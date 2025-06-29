@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_06.html</loc>
+    <lastmod>2025-06-29T19:57:40.102Z</lastmod>
+  </url>
+  <url>
     <loc>https://username.github.io/AGRI4401_website/presentations/lecture_02.html</loc>
     <lastmod>2025-06-29T02:16:03.999Z</lastmod>
   </url>
@@ -18,10 +22,6 @@
   </url>
   <url>
     <loc>https://username.github.io/AGRI4401_website/presentations/lecture_05.html</loc>
-    <lastmod>2025-06-29T19:49:42.851Z</lastmod>
-  </url>
-  <url>
-    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_06.html</loc>
-    <lastmod>2025-06-29T19:56:15.375Z</lastmod>
+    <lastmod>2025-06-29T21:37:51.554Z</lastmod>
   </url>
 </urlset>

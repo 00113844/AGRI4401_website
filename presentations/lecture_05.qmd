@@ -6,22 +6,22 @@ format:
   revealjs:
     width: 1280
     height: 720
-    # margin: 0.05
-    # minScale: 0.5
-    # maxScale: 1.0
+    margin: 0.05
+    minScale: 0.5
+    maxScale: 1.0
     # chalkboard: 
     #   buttons: false
     theme: [default, uwa-theme.scss] 
     # transition: slide
     css: AGRI4401_PrecisionAg.css
     embed-resources: true  
-date: "2025/06/23"
+date: "2025/06/30"
 date-format: long
 slide-number: true
 ---
 
 
-# Soil & Water Spatial Variability
+## Soil & Water Spatial Variability
 
 - Spatial vs temporal variability: definitions and implications  
 - Soil texture: particle-size distribution affecting water-holding, nutrient retention, and root growth  
@@ -40,7 +40,7 @@ Analyzing the magnitude and spatial pattern of these variations enables the crea
 
 ---
 
-# Agenda
+## Agenda
 
 - Precision Agriculture & Site-Specific Nutrient Management Overview  
 - 4R Nutrient Stewardship Framework (Right Product, Rate, Place, Time)  
@@ -55,22 +55,7 @@ This agenda slide provides the high-level structure for our deep dive into preci
 
 ---
 
-# Learning Objectives
-
-- Understand the functionality and architecture of the Smart-Map QGIS plugin  
-- Learn the principles of Ordinary Kriging (OK) and Support Vector Machines (SVM) for digital soil mapping  
-- Explore the use of Moran’s I for spatial covariate selection  
-- Review model evaluation metrics: R² and RMSE  
-- Compare predictive performance of OK vs SVM in soil chemical attribute mapping  
-- Identify data requirements, sampling density, and workflows for a 75 ha field study  
-
-::: notes
-Participants will first gain a deep understanding of Smart-Map’s integration with QGIS 3.10+ and its Python/PyQt5 architecture. We’ll then delve into the geostatistical foundations of OK and kernel-based SVM, highlighting interpolation and prediction of soil properties. Next, we examine Moran’s I as a spatial autocorrelation metric for covariate selection. R² and RMSE will be discussed with field trial examples. Finally, we compare OK vs SVM performance in soil chemical mapping and outline field-study workflows.
-:::
-
----
-
-# Soil Formation & Landscape Variability
+## Soil Formation & Landscape Variability
 
 - Multi-scale soil and crop variability mapping: expert surveys, digital soil mapping, proximal/remote sensing, yield mapping  
 - Strategic, tactical, operational decision levels for low- and high-tech systems  
@@ -85,7 +70,7 @@ Soil formation is governed by climate, organisms, topography, parent material, a
 
 ---
 
-# Key Formation Processes
+## Key Formation Processes
 
 ```{mermaid}
 graph TD
@@ -109,14 +94,14 @@ Hans Jenny’s CLORPT model captures how Climate, Organisms, Relief, Parent mate
 
 ---
 
-# Weathering & Horizon Development
+## Weathering & Horizon Development
 
 ::: {.columns}
 
 ::: {.column width="60%"}
 - Physical weathering: freeze-thaw, abrasion  
 - Chemical weathering: hydrolysis, oxidation  
-- Biological contributions  
+- Biological contributions (root exudates)  
 - Horizon formation: O, A, B, C  
 :::
 
@@ -145,7 +130,7 @@ Chemical weathering transforms silicates through hydrolysis, oxidation, and solu
 
 ---
 
-# Organic Matter Accumulation
+## Organic Matter Accumulation
 
 - Organic matter enhances soil structure & CEC  
 - Humus content correlates with higher ECa  
@@ -160,7 +145,7 @@ Organic matter influences soil dielectric properties and ion-exchange capacity, 
 
 ---
 
-# Landscape Controls on Variability
+## Landscape Controls on Variability
 
 ::: {.columns}
 
@@ -191,7 +176,7 @@ Texture (sand/silt/clay) controls water & nutrient dynamics; structure (aggregat
 
 ---
 
-# Soil Physical Properties Overview
+## Soil Physical Properties Overview
 
 - Apparent Conductivity (ECa): salt, clay, moisture, bulk density, OM, temperature  
 - EMI vs electrode arrays for measurement  
@@ -215,7 +200,7 @@ ECa integrates multiple soil properties. EMI sensors offer non-contact, broad-ar
 
 ---
 
-# Soil Texture
+## Soil Texture
 
 ::: {.columns}
 
@@ -246,7 +231,7 @@ ECa correlates with clay content and moisture. Calibrated ECa grids model soil t
 
 ---
 
-# Soil Structure
+## Soil Structure
 
 ::: {.columns}
 
@@ -257,6 +242,8 @@ ECa correlates with clay content and moisture. Calibrated ECa grids model soil t
 - Impacts on root-zone water & aeration  
 - Correlation with yield & moisture  
 - Basis for VRA tillage & amendments  
+
+![Soil Structure](figures/soil-structure.jpg)
 :::
 
 ::: {.column width="40%"}
@@ -280,7 +267,7 @@ Structure regulates infiltration, retention, and root growth. Proximal sensors m
 
 ---
 
-# Soil Porosity & Density
+## Soil Porosity & Density
 
 - Porosity: void fraction controlling aeration, water, roots  
 - Bulk density: mass per volume, inversely related to porosity  
@@ -304,7 +291,7 @@ Porosity and bulk density are key for water & roots. Direct methods are low thro
 
 ---
 
-# Spatial Variability of Physical Properties
+## Spatial Variability of Physical Properties
 
 - Texture heterogeneity impacts water & nutrients  
 - Aggregate stability & pore connectivity vary spatially  
@@ -319,9 +306,9 @@ Even single fields exhibit strong spatial variability in texture, structure, and
 
 ---
 
-# Macropores & Micropores
+## Macropores & Micropores
 
-::: {.columns}
+:::: {.columns}
 
 ::: {.column width="60%"}
 - Macropores (>0.08 mm): drainage, aeration  
@@ -330,10 +317,27 @@ Even single fields exhibit strong spatial variability in texture, structure, and
 :::
 
 ::: {.column width="40%"}
-Role of pore‐size distribution in water movement.
+
+```{mermaid}
+graph TD
+    A[Pore-Size Distribution in Soil]
+    A --> B[Macropores >0.08 mm]
+    A --> C[Micropores <0.08 mm]
+    B --> D[Drainage]
+    B --> E[Aeration]
+    C --> F[Water Retention]
+    D --> G[Prevents Waterlogging]
+    E --> H[Facilitates Root Respiration]
+    F --> I[Provides Water for Plant Uptake]
+    G --> J[Promotes Root Growth]
+    H --> J[Promotes Root Growth]
+    I --> K[Enhances Water Availability]
+    J --> L[Agricultural Productivity]
+    K --> L[Agricultural Productivity]
+```
 :::
 
-:::
+::::
 
 ::: notes
 Macropores drive infiltration and aeration; micropores retain plant-available water. Mapping pore size distributions guides irrigation scheduling and water-balance models.
@@ -341,7 +345,7 @@ Macropores drive infiltration and aeration; micropores retain plant-available wa
 
 ---
 
-# Soil Compaction & Traffic Farming
+## Soil Compaction & Traffic Farming
 
 - Controlled Traffic Farming confines wheels to lanes, preventing subsoil compaction (>0.3 MPa @ 400 mm)  
 - Preserves macroporosity & root penetration  
@@ -356,7 +360,7 @@ CTF keeps subsoil stress below critical thresholds, boosting infiltration, aerat
 
 ---
 
-# Soil Chemical Properties Overview
+## Soil Chemical Properties Overview
 
 - ECa integrates soluble salts, clay mineralogy, moisture, bulk density, organic matter, temperature  
 - EMI & ERT surveys for rapid field-scale mapping  
@@ -371,7 +375,7 @@ ECa’s composite signal underpins salinity and moisture management. Multi-frequ
 
 ---
 
-# Soil pH Variability
+## Soil pH Variability
 
 ::: {.columns}
 
@@ -399,7 +403,7 @@ ECa correlates (r=0.6–0.8) with pH in loamy/clayey soils. EMI offers rapid map
 
 ---
 
-# Soil Nutrient Content
+## Soil Nutrient Content
 
 ::: {.columns}
 
@@ -429,7 +433,7 @@ ECa correlates (R²>0.7) with nutrient levels. Interpolated ECa surfaces guide t
 
 ---
 
-# Cation Exchange Capacity
+## Cation Exchange Capacity
 
 - CEC: capacity to retain/exchange Ca²⁺, Mg²⁺, K⁺, Na⁺  
 - Units: cmol(+)/kg or meq/100 g  
@@ -444,7 +448,7 @@ CEC reflects negative charge on clays & OM. Grid samples + cokriging produce hig
 
 ---
 
-# Soil Nitrate & Water Relations
+## Soil Nitrate & Water Relations
 
 - Nitrate variability affects water-use efficiency & leaching risk  
 - Temporal nitrate dynamics under variable irrigation  
@@ -459,7 +463,7 @@ The extended 7R framework integrates real-time soil assays, demand curves, remot
 
 ---
 
-# Role of Soil Mapping
+## Role of Soil Mapping
 
 - Integrate surveys, digital mapping, remote sensing for zone delineation  
 - Deploy proximal sensors + interpolation for high-res layers  
@@ -474,7 +478,7 @@ High-res soil property layers from DSM, sensors, and remote sensing define dynam
 
 ---
 
-# Interpreting Soil Variability
+## Interpreting Soil Variability
 
 ::: {.columns}
 
@@ -504,7 +508,7 @@ Combine EC, radiometry, hand-texturing & GIS to validate and refine management z
 
 ---
 
-# Soil Mapping Technologies
+## Soil Mapping Technologies
 
 - Traditional expert surveys & farmer knowledge  
 - Digital Soil Mapping: geostatistics + machine learning  
@@ -519,7 +523,7 @@ DSM leverages environmental covariates to predict soil surfaces. Sensors and rem
 
 ---
 
-# Creating a Basic Soil Map
+## Creating a Basic Soil Map
 
 ```{mermaid}
 graph LR
@@ -543,16 +547,16 @@ Core DSM workflow: sampling → georeferencing → variogram → interpolation �
 
 ---
 
-# ECa Electrical Conductivity
+## ECa Electrical Conductivity
 
 ::: {.columns}
 
 ::: {.column width="60%"} 
-::: {.incremental}
+
 - ECa measures salinity & texture proxies  
 - Methods: contact & non‐contact sensors  
 - Applications: zoning, salinity mapping  
-:::
+
 :::
 
 ::: {.column width="40%"}
@@ -560,10 +564,10 @@ Comparison of EM38 & Veris ECa depth responses and property correlations.
 
 ```{mermaid}
 flowchart LR
-  EM38[EM38 (0–50 cm)] --> DR[Depth Response]
-  Veris[Veris (0–100 cm)] --> DR
+  EM38[EM38 0-50 cm] --> DR[Depth Response]
+  Veris[Veris 0-100 cm] --> DR
   DR --> Cor[Correlations]
-  Cor --> Clay[Clay & CEC]
+  Cor --> Clay[Clay CEC]
   Cor --> Sec[OM, silt, moisture]
 ```
 :::
@@ -576,7 +580,19 @@ EM38 senses top ~50 cm; Veris ~0–100 cm. Both correlate strongly (r=0.74–0.8
 
 ---
 
-# Soil Water Movement & Crop Growth
+## VERIS ECa (On-the-Go)
+
+{{< video https://youtu.be/ERkZdLm44bg?si=HFDzaITUPNQ3VahR width="100%" height="85%" >}}
+
+--- 
+
+## VERIS CoreScan
+
+{{< video https://youtu.be/x13DCAVYS58?si=xImbo13WF7CK6OBfwidth="100%" height="85%" >}}
+
+--- 
+
+## Soil Water Movement & Crop Growth
 
 - Infiltration driven by texture, structure, OM  
 - Capillary vs gravitational flow in vadose zone  
@@ -591,13 +607,28 @@ Hydraulic properties govern water fluxes. Precision sensors and VRA irrigation a
 
 ---
 
-# Field Capacity, Wilting Point, Saturation
+## Field Capacity, Wilting Point, Saturation
 
 ```{mermaid}
-flowchart LR
-  A[Saturation (0 kPa)] --> B[Field Capacity (−33 kPa)]
-  B --> C[Wilting Point (−1500 kPa)]
+graph TD
+    A[Pore Size Distribution]
+    A --> B[Macropores >0.08 mm]
+    A --> C[Micropores <0.08 mm]
+    B --> D[Drainage Saturation 0 kPa]
+    B --> E[Aeration]
+    C --> F[Water Retention Field Capacity -33 kPa]
+    D --> G[Prevents Waterlogging]
+    E --> H[Supports Root Respiration]
+    F --> I[Water Available Until Wilting Point -1500 kPa]
+    G --> J[Promotes Root Growth]
+    H --> J[Promotes Root Growth]
+    I --> K[Ensures Water Availability]
+    J --> L[Agricultural Productivity]
+    K --> L[Agricultural Productivity]
 ```
+---
+
+## Field Capacity, Wilting Point, Saturation
 
 - Saturation: max θ ≈ porosity  
 - Field Capacity: θ at ~−33 kPa after drainage  
@@ -612,7 +643,7 @@ Saturation → Field Capacity → Wilting Point define water availability. The �
 
 ---
 
-# Root Growth Zone
+## Root Growth Zone
 
 ::: {.columns}
 
@@ -623,6 +654,7 @@ Saturation → Field Capacity → Wilting Point define water availability. The �
 :::
 
 ::: {.column width="40%"}
+
 ```{mermaid}
 flowchart LR
   SP[Soil Traits] --> NORM[Normalize]
@@ -640,7 +672,7 @@ Combine soil grid traits (texture, N) and NDVI time series via fuzzy c-means clu
 
 ---
 
-# Evapotranspiration Definition
+## Evapotranspiration Definition
 
 - ET = Evaporation + Transpiration flux to atmosphere  
 - Drivers: net radiation, VPD, aerodynamic & canopy conductance  
@@ -655,7 +687,7 @@ ET quantifies water loss from soil & plants. ETc uses crop coefficients. FAO-56 
 
 ---
 
-# Groundwater Movement Models
+## Groundwater Movement Models
 
 ```{mermaid}
 flowchart LR
@@ -679,7 +711,7 @@ Richards’ equation models vadose flow. Calibrate hydraulic functions with EM-d
 
 ---
 
-# MODFLOW Model Applications
+## MODFLOW Model Applications
 
 ```{mermaid}
 flowchart LR
@@ -704,14 +736,14 @@ MODFLOW ingests real-time subsurface data to simulate hydraulic heads. Coupled w
 
 ---
 
-# Groundwater Pollution & Quality
+## Groundwater Pollution & Quality
 
-- Extend 7Rs to protect aquifers from N & P leaching  
+ 
 - Geospatial mappings & VRI to match inputs to crop demand  
 - Grassed waterways, riparian buffers, wetlands intercept nutrients  
 - Controlled drainage to limit preferential flow losses  
 - Watershed-scale nutrient flow models for BMP optimization  
-- Adaptive governance under water scarcity & climate change  
+
 
 ::: notes
 The 7Rs (add form, feedback, resilience) plus spatial-temporal controls and conservation structures dramatically cut groundwater nutrient loads, informed by real-time monitoring and watershed models.
@@ -719,7 +751,7 @@ The 7Rs (add form, feedback, resilience) plus spatial-temporal controls and cons
 
 ---
 
-# Soil & Water Conservation Practices
+## Soil & Water Conservation Practices
 
 - Contour farming to reduce slope-driven runoff & erosion  
 - Grassed waterways filter sediments & nutrients  
@@ -734,12 +766,12 @@ Precision-guided contour plowing, waterways, buffers, wetlands, and VRI work in 
 
 ---
 
-# Contour Farming & Terracing
+## Contour Farming & Terracing
 
-::: {.columns}
+:::: {.columns}
 
 ::: {.column width="60%"}
-::: {.incremental}
+
 - Contour plowing follows elevation lines  
 - Terraces reduce slope length & gradient  
 - Effects: runoff velocity ↓, erosion ↓  
@@ -747,10 +779,12 @@ Precision-guided contour plowing, waterways, buffers, wetlands, and VRI work in 
 :::
 
 ::: {.column width="40%"}
-::: figure
-![Contour farming and terracing diagram](images/contour_terracing_diagram.png){width="100%"}
+::: {#fig-contour}
+
+
+
 :::
-:::
+::::
 
 ::: notes
 GPS-guided implements ensure precision on contours/terraces. Combined with kriged soil maps, they reduce soil loss by 40–60% and boost yields by 10–15%.
@@ -758,22 +792,7 @@ GPS-guided implements ensure precision on contours/terraces. Combined with krige
 
 ---
 
-# Cover Cropping
-
-- Multispecies cover crops by soil type & climate  
-- UAV & satellite imagery for vigor assessment  
-- Improves structure, OM, moisture retention  
-- N-fixation, P mobilization, reduced leaching  
-- Weed suppression with spot spraying  
-- Data-driven seeding rate & mix deployment  
-
-::: notes
-Cover crops enhance aggregate stability, infiltration, and nutrient cycling. Remote sensing (NDVI) informs in-season management, and VRA seeding optimizes canopy cover and ecosystem services.
-:::
-
----
-
-# Drainage Strategies & Salinity
+## Drainage Strategies & Salinity
 
 - Variable-rate subsurface drainage control  
 - EM & moisture sensors for salinity mapping  
@@ -788,7 +807,7 @@ VRTile drains and controlled outlets, informed by high-res salinity maps, manage
 
 ---
 
-# Surface Energy Balance Algorithm (SEBAL)
+## Surface Energy Balance Algorithm (SEBAL)
 
 - Estimates ET via surface energy balance  
 - Derives Rn, G, H from satellite data  
@@ -803,7 +822,7 @@ SEBAL closes the surface energy budget using remote sensing and meteorology. Hot
 
 ---
 
-# SEBAL Applications
+## SEBAL Applications
 
 - Field-scale ET for precision irrigation scheduling  
 - Crop water productivity & yield forecasting  
@@ -818,7 +837,7 @@ SEBAL ET maps integrate with irrigation models, watershed planning, and drought 
 
 ---
 
-# Practical: Create Soil Map
+## Practical: Create Soil Map
 
 - Collect georeferenced soil samples on a systematic grid  
 - Analyze pH, OM, texture in lab or via proximal sensors  
@@ -838,9 +857,9 @@ End-to-end DSM: sampling → lab/sensors → kriging → zone delineation → GI
 ::: {.columns}
 
 ::: {.column width="60%"}
-::: {.incremental}
+
 - Soil map  
-:::
+
 :::
 
 ::: {.column width="40%"}
@@ -865,7 +884,7 @@ Use a profit-driver framework: identify high-margin zones, collect data, calibra
 
 ---
 
-# Practical: Apply Drainage Strategy
+## Practical: Apply Drainage Strategy
 
 - Multi-layer EM surveys to 1.6 m depth  
 - Calibrate EM vs volumetric water (cores & neutron probes)  
@@ -880,7 +899,7 @@ EM surveys + ground calibration yield 3D hydraulic property maps. Neutron probes
 
 ---
 
-# Key Takeaways
+## Key Takeaways
 
 - Integrated sensor networks for mass-flow & loss monitoring  
 - Systematic protocols aligned with GRDC industry benchmarks (1–2% loss)  
@@ -895,7 +914,7 @@ Aligned sensors at header, feeder, rotor, and cleaning zones enable <2% harvest 
 
 ---
 
-# Next Steps
+## Next Steps
 
 - Finalize farm-specific profit driver assessment  
 - Map PA profit pathways for yield & input optimization  
@@ -910,30 +929,3 @@ Operationalize PA by mapping high-value opportunities, validating tools, forecas
 
 ---
 
-# Questions & Answers
-
-- Site-specific nutrient management cycles  
-- 4R stewardship in sub-humid vs semi-arid systems  
-- GIS integration & interpolation (IDW, kriging, cokriging)  
-- GNSS-guided VRA strategies  
-- Environmental impact metrics & mitigation  
-- Emerging research: ML recommendations, UAV hyperspectral, automated tools  
-
-::: notes
-Open discussion on methodologies, frameworks, tools, and future directions in precision nutrient management and soil-water integration.
-:::
-
----
-
-# Thank You
-
-- Recap: QGIS Desktop 3.22 GUI enhancements  
-- Core functions: visualization, editing, analysis, web publishing  
-- Extensibility: Python plugins & console  
-- Installation: binaries, source, external media  
-- Community: docs, tutorials, forums, plugin repo  
-- Next: hands-on practice & contributions  
-
-::: notes
-We’ve explored QGIS 3.22’s core features and precision PA workflows. Engage with the community, apply these tools in real projects, and contribute to the open-source ecosystem. Thank you!
-:::
