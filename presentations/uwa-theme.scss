@@ -1,0 +1,73 @@
+/*-- scss:defaults --*/
+$uwa-blue:   #002147 !default;
+$uwa-gold:   #FFD100 !default;
+$uwa-grey:   #F5F5F5 !default;
+
+$body-bg: $uwa-grey !default;
+$body-color: $uwa-blue !default;
+$link-color: $uwa-gold !default;
+$presentation-heading-color: $uwa-blue !default;
+// $presentation-heading-font: "Roboto Slab", "Palatino Linotype", serif !default;
+$font-family-sans-serif: "Roboto", Arial, sans-serif !default;
+
+/*-- scss:rules --*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Slab:400,700');
+
+// :root {
+//   --mermaid-bg-color: #F5F5F5;         /* UWA Grey */
+//   --mermaid-edge-color: #FFD100;       /* UWA Gold */
+//   --mermaid-node-fg-color: #FFD100;    /* UWA Gold for node border/text */
+//   --mermaid-fg-color: #002147;         /* UWA Blue for text */
+//   --mermaid-font-family: "Roboto", Arial, sans-serif;
+//   --mermaid-label-bg-color: #F5F5F5;
+//   --mermaid-label-fg-color: #FFD100;
+//   --mermaid-node-bg-color: #002147;    /* UWA Blue for node background */
+// }
+
+.reveal .slide h1 {
+  border-bottom: 2px solid $uwa-gold;
+  padding-bottom: 0.5rem;
+  color: $uwa-blue;
+}
+
+.reveal .slide h2, .reveal .slide h3, .reveal .slide h4 {
+  color: $uwa-blue;
+}
+
+.reveal .slide a {
+  color: $uwa-gold;
+}
+
+.reveal .slide .learning-objectives {
+  background: lighten($uwa-blue, 60%);
+  border-left: 5px solid $uwa-gold;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.reveal .slide table th {
+  background-color: $uwa-blue;
+  color: white;
+}
+
+.reveal .slide table td:first-child {
+  color: $uwa-blue;
+  font-weight: bold;
+}
+
+.reveal .slide code, .reveal .slide pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+  font-family: 'Courier New', monospace;
+}
+
+// .reveal .slide .mermaid {
+//   background-color: white;
+//   border: 1px solid #ddd;
+//   border-radius: 8px;
+//   padding: 1rem;
+//   margin: 2rem 0;
+//   text-align: center;
+// }
