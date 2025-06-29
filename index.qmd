@@ -1,0 +1,7 @@
+---
+title: "All Lectures"
+listing:
+  contents: presentations/*.qmd
+  type: grid
+---
+Browse all lectures below.
