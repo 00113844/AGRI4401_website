@@ -1,19 +1,10 @@
 project:
   type: website
-
+  output-dir: docs
 website:
-  title: "AGRI4401_website"
+  title: "AGRI4401 Lectures"
+  site-url: "https://username.github.io/AGRI4401_website" # Replace with your GitHub Pages URL
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - about.qmd
-
-format:
-  html:
-    theme: cosmo
-    css: styles.css
-    toc: true
-
-
-
+        text: "All Lectures"

@@ -1,0 +1,16 @@
+/.quarto/
+# Quarto temporary and generated files
+
+_site/ .quarto/ *.qmd.cache/ *.qmd_files/
+
+# Exclude docs/ except for .nojekyll
+
+docs/* !docs/.nojekyll
+
+# Common IDE and OS files
+
+.vscode/ *.log .DS_Store
+
+# Python/R dependencies (if applicable)
+
+pycache/ *.pyc *.RData *.Rhistory
