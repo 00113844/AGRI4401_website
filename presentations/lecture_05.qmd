@@ -12,7 +12,7 @@ format:
     # chalkboard: 
     #   buttons: false
     theme: [default, uwa-theme.scss] 
-    transition: slide
+    # transition: slide
     css: AGRI4401_PrecisionAg.css
     embed-resources: true  
 date: "2025/06/23"

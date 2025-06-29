@@ -6,16 +6,15 @@ format:
   revealjs:
     width: 1280
     height: 720
-    margin: 0.05
-    minScale: 0.5
-    maxScale: 1.0
+    # margin: 0.05
+    # minScale: 0.5
+    # maxScale: 1.0
     # chalkboard: 
     #   buttons: false
     theme: [default, uwa-theme.scss] 
-    transition: slide
+    # transition: slide
     css: AGRI4401_PrecisionAg.css
     embed-resources: true  
-date: "2025/06/23"
 date-format: long
 slide-number: true
 ---
@@ -230,7 +229,7 @@ Uniform effort | Variable effort
 Highlights technical differences and performance metrics between grid sampling and clustering-based management zone delineation.
 
 ::: figure
-![](path/to/grid_zone_comparison.png){width="100%"}
+<!-- ![](path/to/grid_zone_comparison.png){width="100%"} -->
 :::
 :::
 
