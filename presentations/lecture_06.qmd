@@ -1,5 +1,5 @@
 ---
-title: "Nutrient Spatial Variability"
+title: "L06 - Nutrient Spatial Variability"
 subtitle: "AGRI4401 Precision Agriculture"
 author: "Gustavo Alckmin"
 format:
@@ -15,6 +15,7 @@ format:
     # transition: slide
     css: AGRI4401_PrecisionAg.css
     embed-resources: true  
+date: "2025/06/30"
 date-format: long
 slide-number: true
 ---
@@ -636,7 +637,7 @@ Variable-rate technology (VRT) seamlessly integrates both spatially derived and 
 
 ---
 
-# VRT Implementation Steps
+## VRT Implementation Steps
 
 - Interpret spatial and temporal data; develop fertilizer and crop protection management plans in office environments  
 - Generate GPS-referenced prescription rate maps using GIS and decision-support software  
@@ -777,6 +778,26 @@ Variable-rate technology (VRT) has evolved from simple speed-based control to so
 ::: notes
 Designing a variable-rate technology (VRT) nutrient plan involves a systematic integration of spatial data analytics and precision application hardware. Initially, high-resolution soil test and yield datasets are processed via GIS tools to delineate management zones using clustering or interpolation algorithms. Office software then generates prescription maps, enabling off-line VRA with built-in look-ahead compensation to address control lag. Complementing this, on-line sensors (e.g., chlorophyll meters, optical reflectance sensors, real-time nitrate probes) adjust application rates dynamically in the field, capturing temporal variability and reducing interpolation errors. Hybrid systems merge these preplanned maps with sensor feedback, optimizing both spatial and temporal precision. Accurate GNSS RTK guidance ensures consistent swath overlap, while ISO VT-compliant controllers modulate actuators to follow the prescribed rate at each location. This layered approach underpins modern VRA platforms and sets the stage for fully automated nutrient delivery systems.
 :::
+
+---
+
+## Application equipment
+
+- Spreader
+
+
+
+{{< video https://www.youtube.com/watch?v=ZagoWuo6k7E width="100%" height="85%" >}}
+
+---
+
+## Application equipment
+
+- Banding
+
+
+
+{{< video https://www.youtube.com/watch?v=Ze79VSAx1b4 width="100%" height="85%" >}}
 
 ---
 

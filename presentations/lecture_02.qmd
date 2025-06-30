@@ -1,5 +1,5 @@
 ---
-title: "Global Navigation Satellite Systems"
+title: "L02 - Global Navigation Satellite Systems"
 author: "Gustavo Alckmin"
 format:
   revealjs:

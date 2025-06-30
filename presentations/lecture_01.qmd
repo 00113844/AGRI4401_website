@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Precision Agriculture"
+title: "L01 - Introduction to Precision Agriculture"
 author: "Gustavo Alckmin"
 format:
   revealjs:

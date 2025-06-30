@@ -1,5 +1,5 @@
 ---
-title: "Soil and Water Spatial Variability"
+title: "L05 - Soil and Water Spatial Variability"
 subtitle: "AGRI4401 Precision Agriculture"
 author: "Gustavo Alckmin"
 format:
