@@ -1,7 +1,722 @@
 ---
-title: "Lecture 2: Introduction"
-format: revealjs
-date: 2025-06-01
+title: "Global Navigation Satellite Systems"
+author: "Gustavo Alckmin"
+format:
+  revealjs:
+    width: 1280
+    height: 720
+    margin: 0.05
+    minScale: 0.5
+    maxScale: 1.0
+    # chalkboard: 
+    #   buttons: false
+    # disableLayout: true
+    theme: [default, uwa-theme.scss] 
+    # embed-resources: true
+    transition: slide
+    css: AGRI4401_PrecisionAg.css  
+date: "2025/06/23"
+date-format: long
 ---
-## Slide 1
-Content here...
+
+
+## Global Navigation Satellite Systems
+
+* GNSS comprises multiple satellite constellations (e.g., GPS, GLONASS, Galileo, BeiDou) providing 3D positioning.  
+* Satellites broadcast multiple carrier signals (L1/L2/L5) for pseudorange and carrier-phase measurements.  
+* Receivers compute position via trilateration; differential techniques (DGPS, RTK) correct clock and propagation errors.  
+* Real-time kinematic (RTK) processing achieves centimeter-level accuracy through carrier-phase ambiguity resolution.  
+* Satellite-based augmentation systems (WAAS, EGNOS) enhance integrity and mitigate ionospheric and tropospheric delays.  
+* Precise GNSS fixes enable yield mapping, variable-rate application control, and autosteering in precision agriculture.
+
+::: {.notes}
+Global Navigation Satellite Systems (GNSS) such as the U.S. GPS, Russian GLONASS, European Galileo, and Chinese BeiDou each maintain 24+ satellites in medium Earth orbit broadcasting coded signals (e.g., L1 at 1575 MHz, L2 at 1227 MHz, L5 at 1176 MHz). Stand-alone pseudorange measurements deliver metre-level positioning, while carrier-phase observations in Real-Time Kinematic (RTK) mode resolve integer ambiguities to yield centimetre-level accuracy. Differential GNSS (DGPS) uses a fixed reference station to compute and transmit real-time corrections, removing common errors from satellite clock bias and atmospheric delays. Satellite-Based Augmentation Systems (WAAS, EGNOS) provide integrity monitoring and additional corrections, further reducing residual errors. In precision farming operations, centimetre-accurate GNSS coordinates tag yield monitor data, guide farm machinery along precise paths, and trigger variable-rate controllers to apply inputs (fertilizer, seed, chemicals) exactly where planned.
+:::
+
+---
+
+## Agenda
+
+::: {.notes}
+This presentation begins with an overview of site-specific nutrient management systems (SSNMS), building on the farm management definition by Dillon (1980) and Castle et al. (1972) and focusing on the four Rs of fertilizer stewardship (Johnston & Bruulsema, 2014). Next, we detail core processes to inform SSNMS: systematic grid sampling and kriging (Wollenhaupt et al., 1994; Gotway et al., 1996), management zone delineation using EC mapping and clustering (Khosla et al., 2002; Fridgen et al., 2004), in-season crop N sensing with active optical sensors (Raun et al., 2002; Solie et al., 2002), and on-combine grain quality sensing (Long et al., 2005; Engel et al., 1999). We then examine two regional perspectives: precision N management in the US Midwest (Scharf et al., 2011; Bushong et al., 2016) and terrain-based practices in the semi-arid US West (Long et al., 2014; Moulin et al., 1994). In the conclusions section, we explore future trends including dynamic simulation models (Adapt-N: Melkonian et al., 2008), maximum return to N (Sawyer et al., 2006), and Bayesian updating approaches for risk-based decision support (Lawrence et al., 2015; McFadden et al., 2018). Finally, we list key resources such as IPNI Site-Specific Management Guidelines, extension services, and ARS N-use networks for further reference.
+:::
+
+---
+
+## Introduction to GNSS
+
+* GNSS provides sub-meter to decimeter positioning accuracy  
+* Core constellations: GPS (USA), GLONASS (Russia), Galileo (EU), BeiDou (China)  
+* Differential and Real-Time Kinematic (RTK) services enhance precision to centimeters  
+* Receiver trilateration computes latitude, longitude and altitude from timed satellite signals  
+* Enables high-precision field mapping, auto-steer guidance, and yield data georeferencing  
+* Correction networks include SBAS (e.g. WAAS), RTK base stations, and post-processing  
+
+::: {.notes}
+Global Navigation Satellite Systems (GNSS) underpin precision agriculture by delivering accurate real-time positioning for field operations. Four primary systems (GPS, GLONASS, Galileo, BeiDou) each operate constellations of ≥24 satellites broadcasting time-stamped signals. A GNSS receiver measures signal travel times from multiple satellites to determine its three-dimensional location via trilateration. Standard GNSS accuracy (~5–10 m) is improved to decimeter or centimeter levels through Differential GPS (DGPS) and Real-Time Kinematic (RTK) techniques, which use reference stations to supply real-time correction data. Satellite-Based Augmentation Systems (SBAS) such as WAAS and local/cellular RTK networks further refine accuracy. High-precision GNSS enables accurate georeferenced yield mapping, variable-rate application of inputs, and automated tractor navigation. Integration of GNSS with Geographic Information Systems ensures precise spatial alignment of management zones and sensor data, boosting resource-use efficiency and crop performance.
+:::
+
+---
+
+## Origins of GPS Technology
+
+* Conceived by U.S. Department of Defense under the NAVSTAR program in 1973 to meet military navigation needs  
+* First experimental Block I satellites launched 1978–1985; full 24-satellite constellation achieved in 1994  
+* 1983 KAL 007 shootdown prompted civilian access to C/A code for ~100 m accuracy; P(Y) code reserved for military  
+* Selective Availability (SA) introduced intentional civilian signal error (±100 m) until deactivation in May 2000  
+* Emergence of Differential GPS (DGPS) for sub-meter accuracy via real-time ground-based corrections  
+* Established foundation for precision agriculture: real-time farm equipment navigation and georeferenced mapping  
+
+::: {.notes}
+The Global Positioning System (GPS) traces back to the 1973 NAVSTAR program, initiated by the U.S. Department of Defense to provide reliable, all-weather, global navigation for military forces. Between 1978 and 1985, 11 experimental Block I satellites validated core concepts; by 1994 the 24-satellite constellation was complete, offering continuous global coverage. In 1983, after the Korean Air Lines Flight 007 tragedy, President Reagan directed that the coarse acquisition (C/A) civilian signal be made available worldwide, though with Selective Availability (SA) limiting civilian positioning errors to ~100 m. Military P(Y) code delivered 3–5 m accuracy to authorized users. Civilian users countered SA by adopting Differential GPS (DGPS), applying ground-station corrections in real time or post-processing to achieve sub-meter precision. GPS has subsequently become the backbone of precision agriculture, enabling autosteering, yield mapping, and variable-rate application with centimeter-level positioning.
+:::
+
+---
+
+## Transition to Civilian Use
+
+* GPS originally developed for DoD; civilian access granted in 1993 enabling auto-steer systems  
+* Radar-based guidance prototypes in the 1980s led to first autonomous ground vehicles on farms  
+* Landsat multispectral satellites (1972) adapted for crop monitoring and NDVI mapping  
+* LiDAR sensing from military mapping repurposed for high-resolution terrain models in field planning  
+* Unmanned aerial vehicles (UAVs) transitioned from defense to drone-based crop scouting  
+* Wireless communication and IoT protocols derived from military systems enable sensor networks in agriculture  
+
+::: {.notes}
+Military research into satellite navigation began in the 1960s under the U.S. Department of Defense (Danchik, 1998). The GPS constellation was completed in 1994 and civilian access authorized in 1993, directly enabling auto-steer guidance in farm tractors and sprayers (Holland & Schepers, 2010). This transfer accelerated precision steering adoption from under 5% to over 35% in U.S. agriculture between 2001 and 2009 (Schimmelpfennig & Ebel, 2011).
+
+Simultaneously, radar and LiDAR sensors developed for terrain mapping in defense were repurposed for on-farm topographic modeling and drainage planning (Carter et al., 2012). Landsat, originally a NASA Earth observation satellite launched in 1972, provided multispectral imagery adapted for NDVI crop health monitoring and variable-rate nitrogen recommendations (Blackmer & Schepers, 1996).
+
+More recently, unmanned aerial vehicles (UAVs) and drone platforms emerged from military applications and now support high-resolution field scouting, disease detection, and yield estimation (Spinelli et al., 2011). Wireless communications and IoT standards originally designed for defense networks underpin modern sensor networks, enabling real-time soil moisture, weather, and nutrient monitoring (Grisso et al., 2009).
+:::
+
+---
+
+## GPS Development Timeline
+
+```{mermaid}
+timeline
+  title GPS Development Timeline
+  1940s : LORAN & hyperbolic navigation
+  1957 : Sputnik launch → doppler research
+  1973 : NAVSTAR GPS inception
+  1978 : First Block I satellites
+  1995 : 24-satellite constellation
+  2000 : SA disabled (civilian accuracy)
+  2016 : Full Operational Capability
+```
+
+* 1940s: Foundation in LORAN and hyperbolic navigation  
+* 1957: Sputnik launch demonstrated Doppler principle  
+* 1973: NAVSTAR GPS program initiated by DoD  
+* 1978: Launch of first GPS Block I satellites for testing  
+* 1995: Achieved full 24-satellite constellation for global coverage  
+* 2000: Selective Availability turned off, boosting civilian accuracy  
+* 2016: Full Operational Capability and enhanced interoperability  
+
+::: {.notes}
+The Global Positioning System traces back to WWII-era radionavigation (LORAN-C) and hyperbolic positioning research. Sputnik’s 1957 launch demonstrated the Doppler principle for satellite navigation, spurring the 1973 NAVSTAR GPS program. Between 1978 and 1994, Block I satellites validated the system and refined orbital parameters. Civilian receivers gained limited access in the 1980s, but only after the full 24-satellite constellation was in place in 1995 did GPS offer global coverage. In May 2000, U.S. selective availability was discontinued, improving civilian horizontal accuracy from ~100 m to ~20 m. By 2016, GPS achieved Full Operational Capability (FOC) and interoperability with GLONASS and Galileo further enhanced resilience and precision.
+:::
+
+---
+
+
+
+## GPS Constellation
+
+* The GPS comprises 24+ MEO satellites in six orbital planes at ~20,200 km altitude with a 12-hour period  
+* Key civilian signals: L1 C/A (1575.42 MHz), L2C (1227.60 MHz), and L5 (1176.45 MHz) for enhanced accuracy  
+* Three segments: space (satellites), control (ground monitor stations + master control), and user (GNSS receivers)  
+* Standard positioning accuracy: 2–3 m horizontal, 5 m vertical; augmentation via DGPS, SBAS (WAAS/EGNOS) or RTK (< 1 cm)  
+* Satellite geometry quantified by PDOP/HDOP/VDOP metrics influences real-time positioning precision  
+* Modern multi-GNSS interoperability (GLONASS, Galileo) improves availability and reliability in field operations  
+
+::: {.notes}
+The Global Positioning System (GPS) is the foundation of modern precision agriculture. It operates with at least 24 active satellites in six equally spaced orbital planes, each orbiting at approximately 20,200 km altitude with a 12-hour orbital period. Civilian receivers use the L1 C/A code on 1575.42 MHz and more recent signals such as L2C and L5 to resolve ionospheric delays and improve multipath mitigation. GPS consists of three segments: the space segment (satellites broadcasting navigation messages), the control segment (ground antenna stations, monitoring stations, and the Master Control Station that uploads ephemeris data), and the user segment (field receivers on tractors and implements).
+
+Under clear conditions, unaugmented GPS provides 2–3 m horizontal and 5 m vertical accuracy. Differential corrections from DGPS, Satellite-Based Augmentation Systems such as WAAS or EGNOS, or real-time kinematic (RTK) methods can further reduce errors to decimeter or even centimeter levels, essential for sub-meter or centimeter-level field operations. Receiver-reported metrics such as PDOP (Position Dilution of Precision), HDOP (Horizontal DOP), and VDOP (Vertical DOP) indicate satellite geometry quality and help the operator assess real-time positional reliability.
+
+By integrating other GNSS constellations (e.g., GLONASS, Galileo, BeiDou), modern receivers maintain stronger signal availability and improved accuracy in obstructed environments, such as near tree lines or buildings. For precision agriculture, robust and accurate GNSS positioning underpins automated steering, variable-rate application, and yield mapping, ensuring timely and efficient field operations.
+:::
+
+---
+
+## GLONASS Constellation
+
+* 24 active satellites distributed in three orbital planes at ~19,100 km altitude  
+* 8 evenly spaced satellites per plane with 64.8° inclination for global coverage  
+* 11 h 15 min orbital period enabling revisit times of ~8 h at mid-latitudes  
+* Full-cycle constellation supports real-time kinematic (RTK) positioning for sub-10 cm accuracy  
+* Redundant design ensures continuous positioning even with in-orbit maintenance  
+* Interoperable with GPS and other GNSS for enhanced reliability and signal availability  
+
+::: {.notes}
+The GLONASS (Global Navigation Satellite System) constellation is operated by Russia’s Space Forces and comprises 24 active satellites orbiting at ~19,100 km in three evenly populated orbital planes. Each plane carries eight satellites at a 64.8° inclination to maximize coverage across high latitudes. With an orbital period of approximately 11 hours 15 minutes, GLONASS satellites revisit mid-latitude regions every ~8 hours, which is critical for precision agriculture to ensure frequent updates for field mapping and guidance. GLONASS supports real-time kinematic (RTK) corrections via a network of ground reference stations, delivering sub-10 cm horizontal accuracy—vital for variable-rate seeding and spraying. The constellation’s redundancy, achieved through overlapping coverage and on-orbit maintenance reserve satellites, maintains continuous positioning service. When used in conjunction with GPS, GLONASS enhances signal geometry, reduces multipath errors, and improves satellite availability in obstructed environments such as windrowed stubble or tree-lined field margins.
+:::
+
+---
+
+## Other Regional Systems
+
+- Beidou (China)
++ Operational since 2020 with 35 satellites (MEO, GEO, IGSO). Provides global coverage with positioning accuracy of ~5 meters, enhanced to centimeter-level with augmentation. Uses CDMA, supports navigation, timing, and messaging services. Key applications: agriculture, transportation, disaster management.
+- Galileo (Europe)
++ Operational since 2016, 30 MEO satellites at 23,616 km, 56° inclination. Offers 1-meter accuracy for open service, sub-meter for commercial. Uses CDMA, BOC, and QPSK modulation. Supports safety-of-life services, interoperable with GPS/GLONASS. Applications: aviation, rail, precision farming.
+- 
+
+::: {.notes}
+
+:::
+
+---
+
+## Other Regional Systems
+
+
+- IRNSS/NavIC (India): 
+Operational since 2018, 7 satellites (3 GEO, 4 IGSO). Regional coverage over India and 1,500 km beyond. Accuracy ~10 meters (public), <1 meter -(restricted). Uses CDMA, supports navigation and timing. Applications: agriculture, fleet management, disaster response.
+-  QZSS (Japan):
+Operational since 2018, 4 satellites (QZO, IGSO). Regional augmentation for GPS over Asia-Oceania. Accuracy <1 meter with augmentation. Uses CDMA, complements GPS with L1, L2, L5 signals. Applications: precision agriculture, urban navigation, autonomous vehicles.
+
+---
+
+## Carrier Phase Measurements
+
+* Carrier phase in GNSS provides sub-millimeter precision for relative positioning  
+* Phase observable is ambiguous by an unknown integer number of cycles  
+* Resolving integer ambiguities (“fixed solution”) yields centimetric or better accuracy  
+* Long observational baselines and stable tropospheric models improve ambiguity resolution  
+* Dual-frequency data mitigate ionospheric delays, key for robust carrier-phase measurements  
+* High-rate phase data enable real-time kinematic (RTK) positioning in precision agriculture  
+
+::: {.notes}
+Carrier phase measurements exploit the very short wavelength (≈19 cm at L1) of GNSS signals to achieve high-precision relative positioning, critical for precision agriculture tasks such as auto-steering and field mapping. Unlike code pseudorange, carrier phase is precise to a small fraction of a cycle, but suffers from an unknown integer ambiguity. By collecting sufficient continuous data, using dual-frequency receivers to remove ionospheric errors, and applying tropospheric models or reference-station corrections, we can resolve these ambiguities to integer values. A fixed-ambiguity solution delivers centimetric or even sub-centimetric accuracy, enabling centimeter-level applicator control and precise yield mapping. Longer baselines require more reliable atmospheric modelling, while shorter baselines with a local GNSS base station are more forgiving. High-rate (e.g., 10 Hz) phase observations support real-time kinematic (RTK) corrections, critical for implementing guidance and variable-rate applications in the field.
+:::
+
+---
+
+## Dual-Frequency Benefits
+
+* Comparison of L1-only vs L1/L2 positioning accuracy  
+* Real-time ionospheric delay correction via dual-frequency measurements  
+* Faster ambiguity resolution and quicker RTK fix times  
+* Increased reliability in canopy and urban environments  
+* Enhanced vertical accuracy for elevation-critical operations  
+* Robust multipath mitigation through frequency combination  
+
+::: {.notes}
+Dual-frequency GNSS receivers track both the L1 (1575.42 MHz) and L2 (1227.60 MHz) carrier signals, enabling direct measurement and removal of ionospheric delays. By computing the phase difference between L1 and L2, the receiver solves for ionospheric error in real time, yielding sub-centimeter positional accuracy (Hofmann-Wellenhof et al., 2008). Teunissen and Kleusberg (1998) demonstrated that using two frequencies accelerates integer ambiguity resolution, reducing RTK fix times from minutes to seconds. Frequency diversity also attenuates multipath by exploiting distinct scatter patterns on L1 and L2, improving both horizontal and vertical positional stability (Braasch, 1997). Under canopy and urban canyons, dual-frequency units maintain RTK corrections up to 40 % longer than single-frequency receivers (Groves, 2013), ensuring consistent precision for critical tasks like centimeter-level planting and terrain-following variable-rate applications.
+:::
+
+---
+
+## Frequency Comparison
+
+---
+
+## Cost Trends of GNSS Tech
+
+* Per-unit RTK GNSS costs dropped from > $20,000 (2000) to < $2,000 (2020) (Jones et al. 2018)  
+* Commodity multi-constellation chipsets (GPS/GLONASS/Galileo) mass-produced, driving economies of scale  
+* MEMS-based IMU integration enables sub-decimeter positioning with minimal drift  
+* SBAS, CORS and NTRIP correction services distribute infrastructure costs across user networks  
+* Cellular PPP subscriptions (4G/5G) at < $50/ha deliver global decimeter accuracy (Gupta et al. 2020)  
+* Total cost of ownership for < 2 cm RTK solutions now under $2,000/device  
+
+::: {.notes}
+Over the past two decades the cost of survey-grade GNSS receivers has plummeted from nearly $20,000 per unit in the early 2000s to well under $2,000 today (Jones et al. 2018). This dramatic decline results from mass production of multi-constellation modules supporting GPS, GLONASS and Galileo, as well as integrated RF front ends and on-chip processing—driving down component and assembly costs. The integration of MEMS inertial measurement units (IMUs) has further improved reliability in obstructed environments by reducing positional drift when satellite signal is intermittent. Meanwhile, subscription-based correction services such as SBAS, regional CORS networks and NTRIP streaming have shifted infrastructure expenditures onto service providers, eliminating the need for farmers to maintain their own base stations. More recently, cellular-based PPP corrections over 4G/5G networks offer affordable global decimeter accuracy at under $50 per hectare of operation (Gupta et al. 2020). Together, these trends have lowered the total cost of ownership and removed a key financial barrier, enabling widespread adoption of RTK guidance in precision agriculture.
+:::
+
+---
+
+## Variable Rate Application
+
+* VRA adjusts fertilizer and chemical inputs in real time using prescription maps or sensor feedback  
+* Key components: data collection (soil, yield), map-based/sensor-based control, application controller, and actuators  
+* Liquid VRA methods: pressure/flow control, pulse-width modulation, twin-fluid, variable-orifice nozzles  
+* Dry VRA methods: pneumatic systems, spinner spreaders with variable metering  
+* Section control and individual nozzle/boom section switching to reduce overlaps and edge losses  
+* Generates as-applied maps for documentation and system performance evaluation  
+
+::: {.notes}
+Variable rate application (VRA) in precision agriculture enables the modulation of input application rates across a field to match spatial variability in soil properties, crop status, or pest/disease pressure. VRA systems can operate in map-based mode, using pre-generated prescription maps derived from yield monitors, soil tests, or remote sensing, or sensor-based mode, where on-the-go sensors (e.g., canopy reflectance, EC sensors) adjust rates in real time. Map-based approaches allow extensive data preprocessing but depend critically on accurate georeferencing, while sensor-based systems offer immediate response to temporal variability but require robust calibration and fast-response hardware (Sudduth et al., 2015; Morgan, 2010).
+
+Liquid VRA systems traditionally controlled nozzle flow via pressure adjustment (turn-down ratio ~1.4:1), but advanced methods such as pulse-width modulation, twin-fluid nozzles, and variable-orifice designs achieve turn-down ratios up to 5–10:1 with minimal change in droplet size distribution (Giles & Comino, 1990; Combellack & Miller, 1999). Dry VRA implements pneumatic conveyance or spinner spreaders with variable-speed metering, where accuracy depends on both metering and dispersion uniformity (Fulton et al., 2005a; Fulton et al., 2013).
+
+Section control divides the boom into independently switched segments or individual nozzles to minimize overlaps and skip non-target areas. Effective section control reduces chemical usage by 15–17% in irregular fields but requires fast control algorithms to limit transient rate errors (Luck et al., 2010; Sharda et al., 2013).
+
+As-applied maps log actual rates versus GPS position, providing validation of VRA performance, documentation for environmental compliance, and data for post-season analysis. Accurate as-applied logging supports adaptive management and system calibration for continuous improvement.
+:::
+
+---
+
+## Yield Mapping
+
+* Definition and purpose: Generation of spatial yield maps using GPS-enabled harvesters.  
+* Standardization: Converting raw yield data to relative percentage maps over field grid.  
+* Geostatistics: Applying semivariogram analysis (range, sill, nugget) for spatial structure.  
+* Temporal analysis: Using coefficient of variation across multiple years to assess stability.  
+* Integration: Correlating yield maps with soil and NDVI data for management zone development.  
+* Applications: Driving site-specific management, variable-rate prescriptions, and ROI estimation.  
+
+::: {.notes}
+Yield mapping involves capturing georeferenced crop yield data in real time with GNSS-enabled combines and flow sensors. Raw yield values are adjusted for moisture and cleaned to remove outliers before being standardized as a percentage of the field mean to enable multi-year comparisons. A semivariogram is fitted to the standardized data to quantify spatial dependence via nugget, sill, and range parameters, guiding kriging interpolation to produce continuous yield surfaces. Temporal stability is assessed by the coefficient of variation at each grid cell across seasons, identifying areas of consistent high or low productivity. Correlation with ancillary layers such as soil properties and normalized difference vegetation index (NDVI) validates yield drivers and informs delineation of management zones. Yield maps drive site-specific operations including variable-rate seeding and fertilization, helping to optimize input allocation and maximize return on investment.
+:::
+
+---
+
+## Integrated Farm Management
+
+* Analyze PA investments in a whole-farm context: combine financial, labour, environmental and social metrics  
+* Use financial balance-sheet modeling as one decision tool alongside broader qualitative factors  
+* Account for region-, farm- and field-specific variability in input costs, yields and returns  
+* Incorporate dynamics of changing technology costs and commodity prices over time  
+* Evaluate intangible benefits: improved timeliness, labour flexibility, environmental footprint and social outcomes  
+* Embed PA within overarching farm plans to align tools with sustainability and profitability goals  
+
+::: {.notes}
+Precision Agriculture (PA) decisions must go beyond standalone cost–benefit spreadsheets. A whole-farm analysis integrates obvious financial metrics – purchase price, amortization, operating costs and changes in input and output values – with secondary drivers like time, labour requirements, environmental impact and farmer satisfaction. While balance-sheet tools ($/ha) facilitate quick ROI estimates, they exclude non-monetary benefits such as reduced greenhouse gas emissions, improved soil health, on-farm knowledge retention and community goodwill. Technology adoption decisions are influenced by farm scale, field heterogeneity and regional production systems; hence, each enterprise should calibrate models to its soil types, machinery mix and market access. It is also critical to consider the trajectory of equipment costs, service fees and commodity pricing, as early-adopter economics differ from forecasts three years ahead. Ultimately, integrated farm management embeds PA within broader enterprise objectives – optimizing crop rotations, timeliness of operations, environmental stewardship and long-term resilience – to achieve a balanced triple bottom line.
+:::
+
+---
+
+## RTK Guidance in Tractors
+
+* RTK (Real-Time Kinematic) uses GNSS corrections to achieve centimeter-level positioning for precise row guidance.  
+* Establish fixed base station or subscribe to network RTK services delivering correction signals via UHF or cellular.  
+* Improves field efficiency by reducing overlap and skips, optimizing coverage and input use.  
+* Enables accurate implement steering and seed placement, enhancing stand uniformity and input efficiency.  
+* Automates steering control to maintain ideal speed and reduce operator fatigue.  
+* Requires calibration: base station setup, antenna mounting, and offset calibration for reliable operation.  
+
+::: {.notes}
+Real-Time Kinematic (RTK) guidance employs GNSS satellite signals augmented by correction data from a local base station or network service to achieve positioning accuracy within 1–2 cm horizontally. Tractors equipped with RTK receivers apply these corrections via UHF radio or cellular networks to the onboard GNSS antenna, which feeds an autosteering controller. The controller adjusts the steering hydraulics to keep the tractor precisely on line, minimizing overlap, skips, and excessive tramlines. This precision reduces input waste—seed, fertilizer, or chemicals—by ensuring even coverage and seed placement. Field trials indicate that RTK guidance can improve application accuracy by up to 95 % compared with manual guidance and can save up to 8 % in input costs by reducing overlaps. Additionally, RTK guidance systems decrease operator fatigue and enable higher operational speed without sacrificing accuracy. Successful implementation requires correct base station setup, including stable antenna placement over a known coordinate, calibration of implement offsets, and ensuring reliable communication between base and rover receivers.
+:::
+
+---
+
+## Network-Based Corrections
+
+* GNSS network RTK uses Continuously Operating Reference Stations (CORS) to model spatial errors across a broad region  
+* Virtual Reference Stations (VRS) interpolate corrections near the rover, reducing baseline-dependent biases  
+* Network algorithms (FKP, VRS and MAC) estimate tropospheric and ionospheric gradients for real-time correction  
+* Low-latency data streams via GSM/3G/4G and NTRIP maintain sub-centimetre accuracy in field deployments  
+* Multi-constellation support (GPS, GLONASS, Galileo, BeiDou) improves fix availability and solution reliability  
+* Seamless integration in GIS/QGIS plugins (e.g., Smart-Map) enables automated georeferencing for precision ag workflows  
+
+::: {.notes}
+Network-based correction services (Network RTK) derive real-time GNSS corrections from a distributed network of reference stations rather than a single base, enabling consistent centimeter-level accuracy across larger areas. Using Continuously Operating Reference Stations (CORS), the network control center applies algorithms such as FKP (Flächen-Korrektur-Parameter), VRS (Virtual Reference Station) and MAC (Master-Auxiliary Concept) to model spatially correlated errors like tropospheric delays, satellite orbit inaccuracies and ionospheric gradients. These models interpolate a set of synthetic correction streams at or near the rover location, which the field GNSS receiver applies via RTK filtering.
+
+Corrections are streamed over GSM/3G/4G or other IP links using NTRIP, with latencies under 500 ms critical for maintaining fixed solutions while the rover traverses uneven baselines. Using multi-constellation tracking (GPS+GLONASS+Galileo+BeiDou) further reduces ambiguity resolution time and enhances solution robustness under canopy or obstruction. Within precision agriculture, network RTK seamlessly integrates into GIS platforms and plugins (e.g., Smart-Map for QGIS) to automatically georeference sensor and sample data, driving variable-rate applications and spatial analyses. Deploying network-based corrections eliminates the need for local base stations, lowers setup complexity, and provides consistent accuracy across hundreds of square kilometers. For best performance, ensure continuous data connectivity, monitor reference station status, and verify solution quality indicators (age of corrections, fix ratio).
+:::
+
+---
+
+## GNSS Data Workflow
+
+```{mermaid}
+flowchart TD
+  A[GNSS Satellites] -->|L1/L2 Signals| B[Field GNSS Receiver]
+  B --> C{Corrections}
+  C -->|RTK Base Station| D[RTK Position Fix]
+  C -->|SBAS| D
+  D --> E[Data Logger]
+  E --> F[Farm GIS]
+  F --> G[Prescription Maps]
+  G --> H[Variable-Rate Application]
+  D --> I[Autosteer & Guidance]
+  I --> H
+```
+
+* GNSS satellites transmit dual-frequency (L1/L2) signals to the field receiver  
+* Corrections from RTK base stations or SBAS are applied for centimeter-level accuracy  
+* The RTK position fix is logged and sent to the farm GIS for mapping and analysis  
+* Prescription maps generated in GIS drive variable-rate input applications  
+* Autosteer and guidance systems use corrected position data for precise machine control  
+
+::: {.notes}
+Global Navigation Satellite Systems (GNSS) underpin modern precision agriculture by providing high-accuracy location data. GNSS receivers capture L1 and L2 carrier signals from multiple satellites; however, raw positions contain errors due to tropospheric and ionospheric delays, satellite clock and orbit biases, and multipath effects. To mitigate these, real-time correction streams are broadcast from local base stations (RTK) or via Satellite-Based Augmentation Systems (SBAS), delivering sub-decimeter to centimeter accuracy.
+
+Once corrections are applied in the receiver, the RTK fix yields a highly precise 3D coordinate that is timestamped and logged. This georeferenced data is essential for linking yield monitor outputs, soil sample locations, sensor readings, and implement control. Post-processing workflows on farm GIS platforms import these coordinates to generate zone maps, agronomic layers, and variability analyses.
+
+The corrected GNSS positions also feed into autosteer and implement control systems: guidance algorithms use real-time location and heading to maintain optimal paths, reducing overlaps and skips. Variable-rate controllers then apply inputs exactly where needed based on spatial prescription maps. Robust quality control procedures include monitoring satellite geometry (PDOP), verifying base station logs, and cross-checking field marks to ensure data integrity.
+:::
+
+---
+
+## Tractor Guidance Systems
+
+* GNSS-based autosteering with RTK delivers ±2 cm path accuracy  
+* Local base station and rover configuration for differential corrections  
+* Marker arms offer a low-cost visual alternative with ~30 cm repeatability  
+* Implement steering modules reduce sprayer and seeder drift  
+* Consistent A–B waylines across machines prevent tramline divergence  
+* Guidance data logging enables post-season tramline verification  
+
+::: {.notes}
+Accurate tractor guidance is essential for precision agriculture and controlled traffic farming. RTK-GNSS autosteering systems use a local base station broadcasting differential corrections to a rover receiver on the tractor, achieving sub-decimetre repeatability over a 20 km radius (Godwin et al., 2017). Simple marker arms can be retrofitted for under 10% of autosteer cost, but their repeatability is limited to ~30 cm, leading to cumulative wheel-track drift if used alone. Modern guidance integrates hydraulic or electric implement steering, ensuring both tractor and implement align precisely on the reference wayline. Consistency in defining A–B lines and using a unified coordinate system avoids mismatches between machines—a common source of tramline misalignment (Webb et al., 2004). Logged guidance records provide diagnostics to verify tramline placement, identify steering errors and inform corrective maintenance of wheel tracks.
+:::
+
+---
+
+## Auto-Steering Technologies
+
+* Auto-steering employs RTK-GNSS corrections to deliver sub-2 cm lateral accuracy under field conditions  
+* Core components: multi-constellation GNSS receiver, base-station or CORS corrections, steering controller and actuator interface  
+* Integration with hydraulic/electric steering actuators automates tractor guidance along permanent tramlines  
+* Enhances timeliness of operations, reduces overlap, lowers compaction, improves input efficiency and minimizes driver fatigue  
+* Supplemental methods include mechanical marker arms, vision-based row sensors and inertial dead-reckoning for GNSS outages  
+* Key challenges: signal multipath, base-station range limits, RTK drift, and maintaining swath alignment on curved headlands  
+
+::: {.notes}
+Auto-steering systems rely on real-time kinematic (RTK) GNSS corrections to achieve centimetric guidance, critical for maintaining permanent tramlines in controlled traffic farming. A fixed reference station or CORS network broadcasts differential corrections that the tractor’s GNSS unit combines with satellite data to compute precise positions. Those positions feed into a steering controller that modulates hydraulic or electric actuators, continuously correcting the wheel orientation. Studies (e.g., Bochtis et al., 2010; Tullberg, 2018) demonstrate that auto-steer improves field efficiency by up to 15%, reduces fuel consumption by 20–50%, and cuts input overlap by 5–10%, enabling more timely seeding and spraying windows. Supplemental mechanical markers or camera-based row sensors provide backup under GNSS signal loss or heavy canopy. Operators must be aware of potential signal multipath near trees or buildings, RTK baseline limits of 10–20 km, and nullify reference shifts each season. Proper calibration and maintenance of the autosteering interface are essential for reliable performance.
+:::
+
+---
+
+## Sprayer & Seeder Controllers
+
+* Supports real-time GNSS integration via ISOBUS (ISO 11783) for spatially-accurate control  
+* Implements section and row control with CAN-bus networks to minimize overlap losses  
+* Utilizes variable-rate algorithms: pulse-width modulation, electric motor drives, and flow sensors  
+* Synchronizes nozzle/seed metering and active downforce feedback loops for consistent placement  
+* Records operational data in-cab and telemeters to farm management systems for analytics  
+* Allows multi-product and multi-hybrid switching on-the-go through dual-meter and valve arrays  
+
+::: {.notes}
+Modern sprayer and seeder controllers form the backbone of precision application by integrating GNSS position, prescription maps, and real-time sensor feedback. Controllers conforming to ISO 11783 (ISOBUS) use a CAN-bus architecture to manage section or row actuation, thereby reducing chemical and seed overlap (Runge et al., 2014). Variable-rate control algorithms—ranging from pulse-width modulation (Giles & Comino, 1990) to electric motor-driven meters (Hoeft et al., 2000)—adjust nozzle flow or seed population by referencing target maps and instantaneous forward speed. Active downforce systems close the loop on seed depth control by sensing coulter draft and hydraulically adjusting pressure, improving emergence uniformity (Hanna et al., 2010). Real-time datalogging within the controller captures as-spread or as-planted data which can be telemetered to cloud platforms for retrospective analysis, ROI assessment, and agronomic fine-tuning. Emerging multi-hybrid or multi-product capabilities leverage dual-meter configurations to switch seed or chemical formulations on-the-fly, maximizing profitability in variable environments (Verbeten, 2015).
+:::
+
+---
+
+## Equipment Comparison Matrix
+
+:::: {.columns}
+::: {.column width="60%"}
+
+- Comparison criteria:
+  + Track-width compatibility with CTF lanes  
+  + Centimetre-accurate GPS performance  
+  + Fuel efficiency & energy consumption  
+  + Capital & operational costs  
+- Ensures machinery confines compaction to permanent lanes  
+- Balances performance for optimal field operations  
+
+::: {.column width="40%"}
+**CTF-Capable Tractors**
+
+| Model   | Track Width (m) | GPS Accuracy | Fuel Rate (L/h) | Unit Cost (USD) |
+|---------|-----------------|--------------|-----------------|-----------------|
+| Model A | 3.0             | ±2 cm        | 10.0            | 160,000         |
+| Model B | 3.0             | ±1 cm        | 9.2             | 175,000         |
+| Model C | 3.0             | ±2.5 cm      | 10.5            | 150,000         |
+:::
+::::
+
+::: {.notes}
+Controlled Traffic Farming (CTF) is characterized by three core elements: matching track-width machinery, centimetre-accurate GPS guidance to confine all wheel loads to permanent lanes, and field layout engineered for optimal drainage and operations flow. By restricting compaction to designated lanes, soil in crop beds regenerates aggregate stability and macroporosity, which boosts infiltration and reduces runoff (McHugh et al., 2009; Radford et al., 2007). High-precision steering systems eliminate random wheel tracks and enable minimal tillage or no-till practices, preserving soil structure and supporting biological activity (Chamen et al., 2015). Consolidated lanes lower draft and wheel slip, reducing energy consumption by up to 50% compared to conventional traffic systems (Tullberg, 2014). This stable spatial framework underpins yield mapping, variable-rate inputs and other precision agriculture tools, driving efficiency in water, nutrient and energy use while enhancing system resilience.
+:::
+
+---
+
+## Atmospheric Effects
+
+## Ionospheric Corrections for GPS
+
+- **Improved Accuracy**: Ionospheric corrections using dual-frequency measurements (L1, L2) or models reduce GPS signal delays, achieving sub-meter precision critical for variable rate applications in precision agriculture.
+- **Real-Time Reliability**: Corrections via SBAS (e.g., WAAS) or RTK networks enhance real-time positioning, ensuring consistent performance for automated farming tasks like planting and spraying.
+
+::: {.notes}
+Atmospheric constituents—particularly aerosols, water vapor, ozone, and carbon dioxide—modify incoming solar radiation through absorption and scattering processes, thus distorting the apparent reflectance captured by remote sensors. Optical sensors operating in visible and NIR bands suffer from path radiance contributions and differential attenuation, leading to biases in vegetation indices like NDVI. Thermal infrared observations of canopy temperature are similarly affected by water-vapor absorption features; uncorrected, these biases can mislead stress detection algorithms. Solar zenith angle influences the ratio of diffuse to direct irradiance, producing bidirectional reflectance anisotropy effects that vary diurnally and seasonally. High relative humidity and extreme temperatures can alter LiDAR pulse return intensity and focal plane stability in multispectral cameras, degrading range accuracy and spectral consistency.
+
+Rigorous atmospheric correction is thus imperative. Physics-based models such as 6S (Second Simulation of a Satellite Signal in the Solar Spectrum) and MODTRAN simulate the radiative transfer through atmospheric layers, enabling removal of path radiance and compensating for absorption bands. Geometric correction addresses refraction and geolocation errors. Implementing in-field calibration—using ground reference reflectance panels, downwelling irradiance sensors, and co-located weather stations—yields real-time adjustments that harmonize imagery across sensors and dates. These best practices ensure that derived products (e.g., biomass estimates, nitrogen stress maps, evapotranspiration rates) are accurate and consistent, optimizing decision-making in precision agriculture.
+:::
+
+---
+
+## Multipath & Interference
+
+* Multipath occurs when GNSS signals reflect off metal machinery, buildings or terrain before reaching the receiver.  
+* Reflected signals interfere with the direct path, causing phase and pseudorange errors up to tens of centimeters.  
+* Multipath degrades RTK/GNSS accuracy, increases convergence time and produces position jitter.  
+* Mitigation techniques include choke-ring antennas, ground planes, multi-frequency/multi-constellation receivers and optimized antenna placement.  
+* Antenna mounting height, clear line-of-sight and ensuring minimal nearby reflectors are critical on the farm.  
+* Advanced signal processing filters and hybrid INS/GNSS integration further reduce interference impacts.  
+
+::: {.notes}
+Multipath and interference are major error sources in precision agriculture GNSS guidance. Multipath arises when the GNSS signal from a satellite reflects off nearby surfaces—steel farm equipment, silos, water bodies or even terrain slopes—arriving at the receiver along multiple paths. These delayed and phase-shifted echoes corrupt the direct signal, leading to pseudorange and carrier-phase errors that can exceed 10–30 cm. RTK and PPP solutions are particularly sensitive; convergence times double and position jitter increases significantly. Research (Leick et al., 2015; Misra & Enge, 2011) shows that choke-ring antennas with built-in ground planes can reduce multipath by up to 70%. Multi-frequency, multi-constellation receivers exploit redundant measurements to identify and reject reflections, further improving accuracy. On-farm best practices include mounting the antenna at least 1 m above equipment, avoiding nearby metal surfaces and using dedicated mounting poles in open fields. GNSS/INS integration and real-time multipath mitigating filters have also been proven effective (Hoque et al., 2018). Understanding and mitigating multipath is essential to achieve sub-decimeter guidance performance across irregular landscapes and avoid yield losses from swath misalignment.
+:::
+
+---
+
+## Basic GNSS Functionality
+
+* GNSS comprises multiple satellite constellations: GPS (U.S.), GLONASS (Russia), Galileo (EU), BeiDou (China)  
+* Receiver measures signal travel-time to ≥4 satellites using precise onboard and atomic satellite clocks  
+* Trilateration solves for three-dimensional position and receiver clock bias from satellite ephemeris and pseudoranges  
+* Accuracy degraded by ionospheric/tropospheric delays, satellite clock/orbit errors and multipath reflections  
+* Differential GNSS (DGNSS) and RTK apply real-time corrections from a base station to achieve sub-meter/centimeter accuracy  
+* Core PA applications: real-time field mapping, yield monitoring, automated guidance and variable-rate inputs  
+
+::: {.notes}
+Global Navigation Satellite Systems (GNSS) operate via constellations of ≥24 medium-Earth orbit satellites broadcasting ranging signals (L1/L2) with ephemeris and precise clock data (Misra & Enge, 2006). A GNSS receiver timestamps signal reception, computes pseudoranges to at least four satellites and uses trilateration to resolve latitude, longitude, altitude and receiver clock bias (Kaplan & Hegarty, 2005). Major error sources include ionospheric and tropospheric delay, satellite ephemeris and clock inaccuracies, and multipath (Leick, 2004). After removal of selective availability in 2000, standalone GNSS achieves ~5–10 m accuracy; differential GNSS (DGNSS) uses a local base station to broadcast corrections, improving to ~1–2 m (WAAS) and down to sub-decimeter or centimeter via RTK (Zhang & Kovacs, 2012). In precision agriculture, GNSS underpins real-time mapping, yield monitoring, autosteering and variable-rate application, enabling significant gains in input efficiency, productivity and environmental stewardship.
+:::
+
+---
+
+## Augmentation Systems
+
+* Autosteering with real-time kinematic (RTK) GNSS holds tramlines to ±2 cm for repeatable row alignment  
+* Controlled-traffic farming (CTF) on 3 m tramlines confines compaction to permanent lanes  
+* Tyne and disc opener stability depends on symmetric layout, independent depth control and draw-bar length ≈ ½ bar width  
+* Inter-row (250–380 mm) vs edge-row (180–200 mm) sowing selected by stubble cover, soil moisture and weed pressure  
+* Variable-rate seeding maps derived from ECa, DEM, yield history and NDVI clustering into management zones  
+* Section control & seed-monitor calibration ensure target seeds per hectare at variable ground speeds  
+
+::: {.notes}
+Precision sowing integrates high-accuracy GNSS guidance with mechanised systems to place seed where it will deliver maximum stand establishment and yield. Autosteering systems using RTK correction routinely hold tramlines to within ±2 cm, allowing consistent sowing in the same furrow year after year (ICRAF, 2015). In controlled-traffic farming (CTF), machinery shares 3 m traffic lanes, confining wheeled compaction to permanent zones and preserving soil structure in crop zones.
+
+Seeder bar stability is essential to prevent drift: research shows that a draw-bar equal to half the implement width and symmetric opener layouts minimize skewing forces (Hanna et al., 2010). Independent depth control elements maintain uniform sowing depth across undulating land and through stubble. Row spacing is chosen to balance trash flow, weed suppression and yield: 300 mm seeder spacings work well in broadacre cereals, whereas 180 mm spacings help establish canola in heavy stubble (Holmes et al., 2018).
+
+Variable-rate seeding prescriptions leverage soil apparent electrical conductivity (ECa), digital elevation model (DEM), historical yield and satellite NDVI imagery clustered into management zones. These zone maps are imported into section-control sowers via ISOBUS to modulate seeds per hectare in real time. Seed-monitor calibration against weigh-box counts and ground-truth singulation metrics ensures the target population is delivered across speed changes and slope adjustments.
+:::
+
+---
+
+
+## GPS Receiver Principles
+
+- GPS receivers “listen” for L-band signals broadcast by the GPS constellation  
+- Each satellite transmits a precisely timed code and almanac data  
+- Receiver measures signal travel time → pseudorange to each satellite  
+- Triangulation from ≥ 3 satellites yields 2D position; ≥ 4 yields 3D fix + clock bias  
+- Built-in microprocessor computes location from pseudorange delays  
+
+::: {.notes}  
+A GPS receiver functions like a radio tuned to 1575 MHz (L1) and 1227 MHz (L2).  It correlates incoming pseudorandom codes to determine time‐of‐flight, computes “pseudoranges,” and applies trilateration.  Four satellites are required to solve for latitude, longitude, altitude, and the receiver’s clock offset.  
+:::
+
+---  
+
+## Almanac & Ephemeris Data
+
+- Almanac: coarse constellation ephemeris for all satellites (valid days)  
+- Ephemeris: precise orbital elements broadcast every 30 s (valid ~4 h)  
+- Receiver uses almanac to locate satellites quickly on power-up  
+- DOD continuously monitors orbits and uploads corrections  
+- Accurate ephemeris critical for metre-level positioning  
+
+::: {.notes}  
+Almanac data allow the receiver to approximate satellite positions quickly after startup (“anywhere fix”).  Ephemeris provides high‐precision orbit information essential for accurate pseudorange calculation.  The Department of Defense updates both to correct solar/lunar perturbations.  
+:::
+
+---  
+
+
+## Signal Structure: L1 & L2 Frequencies
+
+- L1 @ 1575.42 MHz carries C/A (civilian) and encrypted P codes  
+- L2 @ 1227.60 MHz carries only P code for Precise Positioning Service (PPS)  
+- C/A code: 1.023 MHz chip rate, public (“Standard Positioning Service”)  
+- P code: 10.23 MHz chip rate, encrypted for military/authorized users  
+- Dual-frequency P code enables real-time ionospheric delay correction  
+
+
+::: {.notes}  
+Civilian receivers track the C/A code on L1, while military/authorized users access both L1 and L2 P codes.  By differencing L1/L2 phase delays, PPS users remove first-order ionospheric error, achieving sub-metre accuracy.  
+:::
+
+---  
+
+
+## Standard vs Precise Services
+
+- Standard Positioning Service (SPS): L1/C/A only, ~5–10 m accuracy  
+- Precise Positioning Service (PPS): dual-frequency P code, < 1 m accuracy  
+- PPS access restricted to U.S. & allied military, government agencies, authorized civvies  
+- Civilian RTK/DGPS emulate PPS precision via real-time corrections  
+- Encryption and policy control service levels and availability  
+
+::: {.notes}  
+SPS users rely on single‐frequency C/A codes and augmentation (DGPS/RTK) to approach PPS performance.  PPS remains encrypted to prevent adversarial exploitation, but differential techniques democratize high accuracy.  
+:::
+
+---  
+
+
+## GPS Accuracy Determinants
+
+- Antenna placement & mounting height  
+- Receiver design: channels, tracking loops, processing power  
+- Satellite geometry characterized by DOP (GDOP, PDOP, HDOP, VDOP)  
+- Atmospheric delays: ionosphere & troposphere  
+- Selective Availability (SA) and multipath reflections  
+- Application of differential corrections (DGPS/RTK)  
+
+::: {.notes}  
+Accuracy is a function of both hardware and environment.  Good satellite geometry (low DOP) and dual-frequency receivers reduce error, but only DGPS/RTK can correct atmospheric and SA biases in real time.  
+:::
+
+---  
+
+
+## Antenna Installation Best Practices
+
+- Centerline mount on tractor, combine or vehicle roof  
+- Elevate above obstructions; avoid boom or cab-side mounting on slopes  
+- Use combined GPS/DGPS antennas for common phase center  
+- Secure coaxial and power connections; follow noise-suppression guidelines  
+- Calibrate boom offsets if antenna ≠ applicator reference point  
+
+
+::: {.notes}  
+Antenna placement directly affects heading and position accuracy.  On irregular terrain, offset errors increase if the antenna is far from the implement reference point.  Noise suppression kits mitigate alternator and ignition interference.  
+:::
+
+---  
+
+
+## Time Delay & Application Synchronization
+
+- Actuator/controller delays cause spatial lag in variable-rate systems  
+- Example: 10 mph ≈ 4.47 m/s → 2 s delay ⇒ 8.9 m offset  
+- Configure time‐lag compensation in controller settings  
+- Use speed‐based offset algorithms for consistent application location  
+- Essential for high‐speed spraying, seeding, and fertilizing  
+
+::: {.notes}  
+Rate controllers typically detect speed and apply map rates after a delay.  Without compensation, boom application occurs downstream of the intended location.  Most systems allow a programmable time or distance offset.  
+:::
+
+---  
+
+
+## Electrical Interference & Mitigation
+
+- Common sources: power lines, two-way radios, alternators, ignition systems, microwaves  
+- Interference spikes increase reacquisition time, degrade position fix  
+- Mitigation: relocate antenna, add ferrite cores, use shielded cables  
+- Maintain separation from heavy-current wiring and radio transmitters  
+- Perform field checks after installation to validate signal quality  
+
+::: {.notes}  
+Alternator noise and nearby radio towers can corrupt the C/A code correlation, leading to dropouts.  Ferrite suppression and careful cable routing often eliminate these issues.  
+:::
+
+---  
+
+
+## Receiver Technology & Reacquisition
+
+- Single-channel: sequentially tracks one satellite at a time; slower fixes  
+- Multi-channel (8–12+): simultaneous tracking → faster acquisition & reacquisition  
+- Reacquisition time: delay after brief signal loss (e.g., under canopy)  
+- Short reacquisition critical for guidance and real-time control  
+- Consider receiver update rate (1–20 Hz+) for dynamic applications  
+
+::: {.notes}  
+A modern 12-channel receiver maintains lock when moving behind obstacles or under foliage.  Faster update rates (10 Hz or more) improve guidance smoothness at higher speeds.  
+:::
+
+---  
+
+
+## Satellite Geometry & DOP
+
+- Dilution of Precision (DOP) quantifies positional error magnification  
+- GDOP: overall geometry; PDOP: 3D position; HDOP/VDOP: horizontal/vertical only  
+- Low DOP (< 2) indicates widely spaced satellites → minimal error amplification  
+- High DOP (> 6) arises when satellites cluster → poor accuracy  
+- Monitor real-time DOP to assess fix quality  
+
+::: {.notes}  
+Satellites clustered near one horizon yield high DOP and unreliable fixes.  Receivers typically display DOP metrics—operators should pause operations when DOP is poor.  
+:::
+
+---  
+
+
+## Selective Availability & Atmospheric Errors
+
+- SA: intentional DOD clock dithering, historically ~100 m civilian bias (removed 2000)  
+- Tropospheric refraction: non-dispersive, modeled by pressure & humidity  
+- Ionospheric delay: frequency-dependent; dual-frequency or SBAS corrects first order  
+- Atmospheric conditions vary diurnally; require real-time modeling  
+- DGPS/RTK mitigate these errors to sub-metre/centimetre levels  
+
+::: {.notes}  
+Even without SA, natural atmospheric variability introduces tens of metres of error.  SBAS networks (WAAS, EGNOS) broadcast corrections for civilian SPS users, but local DGPS/RTK remains superior.  
+:::
+
+---  
+
+
+## Multipath Error
+
+- Occurs when signals reflect off buildings, equipment, terrain  
+- Reflected path adds extra delay → pseudorange & phase errors  
+- Multipath not corrected by DGPS; degrades RTK convergence  
+- Mitigation: choke-ring antenna, ground plane, clear antenna horizon  
+- Maintain ≥ 1 m clearance from metal surfaces  
+
+::: {.notes}  
+Multipath errors vary rapidly, causing “jitter” in position fixes.  High-end antennas with built-in ground rings and advanced filtering reduce multipath by 60–80%.  
+:::
+
+---  
+
+
+## Differential GPS Fundamentals
+
+- Base station at known coordinates measures pseudorange errors  
+- Error = (true range – measured pseudorange) → differential correction  
+- Rover applies corrections in real time via radio or NTRIP  
+- Post-processing uses stored corrections to adjust logged data  
+- Elevation and clock biases also corrected for highest accuracy  
+
+::: {.notes}  
+The base station computes corrections for each satellite and streams them to the rover.  RTK receivers apply these corrections instantly, achieving centimetre‐level accuracy after ambiguity resolution.  
+:::
+
+---  
+
+
+## DGPS Correction Sources
+
+- Coast Guard beacons: 285–325 kHz ground waves, ~1 m RMS, free, low update rate (200 bps)  
+- Satellite services (OmniSTAR, etc.): geostationary uplink, subscription ($500–1,000/yr), < 0.75 m uniform accuracy  
+- Land-based commercial networks: FM sub-carrier, local towers, variable coverage  
+- Private base station: highest update rate (2–10 Hz), full control, infrastructure cost  
+- Choose source by accuracy, latency, coverage, budget  
+
+::: {.notes}  
+Coast Guard beacons are ideal in regions with coverage (e.g., Midwest USA).  Satellite DGPS offers continental coverage but at subscription cost.  Private RTK networks give the lowest latency for guidance.  
+:::
+
+---  
+
+
+## Cost vs. Accuracy & Equipment Selection
+
+- $100–500: basic C/A-only receiver, ~50 yd (CEP) accuracy—suitable for scouting  
+- $3,000–5,000: DGPS-enabled unit, ~1–3 m RMS—soil sampling, yield mapping  
+- $15,000–25,000: RTK guidance system, inch‐level accuracy—auto-steer, VRA  
+- Subscription fees: $75–$800/yr depending on correction service level  
+- Balance application needs, update rate, and total cost of ownership  
+
+::: {.notes}  
+Budget constraints often dictate receiver choice.  For centimetre‐precise auto-steering, invest in a full RTK system.  For mapping, a DGPS rover is sufficient and more economical.  
+:::
+
+---  
+## Coordinate Systems & Datums
+
+- WGS-84: global geodetic datum for GPS latitude/longitude  
+- UTM: divides world into 60 zones, projects to metric coordinates for distance/area  
+- State Plane: state-specific Lambert or Transverse Mercator zones, minimal distortion  
+- Datum shifts (NAD-83 ↔ NAD-27) can exceed hundreds of metres  
+- Use consistent datum and projection across data sources; apply NADCON/LEFTI transforms  
+
+::: {.notes}  
+GPS receivers output lat/lon on WGS-84.  GIS users often convert to UTM or State Plane for analysis.  Neglecting datum shifts leads to large spatial errors—always confirm datum compatibility before merging datasets.  
+:::
