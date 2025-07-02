@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="scorm-version" content="1.2">
+    <title>Introduction to Precision
+Agriculture - AGRI4401 Precision Agriculture</title>
+    
+    <!-- Embedded CSS -->
+  
+    <!-- Enhanced MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [[String.CharCode(36), String.CharCode(36)], ["\\(", "\\)"]],
+                displayMath: [ String.CharCode(36)+String.CharCode(36), String.CharCode(36)+String.CharCode(36)], ["\\[", "\\]"]],
+                processEscapes: true,
+                processEnvironments: true,
+                tags: "ams"
+            },
+            options: {
+                skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+                ignoreHtmlClass: "tex2jax_ignore",
+                processHtmlClass: "tex2jax_process"
+            },
+            startup: {
+                pageReady: function () {
+                    return MathJax.startup.defaultPageReady().then(function () {
+                        // Handle additional preprocessing with the separate math-preprocessor script
+                        console.log("MathJax equations rendered successfully");
+                    });
+                }
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async 
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Mermaid.js for diagrams - Fixed for Pandoc output -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"></script>
+    <script>
+        console.log('🔍 MermaidJS Debug: Starting initialization...');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 MermaidJS Debug: DOM loaded, mermaid available:', typeof mermaid !== 'undefined');
+            
+            if (typeof mermaid !== 'undefined') {
+                try {
+                    // Convert Pandoc's <pre class="mermaid"> to <div class="mermaid">
+                    var preElements = document.querySelectorAll('pre.mermaid');
+                    console.log('🔍 MermaidJS Debug: Found ' + preElements.length + ' pre.mermaid elements');
+                    
+                    preElements.forEach(function(preElement, index) {
+                        var code = preElement.querySelector('code');
+                        var content = code ? code.textContent : preElement.textContent;
+                        console.log('🔍 MermaidJS Debug: Converting pre element ' + index + ' with content:', content.trim());
+                        
+                        // Create new div element
+                        var divElement = document.createElement('div');
+                        divElement.className = 'mermaid';
+                        divElement.textContent = content.trim();
+                        
+                        // Replace pre with div
+                        preElement.parentNode.replaceChild(divElement, preElement);
+                    });
+                    
+                    // Initialize Mermaid
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'neutral',
+                        securityLevel: 'loose',
+                        themeVariables: {
+                            primaryColor: '#003087',
+                            primaryTextColor: '#fff',
+                            primaryBorderColor: '#DAAA00',
+                            lineColor: '#003087',
+                            background: '#ffffff'
+                        }
+                    });
+                    console.log('✅ MermaidJS Debug: Initialization complete');
+                    
+                    // Check rendering after 3 seconds
+                    setTimeout(function() {
+                        var mermaidElements = document.querySelectorAll('.mermaid');
+                        console.log('🔍 MermaidJS Debug: Found ' + mermaidElements.length + ' .mermaid elements after conversion');
+                        
+                        for (var i = 0; i < mermaidElements.length; i++) {
+                            var element = mermaidElements[i];
+                            if (element.innerHTML.includes('svg')) {
+                                console.log('✅ Element ' + i + ' rendered successfully');
+                            } else {
+                                console.error('❌ Element ' + i + ' failed to render');
+                                console.log('Content:', element.textContent.trim());
+                                
+                                // Show error with improved content
+                                element.innerHTML = '<div style="color: red; border: 1px solid red; padding: 10px; background: #ffe6e6;">' +
+                                    '❌ Mermaid diagram failed to render<br>' +
+                                    '<strong>Content:</strong><br>' +
+                                    '<pre style="background: #f0f0f0; padding: 5px; margin: 5px 0; font-size: 12px;">' + 
+                                    element.textContent.trim() + 
+                                    '</pre>' +
+                                    '<em>Check browser console for details</em>' +
+                                '</div>';
+                            }
+                        }
+                    }, 3000);
+                    
+                } catch (error) {
+                    console.error('❌ MermaidJS Init Error:', error);
+                }
+            } else {
+                console.error('❌ MermaidJS not loaded');
+                var preElements = document.querySelectorAll('pre.mermaid');
+                preElements.forEach(function(element) {
+                    element.innerHTML = '<div style="color: red; border: 1px solid red; padding: 10px;">❌ MermaidJS library failed to load. Check internet connection.</div>';
+                });
+            }
+        });
+    </script>
+    
+    <!-- Math preprocessing for special cases -->
+    <style>
+:root {
+    --uwa-blue: #003087;
+    --uwa-gold: #DAAA00;
+    --text-color: #333;
+    --background-color: #fff;
+    --section-background: #f5f5f5;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.chapter-header {
+    background: linear-gradient(135deg, var(--uwa-blue), var(--uwa-gold));
+    color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-title {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.chapter-meta {
+    margin-top: 0.5rem;
+    opacity: 0.9;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--uwa-blue);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+h1 { 
+    font-size: 2.2rem; 
+    border-bottom: 2px solid var(--uwa-gold); 
+    padding-bottom: 0.5rem; 
+}
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+p {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.learning-objectives {
+    background-color: var(--section-background);
+    border-left: 4px solid var(--uwa-gold);
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.case-study {
+    background-color: #e8f4f8;
+    border: 1px solid var(--uwa-blue);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.case-study h3 {
+    color: var(--uwa-blue);
+    margin-top: 0;
+}
+
+.equation {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+}
+
+.mermaid {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+pre {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+code {
+    background-color: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.highlight {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 0.8rem;
+    margin: 1rem 0;
+}
+
+.note {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    border-radius: 4px;
+    padding: 0.8rem;
+    margin: 1rem 0;
+}
+
+.warning {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 0.8rem;
+    margin: 1rem 0;
+}
+
+ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+strong {
+    color: var(--uwa-blue);
+    font-weight: 600;
+}
+
+em {
+    color: #666;
+    font-style: italic;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border: 2px solid var(--uwa-blue);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 48, 135, 0.1);
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.8rem 1rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: linear-gradient(135deg, var(--uwa-blue), #004BA0);
+    color: white;
+    font-weight: bold;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid var(--uwa-gold);
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+}
+
+tr:hover {
+    background-color: #e8f4f8;
+    transition: background-color 0.2s ease;
+}
+
+/* Table caption styling */
+table caption {
+    caption-side: top;
+    padding: 0.5rem 0;
+    font-weight: bold;
+    color: var(--uwa-blue);
+    font-size: 1.1em;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+/* Numeric columns alignment */
+td:nth-child(n+3),
+td.numeric {
+    text-align: right;
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+}
+
+/* First column (usually descriptive) styling */
+td:first-child {
+    font-weight: 500;
+    color: var(--uwa-blue);
+}
+
+/* Table wrapper for responsive design */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 48, 135, 0.1);
+}
+
+/* Enhanced comparison table styling */
+.comparison-table table {
+    border: 2px solid var(--uwa-blue);
+}
+
+.comparison-table th {
+    background: linear-gradient(135deg, var(--uwa-blue), #004BA0);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.comparison-table td:first-child {
+    background-color: var(--section-background);
+    font-weight: bold;
+    border-right: 2px solid var(--uwa-blue);
+}
+
+/* Enhanced data table styling */
+.data-table tr:nth-child(even) td {
+    background-color: #f0f7ff;
+}
+
+.data-table td.numeric {
+    background-color: #f8f9fa;
+    border-left: 1px solid #e0e0e0;
+}
+
+/* Highlight important cells */
+.highlight-cell {
+    background-color: var(--uwa-gold) !important;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Small table text for large datasets */
+.compact-table {
+    font-size: 0.9em;
+}
+
+.compact-table th,
+.compact-table td {
+    padding: 0.5rem;
+}
+
+/* Enhanced cost/currency formatting */
+.currency {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #006600;
+    background-color: #f0f8f0;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    border: 1px solid #d4edda;
+}
+
+/* Enhanced percentage formatting */
+.percentage {
+    font-weight: bold;
+    color: var(--uwa-blue);
+    background-color: #e8f4f8;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    border: 1px solid #bee5eb;
+}
+
+/* Table footer row */
+.table-footer {
+    background-color: var(--section-background);
+    font-weight: bold;
+    border-top: 2px solid var(--uwa-blue);
+}
+
+/* Table with alternating column colors */
+.striped-columns td:nth-child(odd) {
+    background-color: rgba(0, 48, 135, 0.05);
+}
+
+/* Sticky table headers for long tables */
+.sticky-header th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Table sorting indicators (if JavaScript sorting is added) */
+.sortable th {
+    cursor: pointer;
+    user-select: none;
+}
+
+.sortable th:hover {
+    background-color: #002570;
+}
+
+.sort-asc::after {
+    content: " ▲";
+    font-size: 0.8em;
+}
+
+.sort-desc::after {
+    content: " ▼";
+    font-size: 0.8em;
+}
+
+/* Links */
+a {
+    color: var(--uwa-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Math equations styling */
+.math {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1em;
+}
+
+/* Review questions */
+.review-questions {
+    background-color: #fff8e1;
+    border: 1px solid var(--uwa-gold);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 2rem 0;
+}
+
+/* Print-friendly styles */
+@media print {
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    .chapter-header { 
+        break-inside: avoid; 
+        background: var(--uwa-blue) !important;
+    }
+    .mermaid { 
+        break-inside: avoid; 
+    }
+    .case-study {
+        break-inside: avoid;
+    }
+    h1, h2, h3 {
+        break-after: avoid;
+    }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .chapter-header {
+        padding: 1rem;
+    }
+    .chapter-title {
+        font-size: 2rem;
+    }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+}
+
+.video-card {
+    margin-bottom: 2rem;
+}
+
+.video-card iframe {
+    width: 100%;
+    height: auto;
+    border: none;
+    border-radius: 8px;
+}
+
+.video-card .info {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+ </style>
+</head>
+<body>
+    <div class="chapter-header">
+        <h1 class="chapter-title">Geographic Information System for Precision Ag</h1>
+        <div class="chapter-meta">
+            AGRI4401 - Precision Agriculture | University of Western Australia
+        </div>
+    </div>
+    <h1 id="qgis-precision-agriculture"> Practical 1: Geographic Information System for Precision Ag</h1>
+
+    <div class="learning-objectives">
+        <strong>Learning Objectives:</strong>
+        <ul>
+            <li>Understand the fundamentals of Precision Agriculture and GIS.</li>
+            <li>Navigate and use QGIS for spatial data analysis.</li>
+            <li>Apply interpolation and satellite imagery techniques in QGIS.</li>
+        </ul>
+    </div>
+
+    <section class="video-section">
+        <h2>Welcome to Precision Agriculture</h2>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/5a0gDDqOD2o?si=nRDH_lmmkNL3zo9-" title="Precision Agriculture Introduction" frameborder="0" allowfullscreen></iframe>
+            <br>
+            <p class="info">This video introduces the fundamentals of Precision Agriculture and its importance in modern farming.
+                Visit <a href="https://docs.qgis.org/3.40/en/docs/training_manual/index.html" target="_blank"> QGIS Training Manual </a> for more resources. Also <b> complete the LinkedIn learning videos</b>, they are a great learning resource which you can also showcase in your LinkedIn profile.</p>
+        </div>
+    </section>
+
+    <div class="info" style="background:#f5f5f5; border-left:4px solid #003087; padding:1rem; margin:1.5rem 0; border-radius:0 8px 8px 0;">
+        <strong>Instructor's Note:</strong> <em>Add your own commentary, context, or additional resources here for students to review before moving to the next video.</em>
+    </div>
+
+    <div class="note">
+        <strong>Did you know?</strong> Precision Agriculture leverages technology to optimize field-level management regarding crop farming. GIS is a key enabler for this transformation. QGIS is free. 
+    </div>
+
+    <section class="video-section">
+        <h2>Basic QGIS</h2>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/W7XyrcmjXPw?si=Z8hMf9QLmcyinCxo" title="Basic QGIS" frameborder="0" allowfullscreen></iframe>
+            <br>
+            <p class="info">Learn the basics of QGIS, including navigation, layer management, and essential tools for spatial analysis.</p>
+        </div>
+    </section>
+
+    <div class="info" style="background:#f5f5f5; border-left:4px solid #003087; padding:1rem; margin:1.5rem 0; border-radius:0 8px 8px 0;">
+        <strong>Discussion Prompt:</strong> <em>What are some challenges you expect to face when using GIS software for the first time? (Replace this with your own prompt or summary.)</em>
+    </div>
+
+    <div class="highlight">
+        <strong>Tip:</strong> QGIS is open-source and supports a wide range of plugins for advanced geospatial analysis.
+    </div>
+
+    <section class="video-section">
+        <h2>Tutorial 02 Interpolation 1/2</h2>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/hj-HDEYcEU0?si=mTmK_dJgiIRL-E_L" title="Interpolation Tutorial Part 1" frameborder="0" allowfullscreen></iframe>
+            <br>
+            <p class="info">This tutorial covers the first part of spatial interpolation techniques in QGIS.</p>
+        </div>
+    </section>
+
+    <div class="info" style="background:#f5f5f5; border-left:4px solid #003087; padding:1rem; margin:1.5rem 0; border-radius:0 8px 8px 0;">
+        <strong>Further Reading:</strong> <em>Insert links to articles, papers, or datasets relevant to interpolation in agriculture here.</em>
+    </div>
+
+    <div class="case-study">
+        <h3>Case Study: Yield Maps</h3>
+        <p>See how interpolation is used to create Yield Maps from a large number of data points. This is a common application in Precision Ag.</p>
+    </div>
+
+    <section class="video-section">
+        <h2>Tutorial 02 - Interpolation 2/2</h2>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/NUZHz7IPFMs?si=63UonRfk2ELrXtUi" title="Interpolation Tutorial Part 2" frameborder="0" allowfullscreen></iframe>
+            <p class="info">Continue learning about interpolation methods and their applications in real-world datasets.</p>
+        </div>
+    </section>
+
+    <div class="info" style="background:#f5f5f5; border-left:4px solid #003087; padding:1rem; margin:1.5rem 0; border-radius:0 8px 8px 0;">
+        <strong>Activity:</strong> <em>Try creating your own interpolation map using sample data. (Replace with your own activity or instructions.)</em>
+    </div>
+
+    <div class="note">
+        <strong>Note:</strong> Interpolation helps fill in data gaps and is essential for creating continuous surface maps from discrete data points.
+    </div>
+
+    <section class="video-section">
+        <h2>Tutorial 03 - Satellite Imagery</h2>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/7ycFzIdx4Js?si=PYoPMld8FGTtP1l3" title="Satellite Imagery in QGIS" frameborder="0" allowfullscreen></iframe>
+            <p class="info">Explore how to use satellite imagery in QGIS for land analysis and agricultural planning.
+                <br>
+                <b> Don't forget to register with <a href = "https://www.planet.com/industries/education-and-research/#apply-now">Planet!</a></b>
+            </p>
+        </div>
+    </section>
+
+    <div class="info" style="background:#f5f5f5; border-left:4px solid #003087; padding:1rem; margin:1.5rem 0; border-radius:0 8px 8px 0;">
+        <strong>Placeholder:</strong> <em>Add a summary, reflection, or next steps for students here.</em>
+    </div>
+
+    <div class="review-questions">
+        <strong>Review Questions:</strong>
+        <ol>
+            <li>What are the main benefits of using GIS in Precision Agriculture?</li>
+            <li>How does interpolation improve data analysis in agriculture?</li>
+            <li>What are some sources of satellite imagery for QGIS?</li>
+        </ol>
+    </div>
+</body>
+</html>

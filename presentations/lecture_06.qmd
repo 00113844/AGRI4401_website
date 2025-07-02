@@ -115,11 +115,13 @@ By integrating multi-year data on texture and structure variability into site-sp
 - Irrigation scheduling and moisture sensing to reduce leaching and denitrification under water-limited conditions  
 - Watershed-scale integration of precision agronomy and conservation for enhanced nutrient use efficiency and ecosystem services  
 
+
 ::: {.notes}
 This slide examines the fundamental dynamics of soil nutrients and how spatial heterogeneity influences nutrient fate. Soil pH, organic matter and texture vary at micro-scales, creating hot-spots where mineralization, adsorption, or leaching dominate. High-resolution mapping (e.g., electromagnetic induction, proximal gamma-ray) combined with grid sampling enables delineation of these zones, which often contribute over 50% of nutrient losses despite covering less than 20% of the field. Precision tools—UAV hyperspectral imagery, yield monitors, and real-time soil/plant sensors—support variable-rate applications embodying the expanded “7 Rs” (right source, rate, time, place, form, interactions, and monitoring). Conservation practices such as grassed waterways, riparian buffers and constructed wetlands can intercept up to 80% of sediment-bound phosphorus at field edges. In water-scarce systems, spatially optimized irrigation scheduling informed by soil moisture probes minimizes nitrate leaching and N₂O emissions. Integrating these practices at the watershed level not only boosts nutrient use efficiency but also delivers ecosystem services, enhances carbon sequestration and builds resilience to climate-driven precipitation intensification (modeled 1% rainfall increase → 1.7% erosion uptick).
 :::
 
 ---
+
 
 
 ## Phosphorus Dynamics
