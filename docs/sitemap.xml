@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_07.html</loc>
-    <lastmod>2025-07-02T04:55:31.436Z</lastmod>
+    <loc>https://username.github.io/AGRI4401_website/presentations/presentation.html</loc>
+    <lastmod>2025-07-02T08:07:08.633Z</lastmod>
   </url>
   <url>
-    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_05.html</loc>
-    <lastmod>2025-06-30T00:47:23.490Z</lastmod>
-  </url>
-  <url>
-    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_01.html</loc>
-    <lastmod>2025-06-30T00:47:30.059Z</lastmod>
-  </url>
-  <url>
-    <loc>https://username.github.io/AGRI4401_website/about.html</loc>
-    <lastmod>2025-06-29T02:14:35.927Z</lastmod>
-  </url>
-  <url>
-    <loc>https://username.github.io/AGRI4401_website/index.html</loc>
-    <lastmod>2025-06-29T02:36:42.944Z</lastmod>
+    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_06.html</loc>
+    <lastmod>2025-07-01T03:57:44.537Z</lastmod>
   </url>
   <url>
     <loc>https://username.github.io/AGRI4401_website/presentations/lecture_02.html</loc>
     <lastmod>2025-06-30T00:47:41.294Z</lastmod>
   </url>
   <url>
-    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_06.html</loc>
-    <lastmod>2025-07-01T03:57:44.537Z</lastmod>
+    <loc>https://username.github.io/AGRI4401_website/index.html</loc>
+    <lastmod>2025-06-29T02:36:42.944Z</lastmod>
+  </url>
+  <url>
+    <loc>https://username.github.io/AGRI4401_website/about.html</loc>
+    <lastmod>2025-06-29T02:14:35.927Z</lastmod>
+  </url>
+  <url>
+    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_01.html</loc>
+    <lastmod>2025-06-30T00:47:30.059Z</lastmod>
+  </url>
+  <url>
+    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_05.html</loc>
+    <lastmod>2025-06-30T00:47:23.490Z</lastmod>
+  </url>
+  <url>
+    <loc>https://username.github.io/AGRI4401_website/presentations/lecture_07.html</loc>
+    <lastmod>2025-07-02T04:55:31.436Z</lastmod>
   </url>
 </urlset>
