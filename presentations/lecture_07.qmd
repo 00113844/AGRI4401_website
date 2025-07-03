@@ -12,7 +12,7 @@ format:
     # chalkboard: 
     #   buttons: false
     theme: [default, uwa-theme.scss] 
-    transition: slide
+    # transition: slide
     css: AGRI4401_PrecisionAg.css
     embed-resources: true
 date: "2025/07/01"
@@ -42,28 +42,13 @@ Soil structure, determined by aggregate size distribution and pore connectivity,
 
 ---
 
-## Agenda
-
-- Discuss factors influencing spatial variability in crop production
-- Physical principles of the sensors
-- Precision-farming cycle: inventory, GIS analysis, GNSS implementation, monitoring, feedback
-- 4R framework: right product, rate, place, time
-- Spatial interpolation techniques: IDW, kriging, cokriging with terrain data
-- Environmental drivers shaping SSNM design: terrain, climate, soil, water
-
-::: {.notes}
-This slide outlines the presentation structure and introduces core SSNM concepts. We begin with an overview of SSNM principles, emphasizing the need to tailor fertilizer applications to spatial and temporal crop demand. Next, we discuss the integration of diverse farm management inputs—climatic data, soil testing, machinery capabilities, labor availability, and agrochemical characteristics—and how they feed into prescription models. The precision-farming cycle mirrors the Plan-Do-Check-Act model: first we inventory site characteristics, then perform GIS-based spatial analysis to delineate management zones, implement plans via GNSS-guided equipment, monitor outcomes through yield and soil sensors, and finally incorporate feedback for continuous improvement. We then introduce the “4R” framework—right product, rate, place, and time—as a decision support tool for nutrient stewardship. Advanced spatial interpolation methods such as inverse-distance weighting, ordinary kriging, and cokriging with high-resolution terrain covariates are highlighted for generating accurate fertilizer recommendation maps. Finally, we touch on key environmental drivers—terrain slope and aspect, climatic regime, soil texture and chemistry, and plant-available water—that influence SSNM system design and performance. This agenda sets the stage for in-depth exploration of SSNM methodologies, case studies, and remaining research needs.
-:::
-
----
-
 ## Basic Agronomic Principles: Overview
 
 - Variable-rate input application driven by field variability maps
 - Monitoring soil–crop–environment interactions for site-specific management
 - Integration of GPS/GIS spatial data for real-time decision support
 - Crop growth modeling and prescription mapping via remote and proximal sensing
-- Closed-loop control of irrigation and nutrient delivery systems
+- Closed-loop control of herbicide and nutrient delivery systems
 - Precision sampling and geostatistical analysis to calibrate management zones
 
 ::: {.notes}
@@ -241,10 +226,6 @@ graph TD
 ::::
 
 
-
-
-
-
 ::: {.notes}
 Leaf Area Index (LAI) quantifies green leaf area per ground unit and is a key biophysical variable for estimating canopy photosynthesis, evapotranspiration, and biomass. Remote sensing platforms provide synoptic, repeatable observations: Sentinel-2 offers 10 m multispectral bands including red-edge, while UAVs can capture sub-meter resolution data crucial for smallholder plots and heterogeneous fields. Spectral indices such as NDVI and Enhanced Vegetation Index (EVI) are correlated with LAI but saturate at high leaf densities; red-edge indices and narrow-band retrievals mitigate saturation effects.
 
@@ -255,24 +236,6 @@ LAI maps feed into decision-support systems for variable-rate irrigation and fer
 
 ---
 
-## In-Field Sensors for Chlorophyll
-
-- Noncontact EM38 and contact Veris 3100 sensors for in-field soil ECa mapping as proxies for chlorophyll variability.
-- Depth-specific ECa measurements: shallow (0–30 cm) and deep (0–100 cm) profiles.
-- Strong correlation (r = 0.74–0.88) between EM38 vertical-mode and deep Veris ECa across diverse fields.
-- ECa exhibits robust correlations with clay content and CEC, key factors affecting nutrient availability for chlorophyll synthesis.
-- Variable relationships with organic carbon and silt; limited (< 10 %) correlation with sand, moisture, and paste EC.
-- Similar spatial ECa patterns from both sensors enable delineation of zones for targeted chlorophyll monitoring.
-
-::: {.notes}
-In precision agriculture, in-field sensors like EM38 and Veris 3100 measure apparent soil electrical conductivity (ECa) to infer soil texture, moisture, bulk density, salinity, and CEC variability. This study deployed both sensors across two Illinois and two Missouri fields, collecting georeferenced ECa readings alongside paired 120-cm soil cores at 12–21 locations per field. ECa data were depth-weighted using published response curves for shallow (0–30 cm) and deep (0–100 cm) horizons.
-
-Results showed a high correlation (r = 0.74–0.88) between EM38 vertical-mode and deep Veris measurements, although stratified layers in Missouri introduced divergence. ECa correlated most consistently with clay content and CEC, which are critical for nutrient retention and thus chlorophyll synthesis. Organic carbon and silt also showed field-specific significance, while sand, moisture, and paste EC correlated in fewer than 10 % of cases. Both sensors produced similar spatial patterns, enabling the delineation of management zones for targeted chlorophyll monitoring and nutrient application.
-
-Transition: Next, we will explore drone- and satellite-based remote sensing techniques for direct chlorophyll quantification.
-:::
-
----
 
 ## Grain Quality Sensors In-Field
 
@@ -297,10 +260,8 @@ Ongoing case studies across mixed soil landscapes and diverse crop rotations hig
 
 - Calculation of key vegetation indices (NDVI, NDRE, PRI) from multispectral/UAV sensors
 - Correlation of spectral reflectance with canopy biomass and chlorophyll content
-- Linking spectral indices to EM-derived soil moisture and texture layers
 - Spatiotemporal analysis of crop stress and water uptake dynamics
 - Calibration using ground truth from neutron-probe and soil-core volumetric data
-- Integration into 3D predictive models for zone-specific irrigation and fertilization
 
 ::: {.notes}
 This slide explores how spectral remote sensing integrates with EM-based soil water mapping to enhance within-field crop diagnostics. We start by calculating standard vegetation indices—NDVI for biomass, NDRE for chlorophyll, and PRI for light-use efficiency—using UAV or tractor-mounted multispectral cameras. These indices are empirically correlated to canopy water status and biomass yield. By overlaying index maps with depth-resolved EM conductivity layers and ground-truth moisture measurements (neutron probes and soil cores), we can refine regression models that predict real-time soil-plant water relations. The resulting datasets enable dynamic monitoring of crop stress zones, informing variable-rate irrigation and nitrogen application. This approach has been validated in barley trials, showing improved water-use efficiency and yield uniformity across contrasting soil textures.
@@ -308,220 +269,6 @@ This slide explores how spectral remote sensing integrates with EM-based soil wa
 
 ---
 
-## Irradiance & Radiance
-
-```{mermaid}
-flowchart LR
-    Sun["Sun: E(lambda) Irradiance (W/m2 nm)"] -->|Incident Flux| Target["Canopy/Soil"]
-    Target -->|Reflected/Emitted Radiance| Sensor["Optical Sensor"]
-```
-
-- Irradiance (E(λ)): spectral power per unit area incident normal to the surface (W·m⁻²·nm⁻¹).
-- Radiance (L(λ,θ,φ)): spectral power per unit area per unit solid angle emitted or reflected (W·m⁻²·sr⁻¹·nm⁻¹).
-- Bidirectional dependence: Radiance varies with sensor viewing angle (θ) and azimuth (φ).
-- Sensor measurement integrates radiance over its field-of-view and spectral bandwidth.
-- Radiance retrieval: Reflectance(λ,θ,φ) * Irradiance(λ) / π for Lambertian surfaces.
-- Crucial for calibrating vegetation indices and quantitative modeling.
-
-::: {.notes}
-This slide introduces the fundamental radiometric quantities used in optical remote sensing: irradiance and radiance. Irradiance E(λ) defines the spectral flux density incident upon a surface, whereas radiance L(λ,θ,φ) quantifies the directional spectral flux density leaving the surface per unit solid angle. The diagram depicts the sun emitting irradiance onto the canopy or soil, which then reflects or emits radiance measured by a sensor. The bidirectional nature of radiance requires careful consideration of sensor viewing geometry (θ, φ) and field-of-view. For Lambertian approximations, radiance can be related to surface reflectance and incident irradiance divided by π. Accurate quantification of these measures is critical for calibrating vegetation indices, energy balance models, and retrieving biophysical parameters in precision agriculture.
-:::
-
----
-
-## Reflectance, Transmittance & Absorption
-
-- Definition of reflectance (ρ): ratio of reflected to incident radiation, wavelength dependent
-- Transmittance (τ): fraction of radiation passing through a medium, influenced by thickness and optical properties
-- Absorption (α): portion of energy retained by soil or plant tissues, driving photochemical processes and heat conversion
-- Spectral signatures: basis for remote sensing differentiation of crop health and soil composition
-- Beer–Lambert Law: quantifies absorption relative to path length and absorber concentration
-- Energy conservation: ρ + τ + α = 1, foundational for radiative transfer models in precision agriculture
-
-::: {.notes}
-In precision agriculture, understanding how solar radiation interacts with soil and vegetation is fundamental for remote sensing and crop monitoring. Reflectance (ρ) varies with wavelength, surface roughness, and material properties, providing spectral signatures that distinguish crop species, stress levels, and soil characteristics. Transmittance (τ) governs the fraction of radiation that penetrates leaves and soil layers, critical for canopy penetration models and subsurface sensing. Absorption (α) drives photosynthesis in plant tissues and influences soil thermal regimes. The Beer–Lambert law formalizes the relationship between absorber concentration, path length, and absorption, underpinning quantitative retrievals of chlorophyll content and soil moisture. Conservation of energy (ρ + τ + α = 1) is central to radiative transfer models such as PROSAIL, enabling inversion of biophysical parameters from multispectral and hyperspectral data. Accurate partitioning of radiation supports calculation of vegetation indices (e.g., NDVI, PRI) and informs site-specific management practices.
-:::
-
----
-
-## Applying Spectral Principles to Crops
-
-- Plant reflectance signatures across VIS, NIR and SWIR wavelengths
-- Common vegetation indices (NDVI, PRI, EVI) for monitoring physiology
-- Hyperspectral detection of nutrient deficiencies and water stress
-- Sensor calibration and radiometric correction workflows
-- UAV and satellite integration for multi-scale spectral mapping
-- Generation of variable-rate application prescriptions from spectral maps
-
-```{mermaid}
-graph LR
-  UV[UV 380nm ] --> Visible[Visible 400-700 nm]
-  Visible --> NIR[NIR 700-1000 nm]  
-  NIR --> SWIR[SWIR 1.0 to 2.5 µm]
-  SWIR --> MWIR[MWIR]
-```
-
-::: {.notes}
-Spectral remote sensing exploits unique reflectance patterns of leaves and canopies in visible (VIS), near-infrared (NIR) and shortwave infrared (SWIR) bands to assess crop health. Vegetation indices such as NDVI (Normalized Difference Vegetation Index), PRI (Photochemical Reflectance Index) and EVI (Enhanced Vegetation Index) quantify chlorophyll content, photosynthetic efficiency and biomass. Hyperspectral sensors with hundreds of narrow bands enable fine-scale detection of nutrient deficiencies (e.g., nitrogen, phosphorus) and early water stress by identifying specific absorption features. Key steps include sensor radiometric calibration, atmospheric correction, and geometric registration to produce accurate reflectance maps. Integration of UAV-based hyperspectral imaging with satellite platforms allows temporal monitoring at field and regional scales. Finally, spectral data are processed through GIS and decision support systems to generate variable-rate input maps, optimizing fertilizer and irrigation applications to match spatial variability and improve yield and resource-use efficiency.
-:::
-
----
-
-## Visible Region Interaction
-
-- Visible spectrum reflectance indicates canopy chlorophyll absorption characteristics
-- Red and green bands used to compute vegetation indices (e.g., VARI, Green NDVI) for biomass and stress detection
-- Leaf structure, pigment concentration, and soil background influence reflectance signal
-- High-frequency visible imagery captures temporal dynamics critical for dynamic MZ refinement
-- Fusion with soil EC, elevation, and yield data produces robust multi-source zone delineation
-- Constraints include variable illumination, shadows, and sensor radiometric calibration drift
-
-::: {.notes}
-Reflectance in the visible region (400–700 nm) is heavily modulated by chlorophyll absorption peaks in the blue and red bands and by leaf scattering in the green band. Indices such as the Visible Atmospherically Resistant Index (VARI) and variants of Green NDVI leverage these properties to quantify canopy biomass and stress with high sensitivity. When integrated with static soil electrical conductivity (EC) and topographic elevation maps, visible-region metrics improve spatial resolution of management zones by capturing in-season variability. Frequent imaging schedules mitigate temporal aliasing, enabling dynamic recalibration of zone boundaries. However, practitioners must account for illumination geometry, shadowing effects, and sensor calibration consistency to maintain the integrity of reflectance-derived MZ prescriptions.
-:::
-
----
-
-## Near-Infrared (NIR) Region
-
-- Wavelength range: approximately 700–1300 nm
-- High reflectance by healthy vegetation; minimal reflectance by soil and water
-- Foundation for vegetation indices such as NDVI and SAVI
-- Sensitive to chlorophyll content, plant structure, and biomass
-- Critical input for PCA-driven dimensionality reduction in MZ clustering
-- Improves spectral contrast among management zones for precise delineation
-
-::: {.notes}
-The Near-Infrared (NIR) region, spanning roughly 700 to 1300 nm, is a cornerstone in precision agriculture remote sensing. Healthy vegetation exhibits strong NIR reflectance due to internal leaf structure and low pigment absorption, whereas soils and water appear dark, providing clear spectral separation. Common vegetation indices like NDVI and SAVI leverage this contrast to quantify plant vigor, biomass, and stress levels. In our study, NIR bands were integral to the principal component analysis that reduced multivariate sensor data before clustering. By capturing subtle variations in chlorophyll content and canopy architecture, NIR-derived features enhanced the discrimination power of less conventional clustering algorithms — such as McQuitty’s method and Fanny — ultimately yielding management zones with lower within-zone yield variance and higher spatial continuity. When designing MZ delineation workflows, ensuring high-quality NIR acquisition (through appropriate sensor calibration and atmospheric correction) is critical for reliable spectral inputs and robust zone partitioning.
-:::
-
----
-
-## Shortwave Infrared (SWIR) Region
-
-
-
-- Spectral range: 1.0–2.5 µm, capturing strong water absorption features
-- High sensitivity to canopy water content and plant stress levels
-- Penetrates canopy to reveal soil moisture and composition variations
-- Distinct crop-specific SWIR signatures enable accurate species differentiation
-- Enhanced management zone delineation when combined with clustering algorithms
-- Improves intra-zone homogeneity assessment and reduces within-zone yield variance
-
-
-
-*Overview of SWIR spectral characteristics and their applications in precision agri-clustering.*
-
-::: {.notes}
-The SWIR region (1.0–2.5 µm) is critical in precision agriculture due to its sensitivity to water absorption peaks around 1.4 µm and 1.9 µm. Research shows SWIR reflectance decreases sharply with increasing leaf and soil moisture content, enabling accurate mapping of crop water stress and soil moisture heterogeneity. SWIR data can penetrate sparse canopies, revealing subsurface soil properties that are obscured in visible and NIR bands. Distinct SWIR spectral signatures have been validated for crop species discrimination, aiding in targeted management zone (MZ) delineation. When integrated with advanced clustering algorithms—such as McQuitty’s linkage and Fanny—SWIR-derived features contribute to statistically robust MZs by maximizing inter-zone differentiation and minimizing intra-zone yield variance, as demonstrated in multi-year field trials in Paraná, Brazil.
-
-Next, examine how SWIR indices integrate with other spectral bands for multi-index composite analysis.
-:::
-
----
-
-## Vegetation Indices: Overview
-
-- Definition and calculation of NDVI (Normalized Difference Vegetation Index).
-- Extraction of Landsat-derived NDVI time series at key growth stages: tillering, stem elongation, heading, and maturity.
-- Geostatistical workflow: semivariogram modeling and simple kriging to interpolate NDVI to a uniform 30 m grid.
-- Pearson correlation to quantify NDVI–yield relationships and select top-performing acquisition dates.
-- Composite integration of five high-correlation NDVI maps with soil properties (clay content, total limestone, total nitrogen).
-- Delineation of management zones showing 83% pixel-scale agreement with historical yield patterns.
-
-::: {.notes}
-In this slide we present an end-to-end workflow for using NDVI as a proxy for crop vigor and biomass in precision agriculture. We begin with normalized difference calculations on Landsat multispectral bands to generate time series at critical phenological stages. These time series are then subjected to semivariogram analysis and simple kriging to produce continuous 30 m resolution NDVI surfaces, enabling consistent spatial comparison.
-
-Next, Pearson correlation coefficients are calculated between interpolated NDVI layers and seven years of georeferenced yield data for wheat, maize, sunflower, and sorghum. This step identifies the most yield-predictive dates—typically during stem elongation and heading—guiding selection of the top five NDVI acquisitions.
-
-These NDVI maps are then normalized and fused with grid-sampled soil attributes (clay, limestone, total nitrogen) to form an eight-layer composite. Fuzzy clustering on this dataset yields management zones that align with yield-based zones at an 83% pixel agreement, demonstrating the robustness of buffered multi-year, multi-crop NDVI integration for delineating precision fertilization zones.
-:::
-
----
-
-## NDVI & EVI
-
-- NDVI = (NIR – Red) / (NIR + Red); normalized difference index, range –1 to +1
-- EVI = G*(NIR – Red) / (NIR + C1*Red – C2*Blue + L); enhanced for dense vegetation
-- NDVI saturates at high LAI; EVI reduces soil-background and atmospheric effects
-- EVI uses blue band for aerosol correction; NDVI is simpler but more noise-prone
-- Applications: crop vigor monitoring, biomass estimation, stress detection at field scale
-- In Smart-Map, NDVI/EVI rasters pass Moran’s I filtering and serve as SVM covariates
-
-::: {.notes}
-Begin by defining NDVI and its utility in detecting green biomass; explain its limitation due to saturation when leaf area index (LAI) exceeds moderate values. Introduce EVI with Huete et al. (2002) formulation: gain factor (G), canopy background adjustment (L), and aerosol coefficients (C1, C2) improve response in high-biomass conditions. Cite studies showing EVI maintains sensitivity up to LAI of ~6, whereas NDVI plateaus beyond LAI of ~3. Discuss practical use: both indices are calculated from multispectral imagery, then tested for spatial autocorrelation via Moran’s I in Smart-Map. Only the most informative indices are retained for SVM interpolation of soil properties, enhancing R² by up to 0.83 and reducing RMSE substantially. Emphasize that including EVI alongside NDVI can improve model robustness against atmospheric noise and soil background variability.
-:::
-
----
-
-## Additional Vegetation Indices
-
-- Enhanced Vegetation Index (EVI): reduces atmospheric scattering by incorporating the blue band
-- Soil Adjusted Vegetation Index (SAVI): corrects soil background effects under sparse canopies
-- Green Normalized Difference Vegetation Index (GNDVI): improves chlorophyll sensitivity via green reflectance
-- Red-Edge NDVI (NDRE): exploits red-edge reflectance for detailed nitrogen-status monitoring
-- Photochemical Reflectance Index (PRI): tracks xanthophyll cycle dynamics as an early stress indicator
-- Fusion of multiple indices via kriging enhances spatial precision in management zone delineation
-
-::: {.notes}
-Beyond classical NDVI, advanced indices address limitations arising from soil brightness, atmospheric noise, and nutrient variability. EVI’s blue-band correction yields more stable signals under variable aerosol loads. SAVI’s soil adjustment factor is critical for interpreting low-biomass stages, particularly in early sorghum stands. GNDVI leverages green reflectance to sharpen chlorophyll estimation, correlating strongly with biomass in wheat and maize trials. NDRE, derived from the red-edge region, provides sensitive monitoring of canopy nitrogen status, guiding variable-rate fertilization. PRI reflects changes in the xanthophyll cycle, offering an early diagnostic of plant physiological stress. When these indices are interpolated at 30 m resolution by simple kriging and integrated into fuzzy c-means clustering, the resulting management zones exhibit higher agronomic relevance and maintain strong spatial agreement (≥ 83 %) with multi-year yield maps, thus improving site-specific prescription accuracy.
-:::
-
----
-
-## Time Series Data: Crop Development
-
-- High-frequency temporal sampling for phenological stage monitoring (daily to weekly intervals)
-- NDVI/EVI trajectories from satellite and UAV imagery to assess canopy vigor
-- Thermal time series for early detection of water stress and canopy temperature dynamics
-- Soil moisture and nutrient probe data streams for sub-surface water and fertility tracking
-- Growth rate curve fitting and time-series modeling for yield prediction and anomaly detection
-- Multi-sensor data fusion: combining satellite, aerial, and ground sensors into unified timelines
-
-::: {.notes}
-Time series data are foundational for precision crop management because they capture dynamic changes in plant development, water status, and nutrient uptake. High-frequency sampling—from daily satellite overpasses to sub-daily UAV flights and ground sensor recordings—enables accurate phenological staging (e.g., emergence, tillering, heading) and supports real-time decision making. Vegetation indices like NDVI and EVI plotted over time reveal canopy growth curves, while thermal time series highlight early water stress before visible wilting. Soil moisture and nutrient probe outputs provide complementary sub-surface data, linking above-ground observations to root-zone conditions. Fitting growth rate models to these data streams allows prediction of final yield and identification of growth anomalies (e.g., pest outbreaks or nutrient deficiencies). Finally, fusing multi-source time series through geostatistical interpolation and machine-learning frameworks enhances spatial-temporal resolution, reduces uncertainty, and underpins variable-rate application algorithms for optimized input use.
-:::
-
----
-
-## Stress Detection Over Time
-
-```{mermaid}
-graph TD
-  A[NDVI Time Series] -->|Detects Anomalies| D[Stress Event]
-  B[Canopy Temperature] -->|Heat Stress Indication| D
-  C[Soil Moisture Logs] -->|Drought Signal| D
-  D --> E[Update Management Zone]
-  E --> F[Variable-Rate Response]
-```
-
-- Multi-temporal NDVI analysis reveals onset, peak, and recovery phases of plant stress
-- Canopy temperature and vapor pressure deficit (VPD) time series identify heat stress events
-- Soil moisture sensor logs detect drought stress duration and severity
-- Spatio-temporal maps within management zones (MZs) localize stress hotspots
-- Bayesian spatio-temporal modeling integrates multi-year data for stress forecasting
-- Fusion of satellite, aerial, and ground sensors enhances temporal resolution and reliability
-
-::: {.notes}
-This slide highlights the methods used to detect and monitor crop stress over time in precision agriculture. Multi-temporal NDVI trajectories allow us to pinpoint when vegetation deviates from expected growth curves, indicating stress onset and recovery. Canopy temperature coupled with vapor pressure deficit provides early warnings of heat stress by detecting changes in plant transpiration dynamics. Soil moisture time series from in-field sensors quantify drought periods and help differentiate moisture-related stress from other factors. By mapping these signals within predefined management zones (MZs), we can spatially localize stress hotspots and adapt interventions with fine resolution. Advanced Bayesian spatio-temporal models leverage multi-year datasets to forecast stress patterns and optimize nutritional or irrigation responses. Finally, fusing data from satellites, drones, and proximal sensors increases temporal revisit rates and improves detection accuracy under variable environmental conditions. This comprehensive approach enables proactive stress management, reducing yield losses and input waste.
-:::
-
----
-
-## Yield Prediction Using Time Series
-
-- Integrate sequential crop sensor metrics (e.g., NDVI, canopy temperature) over key growth stages
-- Apply ARIMA and LSTM time-series models for capturing temporal yield dynamics and anomalies
-- Incorporate soil texture and structure covariates to account for spatial heterogeneity
-- Produce high-resolution yield maps with prediction intervals at zonal and whole-field scales
-- Validate model outputs against harvest monitor data using cross-seasonal cross-validation
-- Leverage forecasts for zone-specific input optimization in Site-Specific Crop Management (SSCM)
-
-::: {.notes}
-Yield prediction via time-series analysis combines remote sensing metrics and environmental covariates to model temporal crop performance. ARIMA models capture linear trends and seasonality, while LSTM neural networks handle nonlinear dependencies and long-term memory of growth patterns. Adding soil texture (sand, silt, clay proportions) and soil structure (pore connectivity, compaction status) as exogenous inputs ensures that spatial variability in nutrient and moisture dynamics is embedded in the forecasts. We generate continuous yield maps with uncertainty bounds, enabling agronomists to identify under-performing zones and calibrate inputs accordingly. Model validation relies on aligning predicted yields with actual harvest data through cross-seasonal and k-fold validation schemes, providing robust accuracy estimates. The resulting time-series forecasts inform SSCM by prescribing differential fertilizer, irrigation, and seeding rates tailored to temporal and spatial yield potential, optimizing resource use and maximizing productivity.
-:::
-
----
 
 ## Role of Yield Monitors in Precision Ag
 
@@ -593,6 +340,10 @@ Accurate yield monitoring is foundational for precision agriculture analytics. B
 
 ## Using Crop Quality Sensors
 
+::::{.columns}
+
+::: {.column}
+
 - Sensor types: optical imaging, NIR spectroscopy, chlorophyll fluorescence
 - Real-time indices: NDVI, PRI, anthocyanin content, moisture levels
 - Integration with UAVs and ground rovers for high spatial resolution
@@ -600,8 +351,12 @@ Accurate yield monitoring is foundational for precision agriculture analytics. B
 - Data fusion: combining spectral, thermal and morphological measurements
 - Decision support: linking sensor outputs to quality grading and harvest timing
 
+:::
+::: {.column}
+
+
 ```{mermaid}
-flowchart LR
+graph TD
   A[Crop Quality Sensors] --> B[Data Acquisition]
   B --> C{Data Processing}
   C --> D[Quality Indices]
@@ -609,8 +364,9 @@ flowchart LR
   E --> F[Zone-Based Decisions]
   D --> G[Quality Grading & Harvest Timing]
 ```
+:::
 
-*Figure: Quality data to inform decisions*
+::::
 
 ::: {.notes}
 Crop quality sensors enable non-destructive, high-throughput assessment of key quality attributes such as sugar content, moisture, pigment concentration and texture. Optical imaging (multispectral, hyperspectral) and NIR spectroscopy capture spectral signatures that correlate with biochemical constituents. Fluorescence methods (e.g., chlorophyll fluorescence) assess plant stress and maturity. Calibration against laboratory reference data and chemometric techniques (PLS regression, machine learning algorithms) are essential to translate raw sensor signals into accurate quality indices. Platforms include UAVs for rapid aerial surveys and ground rovers for localized scanning. Data fusion integrates multiple modalities (spectral, thermal, structural) to enhance predictive power. Processed outputs feed decision support systems that classify produce into quality grades and optimize harvest schedules, minimizing waste and maximizing market value. Ongoing research focuses on miniaturization, real-time analytics and scalable deployment in large-scale mechanized farms.
@@ -635,6 +391,222 @@ Yield maps are foundational in precision agriculture, capturing harvester-collec
 
 # Spectral Data
 
+---
+
+## Irradiance & Radiance
+
+```{mermaid}
+flowchart LR
+    Sun["Sun: E(lambda) Irradiance (W/m2 nm)"] -->|Incident Flux| Target["Canopy/Soil"]
+    Target -->|Reflected/Emitted Radiance| Sensor["Optical Sensor"]
+```
+
+- Irradiance (E(λ)): spectral power per unit area incident normal to the surface (W·m⁻²·nm⁻¹).
+- Radiance (L(λ,θ,φ)): spectral power per unit area per unit solid angle emitted or reflected (W·m⁻²·sr⁻¹·nm⁻¹).
+- Bidirectional dependence: Radiance varies with sensor viewing angle (θ) and azimuth (φ).
+- Sensor measurement integrates radiance over its field-of-view and spectral bandwidth.
+- Radiance retrieval: Reflectance(λ,θ,φ) * Irradiance(λ) / π for Lambertian surfaces.
+- Crucial for calibrating vegetation indices and quantitative modeling.
+
+::: {.notes}
+This slide introduces the fundamental radiometric quantities used in optical remote sensing: irradiance and radiance. Irradiance E(λ) defines the spectral flux density incident upon a surface, whereas radiance L(λ,θ,φ) quantifies the directional spectral flux density leaving the surface per unit solid angle. The diagram depicts the sun emitting irradiance onto the canopy or soil, which then reflects or emits radiance measured by a sensor. The bidirectional nature of radiance requires careful consideration of sensor viewing geometry (θ, φ) and field-of-view. For Lambertian approximations, radiance can be related to surface reflectance and incident irradiance divided by π. Accurate quantification of these measures is critical for calibrating vegetation indices, energy balance models, and retrieving biophysical parameters in precision agriculture.
+:::
+
+---
+
+## Reflectance, Transmittance & Absorption
+
+- Definition of reflectance (ρ): ratio of reflected to incident radiation, wavelength dependent
+- Transmittance (τ): fraction of radiation passing through a medium, influenced by thickness and optical properties
+- Absorption (α): portion of energy retained by soil or plant tissues, driving photochemical processes and heat conversion
+- Spectral signatures: basis for remote sensing differentiation of crop health and soil composition
+- Beer–Lambert Law: quantifies absorption relative to path length and absorber concentration
+- Energy conservation: ρ + τ + α = 1, foundational for radiative transfer models in precision agriculture
+
+::: {.notes}
+In precision agriculture, understanding how solar radiation interacts with soil and vegetation is fundamental for remote sensing and crop monitoring. Reflectance (ρ) varies with wavelength, surface roughness, and material properties, providing spectral signatures that distinguish crop species, stress levels, and soil characteristics. Transmittance (τ) governs the fraction of radiation that penetrates leaves and soil layers, critical for canopy penetration models and subsurface sensing. Absorption (α) drives photosynthesis in plant tissues and influences soil thermal regimes. The Beer–Lambert law formalizes the relationship between absorber concentration, path length, and absorption, underpinning quantitative retrievals of chlorophyll content and soil moisture. Conservation of energy (ρ + τ + α = 1) is central to radiative transfer models such as PROSAIL, enabling inversion of biophysical parameters from multispectral and hyperspectral data. Accurate partitioning of radiation supports calculation of vegetation indices (e.g., NDVI, PRI) and informs site-specific management practices.
+:::
+
+---
+
+## Applying Spectral Principles to Crops
+
+- Plant reflectance signatures across VIS, NIR and SWIR wavelengths
+- Common vegetation indices (NDVI, PRI, EVI) for monitoring physiology
+- Hyperspectral potential detection of nutrient deficiencies and water stress
+- Sensor calibration and radiometric correction workflows
+- Generation of variable-rate application prescriptions from spectral maps
+
+```{mermaid}
+graph LR
+  UV[UV 380nm ] --> Visible[Visible 400-700 nm]
+  Visible --> NIR[NIR 700-1000 nm]  
+  NIR --> SWIR[SWIR 1.0 to 2.5 µm]
+  SWIR --> MWIR[MWIR]
+```
+
+::: {.notes}
+Spectral remote sensing exploits unique reflectance patterns of leaves and canopies in visible (VIS), near-infrared (NIR) and shortwave infrared (SWIR) bands to assess crop health. Vegetation indices such as NDVI (Normalized Difference Vegetation Index), PRI (Photochemical Reflectance Index) and EVI (Enhanced Vegetation Index) quantify chlorophyll content, photosynthetic efficiency and biomass. Hyperspectral sensors with hundreds of narrow bands enable fine-scale detection of nutrient deficiencies (e.g., nitrogen, phosphorus) and early water stress by identifying specific absorption features. Key steps include sensor radiometric calibration, atmospheric correction, and geometric registration to produce accurate reflectance maps. Integration of UAV-based hyperspectral imaging with satellite platforms allows temporal monitoring at field and regional scales. Finally, spectral data are processed through GIS and decision support systems to generate variable-rate input maps, optimizing fertilizer and irrigation applications to match spatial variability and improve yield and resource-use efficiency.
+:::
+
+---
+
+## Visible Region Interaction
+
+- Visible spectrum reflectance indicates canopy chlorophyll absorption characteristics
+- Red and green bands used to compute vegetation indices (e.g., VARI, Green NDVI) for biomass and stress detection
+- Leaf structure, pigment concentration, and soil background influence reflectance signal
+- High-frequency visible imagery captures temporal dynamics critical for dynamic MZ refinement
+- Fusion with soil EC, elevation, and yield data produces robust multi-source zone delineation
+- Constraints include variable illumination, shadows, and sensor radiometric calibration drift
+
+::: {.notes}
+Reflectance in the visible region (400–700 nm) is heavily modulated by chlorophyll absorption peaks in the blue and red bands and by leaf scattering in the green band. Indices such as the Visible Atmospherically Resistant Index (VARI) and variants of Green NDVI leverage these properties to quantify canopy biomass and stress with high sensitivity. When integrated with static soil electrical conductivity (EC) and topographic elevation maps, visible-region metrics improve spatial resolution of management zones by capturing in-season variability. Frequent imaging schedules mitigate temporal aliasing, enabling dynamic recalibration of zone boundaries. However, practitioners must account for illumination geometry, shadowing effects, and sensor calibration consistency to maintain the integrity of reflectance-derived MZ prescriptions.
+:::
+
+---
+
+## Near-Infrared (NIR) Region
+
+- Wavelength range: approximately 700–1300 nm
+- High reflectance by healthy vegetation; minimal reflectance by soil and water
+- Foundation for vegetation indices such as NDVI and SAVI
+- Sensitive to chlorophyll content, plant structure, and biomass
+- Critical input for PCA-driven dimensionality reduction in MZ clustering
+- Improves spectral contrast among management zones for precise delineation
+
+::: {.notes}
+The Near-Infrared (NIR) region, spanning roughly 700 to 1300 nm, is a cornerstone in precision agriculture remote sensing. Healthy vegetation exhibits strong NIR reflectance due to internal leaf structure and low pigment absorption, whereas soils and water appear dark, providing clear spectral separation. Common vegetation indices like NDVI and SAVI leverage this contrast to quantify plant vigor, biomass, and stress levels. In our study, NIR bands were integral to the principal component analysis that reduced multivariate sensor data before clustering. By capturing subtle variations in chlorophyll content and canopy architecture, NIR-derived features enhanced the discrimination power of less conventional clustering algorithms — such as McQuitty’s method and Fanny — ultimately yielding management zones with lower within-zone yield variance and higher spatial continuity. When designing MZ delineation workflows, ensuring high-quality NIR acquisition (through appropriate sensor calibration and atmospheric correction) is critical for reliable spectral inputs and robust zone partitioning.
+:::
+
+---
+
+## Shortwave Infrared (SWIR) Region
+
+- Spectral range: 1.0–2.5 µm, capturing strong water absorption features
+- High sensitivity to canopy water content and plant stress levels
+- Improves intra-zone homogeneity assessment and reduces within-zone yield variance
+
+
+::: {.notes}
+The SWIR region (1.0–2.5 µm) is critical in precision agriculture due to its sensitivity to water absorption peaks around 1.4 µm and 1.9 µm. Research shows SWIR reflectance decreases sharply with increasing leaf and soil moisture content, enabling accurate mapping of crop water stress and soil moisture heterogeneity. SWIR data can penetrate sparse canopies, revealing subsurface soil properties that are obscured in visible and NIR bands. Distinct SWIR spectral signatures have been validated for crop species discrimination, aiding in targeted management zone (MZ) delineation. When integrated with advanced clustering algorithms—such as McQuitty’s linkage and Fanny—SWIR-derived features contribute to statistically robust MZs by maximizing inter-zone differentiation and minimizing intra-zone yield variance, as demonstrated in multi-year field trials in Paraná, Brazil.
+
+Next, examine how SWIR indices integrate with other spectral bands for multi-index composite analysis.
+:::
+
+---
+
+## Vegetation Indices: Overview
+
+- Definition and calculation of NDVI (Normalized Difference Vegetation Index).
+- Extraction of Landsat-derived NDVI time series at key growth stages: tillering, stem elongation, heading, and maturity.
+- Geostatistical workflow: semivariogram modeling and simple kriging to interpolate NDVI to a uniform 30 m grid.
+- Pearson correlation to quantify NDVI–yield relationships and select top-performing acquisition dates.
+- Composite integration of five high-correlation NDVI maps with soil properties (clay content, total limestone, total nitrogen).
+- Delineation of management zones showing 83% pixel-scale agreement with historical yield patterns.
+
+::: {.notes}
+In this slide we present an end-to-end workflow for using NDVI as a proxy for crop vigor and biomass in precision agriculture. We begin with normalized difference calculations on Landsat multispectral bands to generate time series at critical phenological stages. These time series are then subjected to semivariogram analysis and simple kriging to produce continuous 30 m resolution NDVI surfaces, enabling consistent spatial comparison.
+
+Next, Pearson correlation coefficients are calculated between interpolated NDVI layers and seven years of georeferenced yield data for wheat, maize, sunflower, and sorghum. This step identifies the most yield-predictive dates—typically during stem elongation and heading—guiding selection of the top five NDVI acquisitions.
+
+These NDVI maps are then normalized and fused with grid-sampled soil attributes (clay, limestone, total nitrogen) to form an eight-layer composite. Fuzzy clustering on this dataset yields management zones that align with yield-based zones at an 83% pixel agreement, demonstrating the robustness of buffered multi-year, multi-crop NDVI integration for delineating precision fertilization zones.
+:::
+
+---
+
+## NDVI & EVI
+
+- NDVI = (NIR – Red) / (NIR + Red); normalized difference index, range –1 to +1
+- EVI = G*(NIR – Red) / (NIR + C1*Red – C2*Blue + L); enhanced for dense vegetation
+- NDVI saturates at high LAI; EVI reduces soil-background and atmospheric effects
+- EVI uses blue band for aerosol correction; NDVI is simpler but more noise-prone
+- Applications: crop vigor monitoring, biomass estimation, stress detection at field scale
+- In Smart-Map (Kriging), NDVI/EVI rasters pass Moran’s I filtering and serve as SVM covariates
+
+::: {.notes}
+Begin by defining NDVI and its utility in detecting green biomass; explain its limitation due to saturation when leaf area index (LAI) exceeds moderate values. Introduce EVI with Huete et al. (2002) formulation: gain factor (G), canopy background adjustment (L), and aerosol coefficients (C1, C2) improve response in high-biomass conditions. Cite studies showing EVI maintains sensitivity up to LAI of ~6, whereas NDVI plateaus beyond LAI of ~3. Discuss practical use: both indices are calculated from multispectral imagery, then tested for spatial autocorrelation via Moran’s I in Smart-Map. Only the most informative indices are retained for SVM interpolation of soil properties, enhancing R² by up to 0.83 and reducing RMSE substantially. Emphasize that including EVI alongside NDVI can improve model robustness against atmospheric noise and soil background variability.
+:::
+
+---
+
+## Additional Vegetation Indices
+
+- Enhanced Vegetation Index (EVI): reduces atmospheric scattering by incorporating the blue band
+- Soil Adjusted Vegetation Index (SAVI): corrects soil background effects under sparse canopies
+- Green Normalized Difference Vegetation Index (GNDVI): improves chlorophyll sensitivity via green reflectance
+- Red-Edge NDVI (NDRE): exploits red-edge reflectance for detailed nitrogen-status monitoring
+- Photochemical Reflectance Index (PRI): tracks xanthophyll cycle dynamics as an early stress indicator
+- Fusion of multiple indices via kriging enhances spatial precision in management zone delineation
+
+::: {.notes}
+Beyond classical NDVI, advanced indices address limitations arising from soil brightness, atmospheric noise, and nutrient variability. EVI’s blue-band correction yields more stable signals under variable aerosol loads. SAVI’s soil adjustment factor is critical for interpreting low-biomass stages, particularly in early sorghum stands. GNDVI leverages green reflectance to sharpen chlorophyll estimation, correlating strongly with biomass in wheat and maize trials. NDRE, derived from the red-edge region, provides sensitive monitoring of canopy nitrogen status, guiding variable-rate fertilization. PRI reflects changes in the xanthophyll cycle, offering an early diagnostic of plant physiological stress. When these indices are interpolated at 30 m resolution by simple kriging and integrated into fuzzy c-means clustering, the resulting management zones exhibit higher agronomic relevance and maintain strong spatial agreement (≥ 83 %) with multi-year yield maps, thus improving site-specific prescription accuracy.
+:::
+
+---
+
+## Time Series Data: Crop Development
+
+- High-frequency temporal sampling for phenological stage monitoring (daily to weekly intervals)
+- NDVI/EVI trajectories from satellite and UAV imagery to assess canopy vigor
+- Thermal time series for early detection of water stress and canopy temperature dynamics
+- Soil moisture and nutrient probe data streams for sub-surface water and fertility tracking
+- Growth rate curve fitting and time-series modeling for yield prediction and anomaly detection
+- Multi-sensor data fusion: combining satellite, aerial, and ground sensors into unified timelines
+
+::: {.notes}
+Time series data are foundational for precision crop management because they capture dynamic changes in plant development, water status, and nutrient uptake. High-frequency sampling—from daily satellite overpasses to sub-daily UAV flights and ground sensor recordings—enables accurate phenological staging (e.g., emergence, tillering, heading) and supports real-time decision making. Vegetation indices like NDVI and EVI plotted over time reveal canopy growth curves, while thermal time series highlight early water stress before visible wilting. Soil moisture and nutrient probe outputs provide complementary sub-surface data, linking above-ground observations to root-zone conditions. Fitting growth rate models to these data streams allows prediction of final yield and identification of growth anomalies (e.g., pest outbreaks or nutrient deficiencies). Finally, fusing multi-source time series through geostatistical interpolation and machine-learning frameworks enhances spatial-temporal resolution, reduces uncertainty, and underpins variable-rate application algorithms for optimized input use.
+:::
+
+---
+
+## Stress Detection Over Time
+
+:::: {.columns}
+
+::: {.column}
+
+```{mermaid}
+graph TD
+  A[NDVI Time Series] -->|Detects Anomalies| D[Stress Event]
+  B[Canopy Temperature] -->|Heat Stress Indication| D
+  C[Soil Moisture Logs] -->|Drought Signal| D
+  D --> E[Update Management Zone]
+  E --> F[Variable-Rate Response]
+```
+:::
+
+::: {.column}
+- Multi-temporal NDVI analysis reveals onset, peak, and recovery phases of plant stress
+- Canopy temperature and vapor pressure deficit (VPD) time series identify heat stress events
+- Soil moisture sensor logs detect drought stress duration and severity
+- Spatio-temporal maps within management zones (MZs) localize stress hotspots
+- Bayesian spatio-temporal modeling integrates multi-year data for stress forecasting
+- Fusion of satellite, aerial, and ground sensors enhances temporal resolution and reliability
+
+:::
+::::
+
+::: {.notes}
+This slide highlights the methods used to detect and monitor crop stress over time in precision agriculture. Multi-temporal NDVI trajectories allow us to pinpoint when vegetation deviates from expected growth curves, indicating stress onset and recovery. Canopy temperature coupled with vapor pressure deficit provides early warnings of heat stress by detecting changes in plant transpiration dynamics. Soil moisture time series from in-field sensors quantify drought periods and help differentiate moisture-related stress from other factors. By mapping these signals within predefined management zones (MZs), we can spatially localize stress hotspots and adapt interventions with fine resolution. Advanced Bayesian spatio-temporal models leverage multi-year datasets to forecast stress patterns and optimize nutritional or irrigation responses. Finally, fusing data from satellites, drones, and proximal sensors increases temporal revisit rates and improves detection accuracy under variable environmental conditions. This comprehensive approach enables proactive stress management, reducing yield losses and input waste.
+:::
+
+---
+
+## Yield Prediction Using Time Series
+
+- Integrate sequential crop sensor metrics (e.g., NDVI, canopy temperature) over key growth stages
+- Apply ARIMA and LSTM time-series models for capturing temporal yield dynamics and anomalies
+- Incorporate soil texture and structure covariates to account for spatial heterogeneity
+- Produce high-resolution yield maps with prediction intervals at zonal and whole-field scales
+- Validate model outputs against harvest monitor data using cross-seasonal cross-validation
+- Leverage forecasts for zone-specific input optimization in Site-Specific Crop Management (SSCM)
+
+::: {.notes}
+Yield prediction via time-series analysis combines remote sensing metrics and environmental covariates to model temporal crop performance. ARIMA models capture linear trends and seasonality, while LSTM neural networks handle nonlinear dependencies and long-term memory of growth patterns. Adding soil texture (sand, silt, clay proportions) and soil structure (pore connectivity, compaction status) as exogenous inputs ensures that spatial variability in nutrient and moisture dynamics is embedded in the forecasts. We generate continuous yield maps with uncertainty bounds, enabling agronomists to identify under-performing zones and calibrate inputs accordingly. Model validation relies on aligning predicted yields with actual harvest data through cross-seasonal and k-fold validation schemes, providing robust accuracy estimates. The resulting time-series forecasts inform SSCM by prescribing differential fertilizer, irrigation, and seeding rates tailored to temporal and spatial yield potential, optimizing resource use and maximizing productivity.
+:::
+
+---
 
 ## Blackbody Radiance
 
@@ -915,30 +887,6 @@ Vegetation indices—NDVI, NDRE, MSAVI—leverage red and near-infrared reflecta
 Combined with geostatistical interpolation methods (e.g., kriging), these datasets form the basis for prescription maps used in variable-rate nutrient and irrigation applications. Challenges remain in sensor calibration, atmospheric effects, data volume management, and multi-source data fusion, but the foundational geostatistical work of Mulla and colleagues enables today’s high-resolution, cost-effective site-specific management practices.
 :::
 
----
-
-## Satellite Imagery Applications
-
-- High-resolution multi-spectral imagery (Sentinel-2, Landsat 8) for calculating vegetation indices (NDVI, EVI)
-- Temporal monitoring of crop growth stages and early stress detection via time-series analysis
-- Integration with Smart-Map plugin: raster bands used as SVM covariates for enhanced interpolation
-- Generation of variable-rate application maps by combining satellite-derived moisture and chlorophyll metrics
-- Validation against ground-truth soil and yield data, reporting R² (0.05–0.83) and RMSE (0.07–12.01)
-- Scalable workflow: imagery ingestion, preprocessing, model fitting, and export in QGIS GUI
-
-```{mermaid}
-flowchart LR
-    A[Satellite Imagery] --> B[Preprocessing & Index Calculation]
-    B --> C[Smart-Map SVM Interpolation]
-    C --> D[Continuous Soil Property Maps]
-    D --> E[Variable-Rate Application Zones]
-```
-
-*Figure: Illustrates the workflow and benefits of integrating satellite imagery with Smart-Map’s SVM interpolation for precision agriculture.*
-
-::: {.notes}
-Satellite imagery provides an indispensable data layer for precision agriculture by capturing spatially continuous information on crop and soil conditions. High-resolution sensors like Sentinel-2 and Landsat 8 enable computation of vegetation indices (e.g., NDVI, EVI) which correlate strongly with biomass, canopy cover, and chlorophyll content. Time-series analysis of these indices allows agronomists to detect stress events—such as water deficit, nutrient shortage, or disease onset—well before they manifest visibly in the field. By feeding multi-spectral bands and derived indices into the Smart-Map plugin’s SVM interpolator, we harness machine-learning to produce continuous soil property maps with higher fidelity compared to geostatistical methods alone. The output maps, validated using R² and RMSE metrics against field samples, underpin variable-rate fertilizer and irrigation prescriptions. This slide summarizes the satellite imagery workflow from acquisition and preprocessing to model integration and management zone delineation, demonstrating its technical rigor and practical value for site-specific input optimization.
-:::
 
 ---
 
@@ -961,22 +909,7 @@ Hybrid approaches leverage clustering algorithms to combine multi-source covaria
 Advanced spatio-temporal Bayesian modeling further refines zone delineation by probabilistically linking EC and crop trial data with observed yield responses over time, enabling predictive nitrogen mapping under uncertainty. Illustrative studies include citrus orchards partitioned into productivity zones via EC, NDVI, and canopy volume; wheat fields modeled for nitrogen zones; and irrigation zones derived from soil water holding capacity coupled with imagery and yield data. These integrated frameworks drive site-specific management, optimizing input use and enhancing sustainability.
 :::
 
----
 
-## Soil Property Variability
-
-- Spatial heterogeneity in pH, texture, organic matter, moisture, CEC and nutrient concentrations
-- Proximal sensing technologies: electromagnetic induction, gamma-ray spectrometry, VNIR spectroscopy
-- Remote imagery integration: multispectral indices, UAV-based mapping for surface parameter estimation
-- Digital Soil Mapping using covariates (DEM, climate, land use) and geostatistical models (kriging, random forest)
-- Variogram analysis to set sampling intervals and delineate management zones at field scale
-- Fusion of soil maps with yield and crop sensor data to create functional management units
-
-::: {.notes}
-Soil property variability underpins precision agriculture by defining management units that optimize input use and environmental outcomes. High-resolution mapping of soil pH, texture, organic matter and moisture is achieved through proximal sensors (electromagnetic induction, gamma-ray, VNIR spectroscopy) complemented by remote imagery from satellites and UAVs. Digital Soil Mapping (DSM) leverages environmental covariates and geostatistical techniques such as kriging and machine-learning models (e.g., random forest) to predict continuous soil property surfaces (McBratney et al., 2003). Variogram analysis guides sampling density and delineation of management zones that balance within-zone homogeneity with operational feasibility. Finally, integrating these soil datasets with yield maps and canopy sensor outputs produces functional units that align strategic, tactical and operational decision-making, improving economic returns and reducing environmental impact.
-:::
-
----
 
 ## Abiotic Stress Patterns
 
@@ -995,20 +928,6 @@ Conservation structures such as grassed waterways and contour furrows are vital 
 
 ---
 
-## Management Practice Variability
-
-- Spatial variability: field-scale differences in soil and yield metrics (e.g., zones yielding 1 t/ha vs. 4 t/ha).
-- Temporal variability: seasonal or inter-annual shifts at fixed locations (e.g., yield drop from 2.5 t/ha to 1.5 t/ha).
-- Zone delineation: defining contiguous management zones based on variability magnitude and patterns for SSCM.
-- Multi-scale assessment: variability analysis from within-field to whole-farm scales using repeated ground and remote sensing measurements.
-- Soil texture: sand–silt–clay–gravel proportions control water-holding, nutrient dynamics, chemical binding; mapped via soil EC and gamma radiometric surveys.
-- Soil structure: pore architecture influences root penetration, aeration, drainage and erosion risk; degrades under compaction, tillage and organic-matter loss.
-
-::: {.notes}
-Understanding farm variability is central to precision agriculture. Spatial heterogeneity emerges from inherent soil–landscape interactions: texture gradients alter moisture retention and nutrient supply, while structure variability modulates root access and aeration. These zones can be mapped via geophysical proxies such as electrical conductivity and gamma radiometrics, guiding site-specific sampling and intervention. Temporal variability, driven by seasonal weather and management legacies, necessitates repeated surveys between growing seasons to capture dynamic changes in yield potential. By delineating management zones that are both statistically distinct and agronomically meaningful, practitioners can target fertilizer, irrigation and tillage to areas of greatest return. Research shows that well-defined, contiguous zones simplify logistical implementation and maximize the economic and environmental benefits of SSCM. Integrating multi-scale data—from within-row sensors to farm-wide remote imaging—provides the resolution needed to link soil drivers (texture, structure) to crop response, enabling adaptive management across seasons.
-:::
-
----
 
 ## Routine for Crop Scouting
 
@@ -1036,11 +955,9 @@ Crop scouting routines in precision agriculture leverage grid-based sampling at 
 
 ## Monitoring & Data Logging Routine
 
-- Continuous soil electrical conductivity (EC) & moisture logging via in-ground sensors at 30-minute intervals
-- RTK-GNSS geo-tagging for sub-decimeter spatial accuracy of sensor points
-- Weekly in-season NDVI acquisition from UAV and satellite platforms for canopy chlorophyll mapping
-- Edge data loggers with local buffering & automated cloud synchronization to GIS database
-- Automated QC workflows: outlier detection, temporal gap filling, geostatistical interpolation
+- Pre-start of cropping season (ECa soil clusters)
+- In-season NDVI acquisition from UAV and satellite platforms for canopy chlorophyll mapping (target scouting)
+- Harvest Yield Maps (end-results)
 - Integration into spatio-temporal database enabling dynamic MZ delineation and trend analysis
 
 ::: {.notes}
@@ -1051,53 +968,4 @@ Simultaneously, we schedule weekly NDVI flights or satellite passes to quantify 
 Our preprocessing pipeline applies statistical QC: flagging sensor drifts, removing outliers, infilling missing records through spatio-temporal kriging. The cleaned datasets feed into a central spatio-temporal database, where MZ boundaries are dynamically updated based on combined soil and plant metrics. This routine supports case studies such as citrus nutrient zoning and wheat N-management, and underpins variable-rate irrigation, fertilization, and chemical applications.
 :::
 
----
 
-## Integrated Case Study
-
-- Farm baseline: 500 ha mixed cropping under 350 mm rainfall zone
-- Profit drivers mapped to PA pathways: yield variability, input costs & risk reduction
-- Tool assessment: soil & yield mapping, remote sensing & variable-rate application
-- ROI modelling: projected +12 % net profit via site-specific nutrient management
-- Data workflow: capture → processing → prescription → machinery integration
-- Implementation & monitoring: iterative validation with ROI tracking
-
-::: {.notes}
-This integrated case study demonstrates the end-to-end application of the GRDC five-step precision agriculture framework on a representative southern Australian mixed cropping farm. We begin by establishing a farm baseline (500 ha, 350 mm RFE) and quantifying key profit drivers—yield variability, input costs and production risks.
-
-Next, we assess fit-for-purpose PA tools including soil and yield mapping, drone and satellite remote sensing, and variable-rate fertiliser applicators to address identified profit gaps.
-
-ROI modelling leverages cost and benefit projections, indicating a conservative 12 % increase in net profit through precision nutrient placement. A robust data workflow is designed: geo-referenced data capture (soil, yield and canopy indices), cloud-based processing for zone delineation, prescription generation and direct machinery integration. Implementation is staged with iterative validation—ground truthing yields, refining algorithms and tracking ROI metrics against baseline to ensure continuous improvement. This case underscores the necessity of aligning technology with profit objectives and embedding feedback loops for sustained PA success.
-:::
-
----
-
-## Summary & Conclusions
-
-- Profit-First Framework: five critical questions, Profit Drivers Framework, and Profit Pathways
-- Decision Steps: farm-specific data selection, PA technology assessment, system integration, ROI modelling, implementation planning
-- Variable-Rate Technologies: seeding, fertiliser, and input optimization linked to yield response curves
-- Technical Foundations: VRT, NDVI, GPS geo-referencing, satellite & sensor data integration
-- Hardware & Software Checklists: data capture, storage, analysis pipelines, equipment calibration standards
-- Documented ROI: empirical case studies showing 10–20% profit uplift from PA deployments
-
-::: {.notes}
-This slide distills the core components of the step-by-step Precision Agriculture decision guide. We reaffirm the Profit-First Framework, which employs five critical questions and the Profit Drivers Framework to quantify yield, cost, and risk levers, culminating in Profit Pathways that map variable-rate interventions to dollar gains. The Decision Steps segment highlights sequential activities—from identifying farm-specific opportunities with combined financial, agronomic, and spatial data to assessing technologies (soil mapping, yield mapping, satellite and sensor data) and integrating systems for seamless workflow. Technical Foundations cover essential concepts (VRT, NDVI, geo-referencing) and best practices for data management and analytics, ensuring growers understand both theory and practical implementation. Our checklists for hardware, software, and services standardize requirements for data capture, storage, and field application, reducing deployment risk. Finally, we underscore documented ROI from R&D trials and on-farm case studies, which demonstrate 10–20% profit improvements, validating the structured, profit-focused approach. Growers and advisers can leverage these insights to make evidence-based investments and realize tangible returns through PA adoption.
-:::
-
----
-
-## Questions & Discussion
-
-- Clarifications on SSNM system components and data inputs
-- Discussion on the precision-farming Plan-Do-Check-Act cycle
-- Soil sampling strategies: grid vs. geostatistical methods
-- Variations in SSNM decision algorithms across climates
-- Impacts on nutrient-use efficiency and sustainability
-- Future research directions and technological challenges
-
-::: {.notes}
-This slide opens the floor for in-depth discussion of the Site-Specific Nutrient Management (SSNM) framework. Encourage participants to ask about how environmental inputs such as precipitation, temperature, and terrain are integrated with proximal or remote sensing in GIS-based zone delineation. Be ready to explain the iterative Plan-Do-Check-Act cycle and its four rights (right product, rate, place, time). Provide insights on soil sampling methodologies—comparing early 4-ha grid sampling with modern interpolation techniques like inverse-distance weighting, kriging, and cokriging—and their impact on map accuracy. Discuss how SSNM algorithms differ in sub-humid versus semi-arid regions and the resulting effects on nutrient-use efficiency, yield, economic return, and environmental outcomes. Finally, invite suggestions on cutting-edge sensors, machine learning approaches, and decision-support tools that could advance SSNM research and practice.
-:::
-
----
