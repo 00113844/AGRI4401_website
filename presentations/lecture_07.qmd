@@ -12,13 +12,14 @@ format:
     # chalkboard: 
     #   buttons: false
     theme: [default, uwa-theme.scss] 
-    # transition: slide
+    transition: slide
     css: AGRI4401_PrecisionAg.css
-    embed-resources: true  
+    embed-resources: true
 date: "2025/07/01"
 date-format: long
 slide-number: true
 ---
+
 
 ## Crop Spatial Variability: An Introduction
 
@@ -43,8 +44,8 @@ Soil structure, determined by aggregate size distribution and pore connectivity,
 
 ## Agenda
 
-- Overview of site-specific nutrient management (SSNM) principles
-- Integration of inputs: climate, soil, machinery, labor, agrochemicals
+- Discuss factors influencing spatial variability in crop production
+- Physical principles of the sensors
 - Precision-farming cycle: inventory, GIS analysis, GNSS implementation, monitoring, feedback
 - 4R framework: right product, rate, place, time
 - Spatial interpolation techniques: IDW, kriging, cokriging with terrain data
@@ -86,57 +87,37 @@ Biotic factors, encompassing the living components of agroecosystems, drive sign
 
 ---
 
-## Abiotic Factors: Soil & Weather
+## Abiotic Factors Affecting Variability
 
-- Apparent soil electrical conductivity (ECa) integrates multiple soil properties into a single field-scale metric
-- ECa maps spatial variability of salinity, texture, moisture, organic matter, and compaction
-- Common measurement methods: EM induction (horizontal/vertical), resistivity, lab extract conductivities
-- Geo-referenced ECa surveys via GPS, integrated into GIS for spatial analysis
-- Delineation of site-specific management zones to guide variable-rate irrigation and fertilization
-- Supports monitoring of spatio-temporal soil and crop variability for sustainable farming
+- Soil moisture variability driven by spatial heterogeneity in texture, infiltration rates, and organic matter content  
+- Nutrient distribution differences (N, P, K) influenced by cation exchange capacity and historical application patterns  
+- Temperature gradients across microclimates affecting crop phenology, evapotranspiration, and stress tolerance  
+- Rainfall intensity and distribution creating zones of waterlogging or drought stress within a single field  
+- Soil structure heterogeneity (compaction, porosity) altering root proliferation and hydraulic conductivity  
+- Electrical conductivity mapping to infer salinity, moisture status, and subsurface layering  
 
 ::: {.notes}
-Apparent soil electrical conductivity (ECa) is a versatile abiotic indicator in precision agriculture. It simultaneously reflects soluble salts, clay content and mineralogy, water content, bulk density, organic matter, and temperature, providing a composite view of edaphic conditions. Traditional applications targeted salinity assessment in arid, irrigated zones, but modern surveys leverage ECa to map texture variations, moisture gradients, depth to clay layers, flood-deposited sands, and anthropogenic factors like compaction and leaching patterns. Measurement approaches include electromagnetic induction in horizontal (EMh) and vertical (EMv) coil configurations, electrical resistivity profiling, and laboratory extract methods (ECe, EC1:1). When geo-referenced using GPS and integrated within GIS platforms, ECa datasets enable delineation of management zones for variable-rate irrigation, fertilization, and other inputs. This high-resolution soil mapping underpins sustainable, site-targeted farming, enhancing yield stability, resource use efficiency, and environmental stewardship.
+Abiotic variability arises from dynamic interactions between physical and chemical soil properties and local weather patterns. Spatial differences in texture and organic matter drive moisture retention variability, while cation exchange capacity governs nutrient availability and leaching risk. Microclimatic temperature variation influences evapotranspiration rates and crop development stages, often creating stress hotspots. Precipitation patterns further modulate these gradients by inducing localized waterlogging or deficit zones. Soil compaction and porosity heterogeneity restrict root growth and alter hydraulic pathways, exacerbating moisture stress. Precision tools such as on-the-go soil electrical conductivity sensors (Adamchuk et al., 2004; USDA-ARS) enable high-resolution mapping of these abiotic factors, feeding variable-rate application systems to optimize input placement and mitigate yield-limiting variability.
 :::
 
 ---
 
-## Management Practices
+## Management Practices and Variability
 
-- Soil-based data: sampling (texture, fertility, depth), proximal sensing (EC, resistivity, reflectance), RTK-GPS elevation mapping
-- Crop-based metrics: yield, quality, plant-tissue tests, NDVI and other vegetation indices via satellite/aerial imagery and ground sensors
-- Integration of static soil maps with in-season remote sensing to capture temporal yield variability
-- Management zone typologies:
-  - Irrigation zones (soil water content, EC, yield data)
-  - Nutrient zones (variable N based on EC, elevation, depth)
-  - Pesticide/herbicide zones
-- Case study – citrus orchards: delineated MZs using yield, canopy volume, NDVI, EC, elevation; canopy volume best correlated with yield (r = 0.85)
-- Bayesian spatio-temporal modeling for N optimization: integrates field experiments, market prices, input costs, and climate variability
-
-```{mermaid}
-graph TD
-    A[Soil Data] --> C[Integration]
-    B[Crop Data] --> C
-    C --> D[Define MZs]
-    D --> E[Management Zones]
-    E --> F[Irrigation]
-    E --> G[Nutrient]
-    E --> H[Pesticide]
-```
+- Integrate multiple geospatial and statistical layers via clustering to define management zones without arbitrary boundaries  
+- Validate input maps to remove artifacts from mismanagement or data-collection errors and ensure true field variability  
+- Recognize diminishing inter-class mean differences as zone count increases, reducing agronomic and economic justification for excessive classes  
+- Balance statistical distinctiveness with agronomic significance when selecting the optimal number of zones  
+- Choose appropriate management scale—within-field vs. between-field/regional—based on variability patterns and mapping-unit definitions  
+- Align zone selection with economic returns, input cost reduction, and environmental objectives  
 
 ::: {.notes}
-In this slide, we delve into the practical methodologies for delineating and managing precision agriculture zones. First, we review soil-based data sources. Soil sampling provides static measures of texture, fertility, and depth, while proximal sensors measure electrical conductivity, resistivity, and reflectance. RTK-GPS enabled elevation mapping further enriches the spatial dataset.
-
-Next, crop-based metrics such as yield maps, quality assessments, plant-tissue analyses, and vegetation indices (e.g., NDVI) are collected via satellite, aerial platforms, or ground sensors. These dynamic indicators capture crop health and biomass changes over the season. However, relying on soil data alone can fail to account for temporal variability in yield.
-
-Therefore, best practices integrate static soil property maps with in-season remote sensing to better reflect changing crop conditions. This integrated dataset underpins the delineation of different management zone typologies: irrigation zones tailored by soil water content, EC, and yield; nutrient zones optimized for variable-rate nitrogen applications based on EC, elevation, and soil depth; and pesticide/herbicide zones defined by pest pressure and canopy characteristics.
-
-We highlight a citrus orchard case study where MZs were delineated using multi-source data: yield, canopy volume, NDVI, EC, and elevation. Canopy volume demonstrated the strongest statistical correlation with yield (r = 0.85), underscoring its predictive power. Finally, we discuss Bayesian spatio-temporal models that optimize nitrogen management by integrating experimental results, commodity prices, input costs, and climate variability, thereby providing a probabilistic framework for decision support.
+This slide discusses the critical considerations for delineating and managing precision agriculture zones. By clustering multiple geospatial and statistical data layers, we create management zones that reflect true field heterogeneity, avoiding arbitrary splits. It is essential to pre-process input maps to remove artifacts from past mismanagement or sensor errors, ensuring that zones represent genuine variability. As more zones are defined (e.g., comparing classes in Figures 7.5e,f with 7.6e,f), the mean-value differences between zones diminish, which can undermine both agronomic benefits and return on investment. Therefore, determining the optimal number of zones requires balancing statistically significant distinctions against practical management constraints. Additionally, decision-makers must select the proper scale of variability—within-field or between-field/regional—depending on whether the goal is fine-scale input optimization or broader landscape-level planning. The chosen scale should maximize economic returns, reduce input costs, and support environmental sustainability, recognizing that management strategies will differ across scales.
 :::
 
 ---
 
-## Biochemical & Biophysical Properties: Overview
+## Biochemical & Biophysical Properties Soil: Overview
 
 - Apparent soil electrical conductivity (ECa) integrates soil moisture, soluble salts, clay content, and temperature influences.
 - Measurement via electromagnetic induction (horizontal/vertical coil), electrical resistivity, and time-domain reflectometry.
@@ -230,26 +211,39 @@ Precision agriculture leverages multiple sensing modalities to quantify spatial 
 
 ## Remote Sensing of LAI
 
+:::: {.columns}
+
+
+::: {.column}
 - Definition and importance of Leaf Area Index (LAI) in crop growth modeling
 - Satellite platforms (Sentinel-2, Landsat 8) and UAV-borne multispectral sensors for LAI mapping
 - Spectral indices (NDVI, EVI, Red-Edge) and narrow-band algorithms tailored to canopy structure
 - Retrieval methods: empirical regression models vs. physical radiative transfer model inversion
 - Spatial resolution (10–30 m vs. sub-meter) and temporal revisit trade-offs for monitoring dynamics
 - Integration of LAI products into precision management: stress detection, variable-rate irrigation and fertilization
+:::
 
+::: {.column}
 
-
-```{mermaid}
-graph LR
-  A[Data Acquisition: Satellite & UAV] --> B[Preprocessing: Atmospheric Correction]
+```{mermaid, }
+graph TD
+  A[Data Acquisition: Satellite] --> B[Preprocessing: Atmospheric Correction]
   B --> C[Compute Spectral Indices NDVI, Red-Edge]
   C --> D{Retrieval Method}
   D -->|Empirical| E[Regression Model]
   D -->|Physical| F[RTM Inversion]
   E --> G[LAI Map]
   F --> G[LAI Map]
-  G --> H[Precision Application: VRI, VRF]
+  G --> H[Precision Application: Scouting, VRF]
 ```
+:::
+
+::::
+
+
+
+
+
 
 ::: {.notes}
 Leaf Area Index (LAI) quantifies green leaf area per ground unit and is a key biophysical variable for estimating canopy photosynthesis, evapotranspiration, and biomass. Remote sensing platforms provide synoptic, repeatable observations: Sentinel-2 offers 10 m multispectral bands including red-edge, while UAVs can capture sub-meter resolution data crucial for smallholder plots and heterogeneous fields. Spectral indices such as NDVI and Enhanced Vegetation Index (EVI) are correlated with LAI but saturate at high leaf densities; red-edge indices and narrow-band retrievals mitigate saturation effects.
@@ -361,8 +355,8 @@ In precision agriculture, understanding how solar radiation interacts with soil 
 
 ```{mermaid}
 graph LR
-  UV[UV] --> Visible[Visible]
-  Visible --> NIR[NIR]
+  UV[UV 380nm ] --> Visible[Visible 400-700 nm]
+  Visible --> NIR[NIR 700-1000 nm]  
   NIR --> SWIR[SWIR 1.0 to 2.5 µm]
   SWIR --> MWIR[MWIR]
 ```
@@ -639,6 +633,252 @@ Yield maps are foundational in precision agriculture, capturing harvester-collec
 
 ---
 
+# Spectral Data
+
+
+## Blackbody Radiance
+
+```{r}
+library(ggplot2)
+library(ggplot2)
+
+# Constants
+h <- 6.62607015e-34  # Planck's constant (J·s)
+c <- 2.99792458e8    # Speed of light (m/s)
+k <- 1.380649e-23    # Boltzmann constant (J/K)
+
+# Planck's law function for spectral radiance
+planck <- function(lambda, T) {
+  (2 * h * c^2 / lambda^5) / (exp(h * c / (lambda * k * T)) - 1)
+}
+
+# Wavelengths (in meters, 300nm to 2500nm)
+lambda <- seq(300e-9, 2500e-9, length.out = 1000)
+
+# Temperatures (in Kelvin, including Sun at ~5778K)
+temps <- c(3000, 4000, 5000, 5778)
+temp_labels <- c("3000K", "4000K", "5000K", "Sun (5778K)")
+
+# Create data frame
+data <- data.frame()
+for (T in temps) {
+  radiance <- planck(lambda, T)
+  temp_data <- data.frame(Wavelength = lambda * 1e9, Radiance = radiance, Temperature = as.factor(T))
+  data <- rbind(data, temp_data)
+}
+
+# Plot
+ggplot(data, aes(x = Wavelength, y = Radiance, color = Temperature)) +
+  geom_line() +
+  scale_color_manual(values = c("red", "orange", "green", "yellow", "blue"), labels = temp_labels) +
+  labs(title = "Blackbody Radiance Curves (Wien's Law)",
+       x = "Wavelength (nm)",
+       y = "Spectral Radiance (W/m²/sr/m)") +
+  theme_minimal()
+```
+
+
+
+
+
+---
+
+## Vegetation Spectra
+
+```{r}
+library(prosail)
+# define input variables for PROSPECT. 
+# refer to prospect tutorial for default values
+Input_PROSPECT <- data.frame('CHL' = 40, 'CAR' = 8, 'ANT' = 0.0, 
+                             'EWT' = 0.01, 'LMA' = 0.009, 'N' = 1.5)
+# define input variables for SAIL. 
+lai <- 5      # LAI
+q <- 0.1      # Hot spot parameter
+TypeLidf <- 2 # leaf inclination distribution function 
+LIDFa <- 30   # mean leaf angle
+tts <- 30     # geometry of acquisition: sun zenith angle
+tto <- 10     # geometry of acquisition: observer zenith angle
+psi <- 90     # geometry of acquisition: sun-observer azimuth 
+rsoil <- SpecSOIL$Dry_Soil # soil reflectance (SpecSOIL includes Dry_Soil and Wet_Soil properties)
+
+# run PROSAIL with 4SAIL
+Ref_4SAIL <- PRO4SAIL(Input_PROSPECT = Input_PROSPECT, 
+                      TypeLidf = TypeLidf, LIDFa = LIDFa, lai = lai,
+                      q = q, tts = tts, tto = tto, psi = psi, rsoil = rsoil)
+
+# run PROSAIL with 4SAIL2
+# define leaf chemical constituents corresponding green and brown leaves
+Input_PROSPECT <- data.frame('CHL' = c(40,5), 'CAR' = c(8,5), 'ANT' = c(0,1), 
+                             'EWT' = c(0.01,0.005), 'LMA' = c(0.009,0.008), 
+                             'BROWN' = c(0.0,0.5), 'N' = c(1.5,2))
+# define additional 4SAIL2 parameters
+fraction_brown <- 0.5
+diss <- 0.5
+Cv <- 1
+Zeta <- 1
+
+# run PROSAIL with 4SAIL2
+Ref_4SAIL2 <- PRO4SAIL(SAILversion = '4SAIL2',
+                       Input_PROSPECT = Input_PROSPECT,
+                       TypeLidf = TypeLidf, LIDFa = LIDFa, lai = lai,
+                       q = q, tts = tts, tto = tto, psi = psi, rsoil = rsoil,
+                       fraction_brown = fraction_brown, diss = diss, 
+                       Cv = Cv, Zeta = Zeta)
+#ggplot the Ref_4SAIL2 relectance  rsot
+data <- data.frame(Wavelength = c(400:2500), 
+                   Reflectance = Ref_4SAIL2$rdot)
+# Convert wavelength to nanometers
+data$Wavelength <- data$Wavelength
+# Convert reflectance to percentage
+data$Reflectance <- data$Reflectance*100 
+# Rename columns for clarity
+colnames(data) <- c("Wavelength", "Reflectance")
+# ggplot it
+
+
+
+
+# Plot reflectance
+library(ggplot2)
+ggplot(data, aes(x = Wavelength, y = Reflectance)) +
+  geom_line(color = "darkgreen") +
+  labs(title = "Plant Canopy Reflectance (PROSAIL Simulation)",
+       x = "Wavelength (nm)",
+       y = "Reflectance") +
+  theme_minimal()
+```
+---
+
+## Sentinel Convolution
+
+```{r}
+
+ 
+  #get the spectral response for Sentinel-2A
+  SensorName <- 'Sentinel_2A'
+  # if interested in a different satellite, please use Path_SensorResponse to 
+  # locate the SRF file expected to be named 'SensorName_Spectral_Response.csv' 
+  # (separator = tabulations)
+  SRF_S2 <- GetRadiometry(SensorName,Path_SensorResponse = NULL)
+  WL <- seq(400, 2400, by = 10)
+  # FWHM is a vector giving FWHM for each band in nanometer
+  FWHM <- 10+ 0*seq(400, 2400, by = 10)
+  # compute corresponding SRF
+  SRF_SH <- Compute_SRF(WL,FWHM)
+  
+  wvl <- SpecPROSPECT_FullRange$lambda
+  BRF_4SAIL_S2 <- applySensorCharacteristics(wvl = wvl,
+                                             SRF = SRF_S2,
+                                             InRefl = Ref_4SAIL2)
+
+  
+  ##ggplot BRF_4SAIL_S2 reflectance
+data_s2 <- data.frame(Wavelength = SRF_S2$Central_WL, Reflectance = BRF_4SAIL_S2$rdot)
+# Convert reflectance to percentage
+data_s2$Reflectance <- data_s2$Reflectance * 100
+# Rename columns for clarity
+colnames(data_s2) <- c("Wavelength", "Reflectance")
+# Plot reflectance for Sentinel-2A
+ggplot(data_s2, aes(x = Wavelength, y = Reflectance)) +
+  geom_line(color = "blue") +
+  labs(title = "Sentinel-2A Canopy Reflectance (PROSAIL Simulation)",
+       x = "Wavelength (nm)",
+       y = "Reflectance") +
+  theme_minimal()
+```
+
+---
+
+## Spectra by LAI
+
+```{r}
+run_prosail_lai <- function(lai) {
+  Input_PROSPECT <- data.frame('CHL' = 40, 'CAR' = 8, 'ANT' = 0.0, 
+                               'EWT' = 0.01, 'LMA' = 0.009, 'N' = 1.5)
+  
+  Ref_4SAIL <- PRO4SAIL(Input_PROSPECT = Input_PROSPECT, 
+                        TypeLidf = TypeLidf, LIDFa = LIDFa, lai = lai,
+                        q = q, tts = tts, tto = tto, psi = psi, rsoil = rsoil)
+  
+  return(Ref_4SAIL$rdot)
+}
+# Define a range of LAI values
+lai_values <- seq(1, 10, by = 1)
+# Run PROSAIL for each LAI value and store results
+results <- lapply(lai_values, run_prosail_lai)
+# Create a data frame for plotting
+data_lai <- data.frame(Wavelength = rep(SpecPROSPECT_FullRange$lambda, length(lai_values)),
+                       Reflectance = unlist(results),
+                       LAI = rep(lai_values, each = length(SpecPROSPECT_FullRange$lambda)))
+# Plot the results using ggplot2
+ggplot(data_lai, aes(x = Wavelength, y = Reflectance, color = as.factor(LAI))) +
+  geom_line() +
+  labs(title = "Canopy Reflectance with Varying LAI",
+       x = "Wavelength (nm)",
+       y = "Reflectance",
+       color = "Leaf Area Index (LAI)") +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")  
+```
+
+---
+
+## Spectral Resolution Degradations
+
+```{r}
+data_multispectral <- data.frame(Wavelength = data_s2$Wavelength,
+                                  Reflectance = data_s2$Reflectance,
+                                  Type = "Multispectral (Sentinel-2A)")
+data_hyperspectral <- data.frame(Wavelength = data$Wavelength,
+                                  Reflectance = data$Reflectance,
+                                  Type = "Hyperspectral (PROSAIL Simulation)")
+# Combine the two data frames
+data_combined <- rbind(data_multispectral, data_hyperspectral)
+# Plot the combined data using ggplot2
+ggplot(data_combined, aes(x = Wavelength, y = Reflectance, color = Type)) +
+  geom_line() +
+  labs(title = "Multispectral vs Hyperspectral Reflectance",
+       x = "Wavelength (nm)",
+       y = "Reflectance") +
+  #legend on the bottom 
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  scale_color_manual(values = c("blue", "darkgreen"))
+```
+
+---
+
+## Radiance Ground and Vegetation 
+
+```{r}
+library(photobiology)
+
+data(sun.spct)  # Example solar spectrum at ground level
+
+
+#for TOA irradiance you can use the planck function with a temperature of 5778K
+# Multiply the ground radiance by reflectance to get the radiance reflected by the vegetatation. The information an be founnd on SRF_SH$Spectrl_Response
+# Create data frame for plotting
+data <- data.frame(
+  Wavelength = sun.spct$w.length[120:522],
+  Ground_Radiance = sun.spct$s.e.irrad[120:522],
+  Vegetation_Radiance = t((sun.spct$s.e.irrad[120:522]) * t(results[[1]][0:403])) # Example vegetation reflectance
+#  TOA_Radiance = planck(sun.spct$w.length * 1e-9, 5778) * sun.spct$s.e.irrad / (h * c)
+)
+    
+# Plot irradiance at ground level
+ggplot(data, aes(x = Wavelength)) +
+  geom_line(aes(y = Ground_Radiance, color = "Ground Level"), linewidth = 1) +
+ geom_line(aes(y = Vegetation_Radiance, color = "Radiance Vegetation"), linewidth = 1, linetype = "dashed") +
+  labs(title = "Irradiance at Ground vs. Radiance Vegetation ",
+       x = "Wavelength (nm)",
+       y = "Spectral Irradiance (W/m²/nm)") +
+ # scale_color_manual(values = c("Ground Level" = "blue", "Top of Atmosphere" = "red")) +
+  theme_minimal() + theme(legend.position = "bottom") 
+```
+
+---
+
 ## Spectral Data & Remote Sensing Basics
 
 - EM and spectral sensors capture subsurface conductivity profiles and canopy reflectance for soil moisture and crop stress mapping
@@ -655,6 +895,8 @@ Next, we will examine methods for fusing spectral and EM data to build predictiv
 :::
 
 ---
+
+
 
 ## Remote Sensing in Agriculture
 
@@ -859,14 +1101,3 @@ This slide opens the floor for in-depth discussion of the Site-Specific Nutrient
 :::
 
 ---
-
-## Thank You
-
-```{r}
-library(ggplot2)
-
-```
-
-
-
-:::
