@@ -1,0 +1,204 @@
+---
+title: "L08 - Data Analysis"
+subtitle: "AGRI4401 Precision Agriculture"
+author: "Gustavo Alckmin"
+format:
+  revealjs:
+    width: 1280
+    height: 720
+    margin: 0.05
+    minScale: 0.5
+    maxScale: 1.0
+    # chalkboard: 
+    #   buttons: false
+    #theme: [default, uwa-theme.scss] 
+    # transition: slide
+    css: AGRI4401_PrecisionAg.css
+    embed-resources: true
+date: "2025/07/07"
+date-format: long
+slide-number: true
+---
+
+
+
+## Agenda
+
+- Using LLMs to your advantage:
+  - RStudio GitHub Copilot
+  - Ellmer (LLM Assistant in R)
+- Setting up API keys for LLMs
+- Integration tips & best practices
+
+---
+
+## Introduction to GitHub Copilot in RStudio
+
+- GitHub Copilot is an AI pair programmer helping to write code efficiently.
+- Link for student sign-up:  
+  [GitHub Education for Students](https://docs.github.com/en/education/about-github-education/github-education-for-students/apply-to-github-education-as-a-student)
+- Official RStudio Copilot docs:  
+  [RStudio Copilot Setup](https://docs.posit.co/ide/user/ide/guide/tools/copilot.html)
+
+---
+
+## Installing & Enabling GitHub Copilot in RStudio
+
+1. Confirm you have an active GitHub Copilot subscription.
+2. Open RStudio.
+3. Go to **Tools > Global Options > Copilot** tab.
+4. Tick **“Enable GitHub Copilot”**
+5. Click **Install** to download Copilot Agent components if prompted.
+6. Click **Sign In**.
+7. In the dialog, copy the **Verification Code** shown.
+8. Paste the code on GitHub verification page to authenticate your RStudio IDE session.
+9. Restart RStudio to finalize setup.
+
+---
+
+## Using GitHub Copilot: Workflow & Features
+
+- Copilot offers **ghost text** autocomplete suggestions as you type.
+- Suggestions are **AI-generated**, not simple static completions.
+- Hit **Tab** to accept; **Arrow keys** to cycle suggestions.
+- Use Copilot to:
+  - Write functions based on comments.
+  - Generate boilerplate code.
+  - Get context-aware suggestions.
+- Example usage in R:
+
+```{r, eval=FALSE, echo=TRUE}
+# Calculate the mean of a vector
+mean_vec <- function(x) {
+  # Copilot will suggest the function body here
+}
+```
+
+---
+
+## How to video:
+
+
+<iframe width="640" height="315" src="https://www.youtube.com/embed/vgSOIMj6a8k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+---
+
+## How to Ask Questions with GitHub Copilot
+
+- Use a **comment starting with `# q:`** plus a question mark `?` at the end.
+- Copilot interprets this as a request for an answer and returns a comment response starting with `# a:`
+
+Example:
+
+```{r, eval=FALSE, echo=TRUE}
+# q: How to summarize data by group in dplyr?
+# a: 
+library(dplyr)
+summary <- data %>%
+  group_by(group_var) %>%
+  summarize(mean_value = mean(target_var, na.rm = TRUE))
+```
+
+---
+
+## Getting Started with Other LLMs in RStudio
+
+- Beyond Copilot, you can use Google Cloud-based LLMs (e.g., Gemini).
+- First, create a [Google Cloud Project](https://developers.google.com/workspace/guides/create-project).
+- Then, generate an API key via [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
+- Store your API keys securely for package access.
+
+---
+
+## What is an API Key?
+
+- A unique token that gives your R session access to cloud services like language models.
+- Must be kept **private**; never share in public code.
+- Generate a API key with https://aistudio.google.com/app/apikey
+
+
+<iframe width="640" height="315" src="https://www.youtube.com/watch?v=RVGbLSVFtIk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+---
+
+## Securely Storing Your API Keys in R
+
+```{r, echo=TRUE, eval=FALSE}
+# Install 'usethis' if needed
+# install.packages("usethis")
+
+# Open .Renviron file to securely add environment variables
+usethis::edit_r_environ()
+```
+
+Then add your key in the opened file:
+
+```{r, echo = TRUE, eval=FALSE}
+GEMINI_API_KEY="your_api_key_here"
+```
+
+Save and restart RStudio to load the variables.
+
+---
+
+## Introducing Ellmer: Your LLM Assistant in RStudio
+
+- Ellmer makes it easy to access Google Gemini GPT-based chat from R.
+- Install Ellmer package with dependencies:
+
+```{r, eval=FALSE, echo = TRUE}
+install.packages("ellmer", dependencies = TRUE)
+```
+
+---
+
+## Starting an Ellmer Chat Session
+
+```{r, echo=TRUE, eval=FALSE, warning=FALSE, message=FALSE, error=FALSE}
+library(ellmer)
+# Create a Gemini chat session
+chat <- ellmer::chat_google_gemini()
+
+# Launch browser-based interactive chat interface
+ellmer::live_browser(chat)
+```
+
+---
+
+## Using Ellmer to Boost Productivity
+
+- Ask questions about your R code or data analysis.
+- Request specific code snippets.
+- Get explanations or suggestions for improving your scripts.
+- Works as a complementary assistant alongside Copilot for a seamless workflow.
+
+---
+
+## Best Practices for LLMs in RStudio
+
+- Always review AI-generated code carefully before running.
+- Combine Copilot and Ellmer to cover autocomplete and deeper Q&A.
+- Protect your API keys by storing them in `.Renviron`.
+- Keep your packages updated for best integration experience.
+- Use LLMs to accelerate learning and coding — not to blindly copy code.
+
+---
+
+## Summary & Next Steps
+
+- Setting up GitHub Copilot in RStudio boosts your coding efficiency.
+- Storing and using API keys securely is essential.
+- Ellmer package wraps Google Gemini large language model chat inside RStudio.
+- Try both tools for R programming and data analysis assistance.
+- Practice regularly to build trust and understanding with AI-assisted coding.
+
+---
+
+# End of Session
+
+- Questions?
+- Explore LLMs in your next assignments!
+- You have three data files on LMS to play around. Start analysing it ;)
+
+  
