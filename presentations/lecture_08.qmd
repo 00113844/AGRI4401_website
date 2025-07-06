@@ -79,7 +79,9 @@ mean_vec <- function(x) {
 ## How to video:
 
 
-<iframe width="640" height="315" src="https://www.youtube.com/embed/vgSOIMj6a8k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+{{< video https://www.youtube.com/embed/vgSOIMj6a8k width="100%" height="85%" >}}
+
 
 ---
 
@@ -116,9 +118,12 @@ summary <- data %>%
 - Must be kept **private**; never share in public code.
 - Generate a API key with https://aistudio.google.com/app/apikey
 
+---
 
-<iframe width="640" height="315" src="https://www.youtube.com/watch?v=RVGbLSVFtIk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+## How to video
 
+
+{{< video https://www.youtube.com/embed/RVGbLSVFtIk width="100%" height="85%" >}}
 
 ---
 

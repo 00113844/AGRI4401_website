@@ -56,6 +56,13 @@
     "text": "What is an API Key?\n\nA unique token that gives your R session access to cloud services like language models.\nMust be kept private; never share in public code.\nGenerate a API key with https://aistudio.google.com/app/apikey"
   },
   {
+    "objectID": "presentations/lecture_08.html#how-to-video-1",
+    "href": "presentations/lecture_08.html#how-to-video-1",
+    "title": "L08 - Data Analysis",
+    "section": "How to video",
+    "text": "How to video"
+  },
+  {
     "objectID": "presentations/lecture_08.html#securely-storing-your-api-keys-in-r",
     "href": "presentations/lecture_08.html#securely-storing-your-api-keys-in-r",
     "title": "L08 - Data Analysis",
