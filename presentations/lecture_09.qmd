@@ -1,5 +1,5 @@
 ---
-title: "Automation in Precision Agriculture"
+title: "L10 - Automation in Precision Agriculture"
 subtitle: "AGRI4401 Precision Agriculture"
 author: "Gustavo Alckmin"
 date: "2025/07/08"
@@ -12,35 +12,38 @@ format:
     min-scale: 0.5
     max-scale: 1.0
     transition: slide
-    slide-number: true
     embed-resources: true
-#  chalkboard:
-#    buttons: false
-#  theme: [default, uwa-theme.scss]
-#  css: AGRI4401_PrecisionAg.css
+    theme: [default, uwa-theme.scss]
+    css: AGRI4401_PrecisionAg.css
 ---
 
 ## Automation in Coffee Harvester (BR)
 
 <iframe width="100%" height="85%" src="https://www.youtube.com/embed/htyqnO6aL1s?si=pg4DV0hGEjzQqVQB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+https://www.youtube.com/embed/htyqnO6aL1s?si=pg4DV0hGEjzQqVQB
 ---
 
 ## Manual Coffee Harvest
 
 <iframe width="100%" height="85%" src="https://www.youtube.com/embed/evCf7YYZk3w?si=brhCleT314Op5Bwu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+https://www.youtube.com/embed/evCf7YYZk3w?si=brhCleT314Op5Bwu
 ---
 
 ## Automation in Sugarcane Harvester (AUS)
 
 <iframe width="100%" height="85%" src="https://www.youtube.com/embed/a33iHqUENLk?si=UthwWx6uwpRrRI76" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+https://www.youtube.com/embed/a33iHqUENLk?si=UthwWx6uwpRrRI76
+
 ---
 
 ## Manual Sugarcane Harvest
 
 <iframe width="100%" height="85%" src="https://www.youtube.com/embed/viR1XdhSGLc?si=h6DzvfAlmcG8Sh2V" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+https://www.youtube.com/embed/viR1XdhSGLc?si=h6DzvfAlmcG8Sh2V
 
 ---
 
