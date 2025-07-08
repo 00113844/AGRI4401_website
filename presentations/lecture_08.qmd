@@ -15,9 +15,7 @@ format:
     # transition: slide
     css: AGRI4401_PrecisionAg.css
     embed-resources: true
-date: "2025/07/07"
-date-format: long
-slide-number: true
+
 ---
 
 
