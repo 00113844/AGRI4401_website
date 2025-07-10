@@ -18,6 +18,38 @@ format:
 ---
 
 
+## Manual Sugarcane Harvesting
+
+
+{{< video https://youtu.be/viR1XdhSGLc?si=CmLOC753y9em-JUs width="85%" height="85%" >}}
+
+Labour intensive, time-consuming, and hazardous
+
+---
+
+## Mechanised Sugarcane Harvesting
+
+{{< video https://youtu.be/a33iHqUENLk?si=Xty300bXeQePGuC8 width="85%" height="85%" >}}
+
+Capital intensive, high initial investment, and requires skilled operators
+
+---
+
+## Manual Coffee Harvesting
+
+{{< video https://youtu.be/evCf7YYZk3w?si=2v-PFEcnjJ7PD9pM width="85%" height="85%" >}}
+
+Low paid jobs, competitive advantage of countries with low labour costs.
+
+---
+
+## Mechanised Coffee Harvesting
+
+{{< video https://youtu.be/htyqnO6aL1s?si=l3DJq5FetBw0agk8 width="85%" height="85%" >}}
+
+Competitive regardless of labour costs, high initial investment, requires skilled operators.
+
+--- 
 
 ## Automation in Precision Agriculture
 
@@ -105,7 +137,10 @@ Precision agriculture increasingly relies on automated machinery such as self-st
 
 - How a harvester works and [how it used to](https://wam.org/our-collection/collection/wheat-threshing/).
 
-<iframe width="100%" height="75%" src="https://www.youtube.com/embed/w9u0aYIkjKQ?si=n1FqmI6ueaL9Us4g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{{< video https://youtu.be/w9u0aYIkjKQ?si=1AfAxDnxaZhsTrtn width="85%" height="85%" >}}
+
+
 
 ::: {.notes}
 Google images for ancient wheat harvesting and threshing.
@@ -174,7 +209,9 @@ Integration of precision systems with existing farm electronics typically reduce
 
 ## AutoSteer
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/7GqgI54dUYA?si=D-lDcT1DJhkHWKS0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{{< video https://www.youtube.com/embed/7GqgI54dUYA?si=D-lDcT1DJhkHWKS0 width="85%" height="85%" >}}
+
 
 ---
 
@@ -188,7 +225,7 @@ Integration of precision systems with existing farm electronics typically reduce
 - Adjustable parameters: seeding population, hybrid selection, row-unit downforce, and planting depth  
 
 ```{mermaid}
-graph LR
+flowchart LR
   GNSS[GNSS Receiver] --> Display[In-cab Display]
   Display --> Prescription[Prescription Map]
   Prescription --> Planter[VR Metering Planter]
@@ -220,7 +257,8 @@ Godoy et al. (2012) demonstrate a networked control architecture where sensors f
 
 - Fine adjustment of attachments
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/l9CzgOxDzGg?si=aX2pw6qXmAgftKbL" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{{< video https://www.youtube.com/embed/l9CzgOxDzGg?si=aX2pw6qXmAgftKbL width="85%" height="85%" >}}
+
 
 ---
 
@@ -272,8 +310,8 @@ When budgeting for PA investments, it is critical to include service and subscri
 - Dose regulation alters both concentration and total spray volume  
 
 ```{mermaid}
-graph LR
-  A[Section Valves (3–6 m)] --> B[Nozzle CAN Control (0.5 m)]
+flowchart LR
+  A[Section Valves 3 to 6 m] --> B[Nozzle CAN Control 0.5 m]
   B --> C[Lateral Res: 0.5 m]
   B --> D[Longitudinal Res: <10 ms]
   C --> E[Sharper Modulation]
@@ -341,7 +379,9 @@ In this case study, we compare conventional pressure-regulated booms to injectio
 
 ## PWM Spraying Systems
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/vV33kXDC0jk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+{{< video https://www.youtube.com/embed/vV33kXDC0jk  width="85%" height="85%" >}}
 
 ::: {.notes}
 This slide focuses on the integration of advanced sensing, soft-computing, and control strategies to automate orchard and vineyard operations. First, we employ LiDAR, multispectral cameras, and ultrasonic sensors to construct accurate 3D models of canopy structure and estimate fruit load in real time. These measurements are fused via sensor-fusion algorithms to improve reliability under variable lighting and occlusion.
@@ -357,13 +397,16 @@ Finally, variable-rate application systems adjust spray rates in real time based
 
 ## Australian Autonomous Farm Machinery
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/WqfA-nlj29s?si=5Pj_Is-Nfx5hEikz" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{{< video https://www.youtube.com/embed/WqfA-nlj29s?si=5Pj_Is-Nfx5hEikz  width="85%" height="85%" >}}
+
+
 
 ---
 
 ## Citrus Orchard Autonomous Sprayer
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/1cWeSvZG3PQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{{< video https://www.youtube.com/embed/1cWeSvZG3PQ  width="85%" height="85%" >}}
 
 ---
 
@@ -441,7 +484,7 @@ Auto-steering represents a critical step toward Tractor Implement Management (TI
 - Stage CTF adoption from seeding through spraying, fertilizing, and harvesting  
 
 ```{mermaid}
-graph TD
+flowchart LR
   A[Tramline Grid Layout] --> B[Machinery Alignment]
   B --> C[RTK-GNSS Guidance]
   A --> D[Soil Compaction Reduction]
@@ -546,7 +589,7 @@ Singulation accuracy in precision agriculture hinges on two distinct GNSS metric
 
 - Think about the metrics (e.g., seeding)
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/dF-lakj3uio" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{{< video https://www.youtube.com/embed/dF-lakj3uio  width="85%" height="85%" >}}
 
 ---
 
@@ -577,7 +620,7 @@ Prescription maps are executed through GPS-guided rate controllers that modulate
 - Stricter environmental regulations (Karkee et al., 2014) increasingly favor VRA systems to meet pesticide use limits  
 
 ```{mermaid}
-graph LR
+flowchart LR
   A[Multispectral Sensors] --> B[Data Processing]
   B --> C[Decision-Support Software]
   C --> D[Control Unit]
@@ -641,7 +684,9 @@ Bilbery, on the other hand, leverages UAV-mounted hyperspectral cameras to asses
 
 ## WeedIT
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/-igk5nedpY0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{{< video https://www.youtube.com/embed/-igk5nedpY0 width="85%" height="85%" >}}
+
 
 ---
 
@@ -760,7 +805,8 @@ Modular, shareable architectures are critical for scaling robotics in precision 
 
 ## Small Automated Machinery
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/y2NDZM7clEM?si=988Te5276AJeiFHw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{{< video https://www.youtube.com/embed/y2NDZM7clEM?si=988Te5276AJeiFHw width="85%" height="85%" >}}
 
 ---
 
@@ -824,7 +870,9 @@ In this case study, we examine Solinftec’s state-of-the-art UGV implementation
 
 - Early development (Ardupilot - Follow-me mode)
 
-<iframe width="100%" height="85%" src="https://www.youtube.com/embed/sqlHtH0Np7c?si=HmnvI4gm8yppejG3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{{< video https://www.youtube.com/embed/sqlHtH0Np7c?si=HmnvI4gm8yppejG3 width="85%" height="85%" >}}
+
 
 ---
 
@@ -833,4 +881,6 @@ In this case study, we examine Solinftec’s state-of-the-art UGV implementation
 - Automation is *one* of the trends in agriculture  
 - Requires specialised knowledge  
 - Niche markets and competitive advantage  
+- Sensor are cheap and the trend is that will become cheaper (Moore's law)
+
 ---

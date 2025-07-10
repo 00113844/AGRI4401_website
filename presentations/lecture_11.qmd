@@ -1,5 +1,5 @@
 ---
-title: "L 11- Telematics and Data Management"
+title: "L11- Telematics and Data Management"
 subtitle: "AGRI4401 Precision Agriculture"
 author: "Gustavo Alckmin"
 format:
@@ -15,6 +15,7 @@ format:
     #transition: slide
     css: AGRI4401_PrecisionAg.css
     embed-resources: true
+    preview-links: auto
 date: "2025/07/08"
 date-format: long
 slide-number: true
@@ -189,23 +190,45 @@ Data acquisition underpins zone creation, combining soil sample analyses, yield 
 - Vehicle terminal server handles telemetry exchange, schedules data storage, and issues control commands  
 - Monitoring terminal and database servers parse client requests, retrieve records, and maintain detailed machine logs  
 
+
+::: {.notes}
+This slide details the integrated connectivity architecture deployed across both greenhouse and mobile agricultural environments. In controlled greenhouse settings, sensor nodes measuring temperature, humidity, CO₂, and light form a ZigBee mesh network that relays real-time readings to a gateway. The gateway then uses a serial link to feed data into dedicated PC software, which performs analytics and visualizes trends. Concurrently, high-definition video cameras stream live crop and pest imagery over the Internet to a browser/server mode platform, enabling authorized users to access real-time feeds and historical archives via web interfaces. For field machinery, cost, signal, and speed sensors collect operational telemetry onboard and transmit it via GPRS to a central server cluster. This cluster includes a vehicle terminal server for telemetry exchange and command dispatch, a monitoring terminal server to handle client queries, and backend database servers that store comprehensive logs of machine locations, statuses, and performance metrics.
+:::
+
+---
+
+### Examples
+
+:::: {.columns}
+
+::: {.column}
+
 ```{mermaid}
-graph LR
+graph TD
   subgraph Greenhouse Monitoring
-    A[Sensor Nodes\n(Temp, Humidity, CO₂, Light)] -->|ZigBee Mesh| B[Gateway]
-    B -->|Serial Link| C[PC (Real-Time Analysis)]
-    C -->|Internet| D[Web Interface & Video Streaming]
+    A[Sensor Nodes Temp, Humidity, CO, Light] -->|ZigBee Mesh| B[Gateway]
+    B -->|Serial Link| C[PC Real Time Analysis]
+    C -->|Internet| D[Web Interface  Video Streaming]
   end
+```
+
+:::
+
+::: {.column}
+
+
+```{mermaid}
+ graph TD
   subgraph Vehicle Monitoring
-    E[Vehicle Sensors\n(Load, Signal Strength, Speed)] -->|GPRS| F[Vehicle Terminal Server]
+    E[Vehicle Sensors Load, Signal Strength, Speed] -->|GPRS| F[Vehicle Terminal Server]
     F --> G[Monitoring Terminal Server]
     G --> H[Database Servers]
   end
 ```
 
-::: {.notes}
-This slide details the integrated connectivity architecture deployed across both greenhouse and mobile agricultural environments. In controlled greenhouse settings, sensor nodes measuring temperature, humidity, CO₂, and light form a ZigBee mesh network that relays real-time readings to a gateway. The gateway then uses a serial link to feed data into dedicated PC software, which performs analytics and visualizes trends. Concurrently, high-definition video cameras stream live crop and pest imagery over the Internet to a browser/server mode platform, enabling authorized users to access real-time feeds and historical archives via web interfaces. For field machinery, cost, signal, and speed sensors collect operational telemetry onboard and transmit it via GPRS to a central server cluster. This cluster includes a vehicle terminal server for telemetry exchange and command dispatch, a monitoring terminal server to handle client queries, and backend database servers that store comprehensive logs of machine locations, statuses, and performance metrics.
 :::
+
+::::
 
 ---
 
@@ -237,8 +260,8 @@ Combining GNSS data with inertial measurement units and other onboard sensors en
 - Application layer: data aggregation, analytics & visualization dashboards  
 - Benefits: remote sensing, precise control, resource efficiency & higher ROI  
 
-```{mermaid}
-graph LR
+```{mermaid, fig-align = "center"}
+flowchart LR
   A[Perception Layer] -->|Data Acquisition| B[Network Layer]
   B -->|Data Transport| C[Application Layer]
   style A fill:#E8F4F8,stroke:#333,stroke-width:1px
@@ -315,6 +338,7 @@ flowchart LR;
   DB --> Dashboard[User Dashboard];
   Analytics --> Recommendation[Recommendation Engine];
   Recommendation --> Dashboard;
+  Irrigation[Irrigation Module] ---> Dashboard;
 ```
 
 ::: {.notes}
@@ -522,7 +546,7 @@ Smallholder farms, often under five hectares, exhibit marked heterogeneity in so
 - Cluster-based service models enabling economies of scale via aggregated demand and shared investment  
 
 ```{mermaid}
-graph LR
+flowchart LR
   A[GPS-equipped Machinery] --> B[Data Collection]
   B --> C[Spatial Analysis Platforms]
   C --> D[Prescription Maps]
@@ -540,14 +564,13 @@ Large-scale farms justify high-capacity precision investments by spreading costs
 
 ---
 
-## Remote Operations Solutions
+## Telemetry
 
-- Flexible peer-to-peer messaging: subscribers filter incoming data streams to ignore irrelevant topics in ROS-based networks  
+- Peer-to-peer communication: e.g. harvester <-> chaser bin.  
 - Dynamic robot discovery and coordination: robots join/leave automatically and can switch leader/follower roles without fixed hierarchies  
-- ROS RPC for distributed control: remote procedure calls enable one node to invoke functions on another, simplifying task delegation  
-- Real-time telemetry over radio/cellular links: continuous tracking of vehicles, UAVs, and machinery (location, orientation, operator metrics, equipment health)  
-- Fleet monitoring & analytics: dashboards visualize performance, identify high/low performers, and support proactive maintenance scheduling  
-- ISOBUS standard compliance: machine parameters exposed directly as bus messages, reducing integration effort and improving data visibility  
+- Real-time telemetry over radio/cellular links: continuous tracking of vehicles, and machinery (location, orientation, operator metrics, equipment maintenace)  
+- Fleet monitoring & analytics: dashboards visualize performance, and support proactive maintenance scheduling  
+- ISOBUS CANBUS standard compliance: machine parameters exposed directly as bus messages, reducing integration effort and improving data visibility  
 
 ::: {.notes}
 This slide examines the technical components enabling remote operations in modern precision agriculture systems. First, ROS’s publisher/subscriber model lets each node filter and process only relevant messages, creating a flexible peer-to-peer network. Recent research highlights how dynamic discovery protocols allow autonomous robots to join or leave the network seamlessly and assume leader or follower roles based on contextual needs (Smith et al., 2022). Next, Remote Procedure Calls (RPCs) in ROS provide a lightweight mechanism for distributed function invocation, letting a control station trigger actuators or retrieve sensor data across processes with low overhead (Chen & Lee, 2021).
@@ -555,48 +578,9 @@ This slide examines the technical components enabling remote operations in moder
 Telemetry links over radio or cellular networks stream critical data—GPS coordinates, IMU readings, engine diagnostics, and operator behavior—to cloud or edge platforms in real time. Studies show that continuous monitoring reduces downtime by up to 30% through predictive maintenance alerts (Garcia et al., 2023). Finally, the ISOBUS standard simplifies integration by exposing most machine parameters as readily accessible bus messages, cutting development effort and ensuring vendor-agnostic interoperability (ISO 11783). Together, these elements form a robust remote operations framework for scalable, data-driven farm management.
 :::
 
----
 
-## Selection Criteria
+--- 
 
-- Classify GIS queries as attribute-based or spatial-based filtering  
-- Spatial queries: geometric operations (e.g., points within polygons, buffer proximity)  
-- Attribute queries: table-driven filters (e.g., yield > 250 bu/acre, soil pH class)  
-- Spatio-attribute queries: combined geometry and attribute constraints for enriched analysis  
-- Threshold levels: nominal (expert-driven), simple (single numeric/categorical limits), comprehensive (multi-factor rules)  
-- Mastery of query types and thresholds underpins GIS-driven decision support in precision agriculture  
-
-::: {.notes}
-Precision agriculture relies on targeted GIS queries to extract actionable insights from large-scale agronomic datasets. First, practitioners must distinguish between attribute queries—which select features based on table values—and spatial queries, which use geometric relationships such as point-in-polygon or buffer proximity. Recent studies (e.g., ESRI 2021; USDA-ARS 2020) demonstrate that combining both approaches (spatio-attribute queries) yields the highest fidelity results, for example isolating zones with yield >250 bu/acre within fields treated by a specific fertilizer.
-
-Threshold criteria further refine selection. Nominal thresholds leverage expert knowledge to set qualitative cut-offs (e.g., “high-yield zone”), simple thresholds impose single numeric or categorical limits, and comprehensive thresholds integrate multiple parameters (soil texture, moisture, historical yield) using context-sensitive rules. Research in computational agronomy (Zhang et al., 2019) confirms that comprehensive thresholds enhance predictive accuracy for variable-rate applications.
-
-Developing effective selections involves a two-step workflow:
-
-1. Classify the query type to determine whether spatial, attribute, or combined filtering is appropriate  
-2. Define and calibrate threshold levels aligned with management objectives  
-
-Mastery of these criteria categories is essential for robust, data-driven decision support in precision agriculture.
-
-Next Slide: Define spatial query techniques in detail.
-:::
-
----
-
-## Product Categories
-
-- Six standardized soil pH categories: Very Low (<5.5), Low (5.5–6.0), Adequate (6.1–6.5), Optimum (6.6–7.3), High (7.4–8.0), Very High (>8.0)  
-- User-defined classification alternatives using quartiles or standard deviations for site-specific analysis  
-- Recommended class count: between 3 and 7 to balance discrimination and legibility  
-- Each class defined by explicit minimum/maximum values and precise breakpoints  
-- Workflow: add a symbology column in the attribute table and assign symbol types  
-- Symbology best practices: graduated-color points for soil pH, line styles for networks, distinct polygon fills for categorical features  
-
-::: {.notes}
-Soil pH classification into six categories is a widely accepted standard in agronomy, with breakpoints derived from empirical crop response data and soil chemistry research. User-defined classifications based on statistical measures (quartiles or standard deviations) can provide localized insights but may lack broader agronomic relevance. Limiting class counts to a range of 3–7 maintains map clarity and prevents cognitive overload; too few classes reduce discrimination, while too many compromise interpretability. Each class must have a well documented minimum and maximum value, ensuring reproducibility and consistency in reporting. In GIS workflows, practitioners should add a dedicated symbology field to their attribute tables, then assign symbols—graduated colors for continuous pH values, varied line styles for linear infrastructure, and distinct fills for categorical land-use features—to enhance spatial pattern recognition and support decision-making in precision agriculture.
-:::
-
----
 
 ## Vendor Comparison
 
@@ -611,22 +595,6 @@ Soil pH classification into six categories is a widely accepted standard in agro
 Vendor selection hinges on demonstrating clear technical and economic value. Pricing models vary widely: free open-access tools often lack sustainable support, whereas bundled or subscription services justify ongoing updates but challenge adoption if upfront costs exceed perceived benefits. In niche sectors like horticulture, high R&D costs mean platforms may only break even on maintenance, underscoring the need for scalable pricing. Scope and flexibility remain critical: Rossi et al. (2014) highlight that farmers favor systems adaptable to multiple weeds, crops, and environmental conditions rather than narrow, specialist MBPs. Usability studies by Aubert et al. (2012) and Van Meensel et al. (2012) demonstrate that interfaces laden with technical jargon and misaligned with field workflows significantly reduce system uptake. Complexity in UI/UX and data presentation can overwhelm users, making intuitive design and streamlined decision pathways essential. Ultimately, aligning price with a demonstrable return on investment is vital for vendor solutions to gain traction in precision agriculture.
 :::
 
----
-
-## Cost-Benefit Analysis
-
-- Assess spatial variability via satellite, drone, in-situ sensing and ground-truth sampling  
-- Estimate gross gain: increased yield, quality premiums, and input savings  
-- Calculate PA costs: equipment depreciation, finance charges, labor, and contractor fees  
-- Compute net benefit per hectare: gross gain minus total PA costs  
-- Derive financial metrics: annual benefit/ha, discounted value (NPV), and payback period  
-- Determine marginal benefit:cost ratio and break-even profitability thresholds  
-
-::: {.notes}
-Accurate cost–benefit analysis is critical to justify precision-agriculture (PA) investments. First, spatial variability is quantified using remote sensing (satellite, drones) and in-situ sensors, validated against ground-truth samples to ensure representativeness. Second, gross gain calculations combine increased yields, quality premiums, and reduced input costs. Third, all capital and operating costs must be accounted for: equipment depreciation, financing charges, labor hours, and contractor fees. Net benefit per hectare is the difference between gross gain and total PA costs. From this, annual benefit per hectare and its discounted present value (NPV) are derived, along with payback period metrics. Finally, the marginal benefit:cost ratio assesses economic efficiency, and break-even thresholds are identified.
-
-A case study replacing one to three conventional chemical passes with optical spot sprayers shows net gains vary with spray coverage (15–50%) and fixed-cost assumptions ($4–$12/ha), illustrating sensitivity of profitability to operational parameters.
-:::
 
 ---
 
@@ -689,7 +657,7 @@ Next, we will examine commercial sensing platforms and design trade-offs in oper
 
 ---
 
-##IoT Platforms & Cloud Services
+## IoT Platforms & Cloud Services
 
 - Device management: provisioning, firmware OTA, monitoring  
 - Data ingestion & messaging: MQTT, AMQP, HTTP bridges  
@@ -703,12 +671,16 @@ In precision agriculture, IoT platforms provide a unified environment for device
 :::
 
 ---
-##FarmBeats
-
-https://azure.microsoft.com/en-us/products/data-manager-for-agriculture/
 
 
-https://www.microsoft.com/en-us/research/project/farmbeats-iot-agriculture/
+## FarmBeats
+
+[Data Manager for IoT in Ag](https://azure.microsoft.com/en-us/products/data-manager-for-agriculture/){preview-link="true"}
+
+
+[Farm Beats](https://www.microsoft.com/en-us/research/project/farmbeats-iot-agriculture/){preview-link="true"}
+
+
 
 
 ---
@@ -771,7 +743,7 @@ Finally, the application layer processes this data within ERP platforms, expert 
 
 ## Case Study: Starlink in Wheatbelt
 
-{{< video https://www.youtube.com/watch?v=3RxgTGLti8E width="100%" height="85%" >}}
+{{< video https://www.youtube.com/watch?v=3RxgTGLti8E width="85%" height="85%" >}}
 
 ---
 
@@ -786,7 +758,7 @@ Finally, the application layer processes this data within ERP platforms, expert 
 
 
 ```{mermaid}
-graph LR
+flowchart LR
   SN[Sensor Nodes] -->|LoRaWAN RF| GW[Gateways]
   GW -->|Ethernet/5G| NS[Network Server]
   NS -->|MQTT/TCP| AS[Application Server]
@@ -810,7 +782,7 @@ This slide presents an end-to-end case study of deploying LoRaWAN for precision 
 - Pilot trials and expert consultation to validate assumptions before full-scale deployment  
 
 ```{mermaid}
-flowchart TD
+flowchart LR
     DG[Data Gathering] --> DP[Data Processing]
     DP --> DM[Decision Making]
     DM --> AC[Actuation]
@@ -866,7 +838,7 @@ Underlying analytics solutions like NDVI Analysis and PowWow Irrigation leverage
 
 ## Farm Management Platforms
 
-- Akkerweb and FarmMaps provide a secure 'farm data space' under farmer control  
+- John Deere Operation Centre provide a secure 'farm data space' under farmer control  
 - Ingest real-time soil moisture, weather, machinery logs and satellite/NDVI imagery via standardized APIs, GIS services and cloud warehousing  
 - Modular plugin framework enables rapid integration of new agronomic models and third-party apps  
 - Built-in decision-support algorithms for nitrogen optimization, yield forecasting and pest/disease risk assessment  
@@ -874,7 +846,6 @@ Underlying analytics solutions like NDVI Analysis and PowWow Irrigation leverage
 - Open data schemas and authenticated sharing support interoperability, benchmarking, reporting and traceability  
 
 ::: {.notes}
-Akkerweb and FarmMaps were co-developed by Wageningen University & Research, Plant Cooperative and DOBS Automatisering to create an open-service farm management ecosystem. Their multi-layered architecture uses RESTful APIs, OGC-compliant GIS services and scalable cloud warehousing to harmonize real-time telemetry, satellite imagery and historical management records. The modular plugin framework allows researchers and third-party vendors to deploy new decision-support models—such as nitrogen dose optimization or yield forecasting—without overhauling the core system. Web and mobile interfaces provide farmers with in-field scouting tools, task scheduling and customizable KPI dashboards. Open data schemas ensure seamless exchange with machinery OEM systems, cooperatives and research institutes, while secure authentication mechanisms maintain data sovereignty, compliance and traceability. Despite technical maturity, current adoption remains below 1% in the Netherlands, highlighting the need for more robust standardization, user engagement strategies and cross-platform interoperability to drive mainstream uptake.
 :::
 
 ---
@@ -920,6 +891,10 @@ Effective data management underpins precision agriculture ROI by ensuring all ag
 
 ## Advanced Analytics & AI
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 - Integration of on-farm sensors & weather forecasts in Kubota’s TKSAS for AI-driven water management.  
 - AI models leveraging big data (farm accounting, sales, machinery) and external market & distribution data.  
 - Advanced farming simulator predicts optimal crop selection & business planning for profitability maximization.  
@@ -927,8 +902,11 @@ Effective data management underpins precision agriculture ROI by ensuring all ag
 - Addresses Japan’s farm consolidation & aging farmer demographics via data-driven cooperative management.  
 - Scalable architecture supports real-time analytics and continuous model retraining with incoming data streams.  
 
+:::
+::: {.column width="50%"}
+
 ```{mermaid}
-graph LR
+graph TD
     subgraph Step2 TKSAS
         A[On-farm Sensors & Weather] --> B[AI-driven Water Mgmt]
         B --> C[Harvest Time Prediction]
@@ -947,6 +925,10 @@ graph LR
     G --> H[Crop Selection & Business Planning]
     G --> I[GIS-enabled Machinery Work Plans]
 ```
+:::
+::::
+
+
 
 ::: {.notes}
 In this slide, we delve into Kubota’s roadmap stages 2 and 3 for rice farming precision ag. Stage 2 (TKSAS) integrates on-farm IoT sensors and real-time weather forecasting to automate irrigation scheduling using convolutional neural networks and reinforcement learning frameworks for optimal water usage and predictive harvest timing.
@@ -956,18 +938,4 @@ Stage 3 expands the data scope to include farm management systems—accounting, 
 The platform outputs highly granular work plans with GIS-referenced machinery routes, time windows, and operator assignments to improve field efficiency. This approach directly addresses the structural challenges of Japanese agriculture—declining farm numbers and aging workforce—by enabling cooperatives and large-scale operations to make data-driven strategic decisions. Continuous model retraining ensures adaptability to evolving environmental conditions and market dynamics.
 :::
 
----
-
-## Case Studies in WA’s Wheatbelt
-
-- Genotype × Environment interactions: cultivar performance trials across WA’s semi-arid zones.  
-- Crop rotations & tillage: integrated sequences optimizing soil structure, nutrient cycling & weed control.  
-- Fallow & moisture management: strategic fallows with residue retention to enhance soil moisture capture.  
-- Nutrient management: site-specific, variable-rate fertilizer regimes based on detailed soil mapping.  
-- Precision agronomy: decision support systems (DSS) and modelling tools to tailor seeding and input timing.  
-- Farming systems integration: diversified rotations, risk frameworks & sustainable intensification case examples.  
-
-::: {.notes}
-This slide draws on case studies from “The Wheat Book: Principles and Practice” (DPIRD WA Bulletin 4443) to illustrate applied precision agriculture in Western Australia’s Wheatbelt. The genotype × environment trials demonstrate how specific cultivars are bred and selected for semi-arid zones, maximizing yield stability under rainfall variability. Rotation and tillage examples highlight practices—such as canola–wheat–lupin sequences with minimum till—to maintain soil structure and suppress weeds. Fallow management cases show how strategic summer fallows, combined with residue retention, increase plant-available water by up to 20 mm per season. Nutrient management studies use grid- and zone-based soil sampling to implement variable-rate N and P applications, reducing fertilizer use by 15% while sustaining yields. Precision agronomy is showcased through the use of DSS like Yield Prophet and APSIM to optimize sowing dates and input timing, improving water-use efficiency. Finally, integrated farming system examples underscore economic and environmental benefits from diversified rotations, risk management, and sustainable intensification initiatives described in Chapter 6.
-:::
----
+----
