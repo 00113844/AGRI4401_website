@@ -1,0 +1,270 @@
+---
+title: "L11- Spatial Analysis: Dependency and Interpolation "
+subtitle: "AGRI4401 Precision Agriculture"
+author: "Gustavo Alckmin"
+format:
+  revealjs:
+    width: 1280
+    height: 720
+    margin: 0.05
+    minScale: 0.5
+    maxScale: 1.0
+    # chalkboard: 
+    #   buttons: false
+    theme: [default, uwa-theme.scss] 
+    #transition: slide
+    css: AGRI4401_PrecisionAg.css
+    embed-resources: true
+    preview-links: auto
+date: "2025/07/21"
+date-format: long
+slide-number: true
+---
+
+## Title and Welcome {background-color="darkgreen"}
+
+### Precision Agriculture Spatial Analysis
+
+Presented by: University Lecturer in Precision Agriculture
+
+Today, we'll explore key concepts: Spatial Dependency, Moran's I, LISA, IDW, Kriging, and Management Zones.
+
+These form the foundation for the R tutorial on spatial interpolation and analysis.
+
+---
+
+## Why Spatial Analysis in Agriculture?
+
+In precision agriculture, fields aren't uniform. Yields, soils, and nutrients vary spatially.
+
+Understanding spatial patterns helps optimize inputs like fertilizer and water.
+
+We'll link theory to R code for practical mapping and zoning.
+
+---
+
+## Tobler's First Law
+
+"Everything is related to everything else, but near things are more related than distant things."
+
+This law underpins all spatial analysis in farming.
+
+Assumption: Spatial data shows dependency, not randomness.
+
+---
+
+## What is Spatial Dependency?
+
+Data like crop yields cluster: High yields near high yields due to soil, water, etc.
+
+- Positive autocorrelation: Similar values together.
+- Negative: Dissimilar neighbors.
+- No autocorrelation: Random.
+
+In R: We assess this with Moran's I on yield data.
+
+---
+
+## Moran's I - The Global Measure
+
+Moran's I scores clustering from -1 to +1.
+
+- Positive (near +1): Strong clustering – great for predictions.
+- Formula compares points to neighbors, weighted by distance.
+
+In agriculture: High Moran's I means predictable yield zones.
+
+---
+
+## Moran's I in Practice
+
+Assumes spatial weights (e.g., neighbors in a grid).
+
+In R code: We grid the yield data, compute neighbors, and run `moran.test()`.
+
+```{r eval=F, echo=TRUE}
+# Example from script: Grid and compute Moran's I
+# (Simplified for presentation)
+library(sf); library(spdep)
+# ... (grid creation code)
+moran_result <- moran.test(yield_by_cell$mean_yield, lw)
+print(moran_result)
+```
+
+---
+
+## Interpreting Moran's I Results
+
+- High positive I: Proceed to interpolation.
+- Zero: Random – interpolation risky.
+
+In our script: Scatterplot shows quadrants (HH, LL, etc.) for visualization.
+
+---
+
+## Local Indicators of Spatial Association (LISA)
+
+Moran's I is global; LISA is local.
+
+- Identifies hotspots (HH), coldspots (LL), outliers (HL/LH).
+- Significant via p-values.
+
+---
+
+## LISA in Agriculture
+
+Pinpoint low-yield patches for targeted management.
+
+- Assumes local stationarity but tests for significance.
+
+In R: Use localmoran() and classify clusters.
+
+```{r eval=F, echo=TRUE}
+# From script: LISA computation
+local_moran <- localmoran(yield_by_cell$mean_yield, weights)
+# Classification and plotting
+```
+
+---
+
+## LISA Visualization
+
+Map shows colored clusters: Red for HH, Blue for LL.
+
+Helps farmers spot anomalies, like a fertile spot in poor soil.
+
+---
+
+## Inverse Distance Weighting (IDW)
+
+Interpolation: Estimate unsampled points from known ones.
+
+- IDW: Closer points weigh more.
+- Formula: Weighted average, weights = 1/distance^p.
+- Simple, deterministic.
+
+---
+
+## IDW Assumptions and Use
+
+- Assumes smooth surfaces; p tunes influence (higher p = more local).
+- In agriculture: Quick yield maps.
+- Limitations: No uncertainty; can create artifacts.
+
+---
+
+## IDW in R
+
+From script: Use gstat::idw() with different p values.
+
+```{r eval=F, echo=TRUE}
+# Example: IDW interpolation
+idw_p2 <- idw(yield ~ 1, yield_sp, grid_sp, idp = 2)
+# Plot raster
+# Plots compare p=1,2,3 for smoothness.
+```
+
+---
+
+## Kriging Overview
+
+Advanced interpolation: Best linear unbiased predictor.
+
+- Uses variogram to model spatial structure.
+- Provides predictions + uncertainty (variance).
+
+---
+
+## Variogram in Kriging
+
+Plots semivariance vs. distance: Nugget, sill, range.
+
+- Fit models like spherical.
+
+In R: variogram() and fit.variogram().
+
+```{r eval=F, echo=TRUE}
+# From script: Variogram for meuse data
+v_emp <- variogram(zinc ~ 1, meuse)
+v_mod <- fit.variogram(v_emp, vgm("Sph"))
+```
+
+---
+
+## Ordinary and Universal Kriging
+
+- Ordinary: Constant mean.
+- Universal: Accounts for trends (e.g., slope).
+
+In agriculture: Universal for fields with gradients.
+
+R code uses krige() with trend formulas.
+
+---
+
+## Co-Kriging
+
+Incorporates secondary variables (e.g., soil moisture for yield).
+
+- Models cross-variograms.
+- Improves accuracy when variables correlate.
+
+Script example: Zinc with distance in meuse.
+
+```{r eval=F, echo=TRUE}
+# Co-kriging code snippet
+lzn.kriged = krige(log(zinc)~1, meuse, meuse.grid, model = lznr.fit)
+```
+
+---
+
+```{mermaid}
+graph TD
+    A[Start: Interpolate Spatial Data in Precision Ag] --> B{Need uncertainty estimates?};
+    B -- Yes --> C(Geostatistical methods);
+    B -- No --> D(Deterministic methods);
+    D --> E{Dataset size and complexity?};
+    E -- Small/medium, simple patterns --> F[Use IDW];
+    E -- Irregular points --> G[Use TIN];
+    C --> I{Secondary variables available?};
+    I -- Yes --> J[Use Co-Kriging];
+    I -- No --> K{Spatial trends present?};
+    K -- Yes --> L[Use Universal Kriging];
+    K -- No --> M[Use Ordinary or Block Kriging];
+```
+
+---
+
+## Management Zones
+
+Divide field into uniform areas for management.
+
+- Based on clustering interpolated data.
+- Use k-means or fuzzy methods for zones.
+
+---
+
+## Zones in Precision Ag
+
+- 3-5 zones typical; minimize within-zone variance.
+
+In R: paar package with kmspc() on wheat data.
+
+```{r eval=F, echo=TRUE}
+# From script: Management zones
+kmspc_results <- kmspc(wheat_sf, number_cluster = 2:4, ...)
+# Plot clusters and boxplots
+# Boxplots show yield by zone.
+```
+
+---
+
+## Linking Theory to R Analysis
+
+These concepts ground the script: Assess dependency first, then interpolate, zone.
+
+Run the full .qmd to see outputs.
+
+Apply to your data for real-farm insights!
+
+Thank you! Questions?
