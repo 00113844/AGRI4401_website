@@ -1,6 +1,5 @@
 ---
-title: "L15- Satellite Data in Agriculture "
-subtitle: "AGRI4401 Precision Agriculture"
+title: "L15 - Satellite System in Agriculture"
 author: "Gustavo Alckmin"
 format:
   revealjs:
@@ -11,16 +10,14 @@ format:
     maxScale: 1.0
     # chalkboard: 
     #   buttons: false
+    # disableLayout: true
     theme: [default, uwa-theme.scss] 
-    #transition: slide
-    css: AGRI4401_PrecisionAg.css
-    embed-resources: true
-    preview-links: auto
+    # embed-resources: true
+    transition: slide
+    css: AGRI4401_PrecisionAg.css  
 date: "2025/07/25"
 date-format: long
-slide-number: true
 ---
-
 
 ## Satellite Data for Precision Agriculture
 
