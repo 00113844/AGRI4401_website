@@ -364,6 +364,90 @@
     "text": "Q&A and Thank You\n\nQuestions on applying QGIS in precision agriculture workflows?\n\nDiscussion on integrating drone and sensor data with spatial analysis\n\nQueries about customizing plugins for farm management tools\n\nFeedback on the open-access QGIS learning resource structure\n\nCollaboration opportunities for data sharing and community development\n\nNext steps: exploring tutorials, forums, and contributing back\n\n\nThank you for your attention. This final slide opens the floor for questions on how QGIS can be leveraged in precision agriculture, including use cases integrating UAV imagery and field sensor networks with spatial analytics. You may ask about developing or adapting plugins for specific agronomic tasks—such as variable-rate application or soil health monitoring—drawing from the open-access QGIS resource funded by the DLA.\nWe encourage feedback on the structure of the GentleGIS learning modules, the flow from map creation to advanced customization, and the incorporation of community-driven tutorials. Collaboration is central to the Ubuntu philosophy underpinning this initiative: please share insights on data sharing protocols, metadata standards, and joint development workflows. Finally, we’ll discuss next steps: engaging with QGIS forums, contributing to the GitHub repository, and expanding the resource through your domain expertise."
   },
   {
+    "objectID": "presentations/lecture_12.html#introduction-objectives",
+    "href": "presentations/lecture_12.html#introduction-objectives",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Introduction & Objectives",
+    "text": "Introduction & Objectives\n\nScope of precision agriculture\n\nFrameworks for technology adoption\n\nCapital budgeting methods: NPV & IRR\n\nCase study application & sensitivity analysis"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#precision-agriculture-overview",
+    "href": "presentations/lecture_12.html#precision-agriculture-overview",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Precision Agriculture Overview",
+    "text": "Precision Agriculture Overview\n\nDefinition: data-driven farm management using advanced technologies\n\nKey technologies: GPS machinery; aerial drones; soil & crop sensors; VRA systems\n\nBenefits: yield optimization; input-cost reduction; environmental sustainability"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#unique-characteristics-of-agricultural-markets",
+    "href": "presentations/lecture_12.html#unique-characteristics-of-agricultural-markets",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Unique Characteristics of Agricultural Markets",
+    "text": "Unique Characteristics of Agricultural Markets\n\nSeasonality & biological cycles\n\nHigh capital intensity & long payback periods\n\nFragmented land ownership & scale constraints\n\nWeather dependency & environmental factors"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#comparative-adoption-dynamics",
+    "href": "presentations/lecture_12.html#comparative-adoption-dynamics",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Comparative Adoption Dynamics",
+    "text": "Comparative Adoption Dynamics\n\nLower risk tolerance due to livelihood dependence\n\nLimited financing options for smallholders\n\nSlower diffusion; peer influence is critical\n\nStrong regulatory & ecological constraints"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#technology-adoption-strategies",
+    "href": "presentations/lecture_12.html#technology-adoption-strategies",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Technology Adoption Strategies",
+    "text": "Technology Adoption Strategies\n\nDemonstrations & field trials to reduce perceived risk\n\nFinancing models: leasing; subsidies; group purchasing\n\nFarmer education & technical support programs\n\nCollaborations: equipment manufacturers; agronomists; cooperatives"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#technology-adoption-models",
+    "href": "presentations/lecture_12.html#technology-adoption-models",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Technology Adoption Models",
+    "text": "Technology Adoption Models\n\nRogers’ Diffusion: innovators → early adopters → early majority → late majority → laggards\n\nTOE Framework: technological, organizational & environmental contexts\n\nKey factors: relative advantage; compatibility; complexity; trialability; observability"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#investment-analysis-concepts",
+    "href": "presentations/lecture_12.html#investment-analysis-concepts",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Investment Analysis Concepts",
+    "text": "Investment Analysis Concepts\n\nCapital budgeting: long-term investments in equipment & systems\n\nTime value of money: discount future cash flows\n\nCash-flow components: initial outlay (C₀); annual benefits (Cₜ); salvage value\n\nDiscount rate: WACC & project-specific risk premiums"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#net-present-value-npv",
+    "href": "presentations/lecture_12.html#net-present-value-npv",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Net Present Value (NPV)",
+    "text": "Net Present Value (NPV)\n\nDefinition: sum of discounted cash flows minus initial investment\n\nFormula: NPV = ∑ₜ₌₁ᵀ (Cₜ / (1 + r)ᵗ) – C₀\n\nDecision rule: accept if NPV &gt; 0\n\nPros: accounts for time value; provides absolute value measure\n\nCons: sensitive to discount rate; requires accurate cash-flow estimates"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#internal-rate-of-return-irr",
+    "href": "presentations/lecture_12.html#internal-rate-of-return-irr",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Internal Rate of Return (IRR)",
+    "text": "Internal Rate of Return (IRR)\n\nDefinition: discount rate that makes NPV zero\n\nFormula: 0 = ∑ₜ₌₁ᵀ (Cₜ / (1 + IRR)ᵗ) – C₀\n\nDecision rule: accept if IRR &gt; hurdle rate\n\nLimitations: multiple IRRs with non-conventional cash flows; scale & timing distortions"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#case-study-npv-calculation",
+    "href": "presentations/lecture_12.html#case-study-npv-calculation",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Case Study: NPV Calculation",
+    "text": "Case Study: NPV Calculation\n\nProject: purchase of variable-rate fertilizer applicator\n\nC₀ = $150,000; Cₜ = $40,000/year for 6 years; r = 8%\n\nNPV = –150000 + ∑ₜ₌₁⁶ (40000 / 1.08ᵗ)\n\nIf NPV &gt; 0, the investment is financially viable"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#case-study-irr-calculation",
+    "href": "presentations/lecture_12.html#case-study-irr-calculation",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Case Study: IRR Calculation",
+    "text": "Case Study: IRR Calculation\n\nSame cash flows as NPV example\n\nSolve 0 = –150000 + ∑ₜ₌₁⁶ (40000 / (1 + IRR)ᵗ) for IRR\n\nUse Excel’s IRR function or a financial calculator\n\nAccept if IRR &gt; 8% hurdle rate"
+  },
+  {
+    "objectID": "presentations/lecture_12.html#sensitivity-analysis-conclusions",
+    "href": "presentations/lecture_12.html#sensitivity-analysis-conclusions",
+    "title": "L12 - Technology Adoption and Investment Analysis",
+    "section": "Sensitivity Analysis & Conclusions",
+    "text": "Sensitivity Analysis & Conclusions\n\nScenarios: discount rates of 6%, 8%, 10%; benefits of $36k (–10%) & $44k (+10%); project life of 5–7 years\n\nEvaluate NPV & IRR under each scenario; identify break-even points\n\nRecommendations: pilot trials; targeted training; flexible financing schemes\n\nOngoing monitoring: update cash-flow estimates & revisit analysis as conditions change"
+  },
+  {
     "objectID": "presentations/lecture_09.html#manual-sugarcane-harvesting",
     "href": "presentations/lecture_09.html#manual-sugarcane-harvesting",
     "title": "L10 - Automation in Precision Agriculture",
@@ -1733,7 +1817,7 @@
     "href": "index.html",
     "title": "All Lectures",
     "section": "",
-    "text": "Browse all lectures below.\n\n\n\n\n\n\n\n\n\n\n\n\nL01 - Introduction to Precision Agriculture\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJun 23, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL02 - Global Navigation Satellite Systems\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJun 23, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL05 - Soil and Water Spatial Variability\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJun 30, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL06 - Nutrient Spatial Variability\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJun 30, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL07 - Crop Spatial Variability\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 1, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL08 - Data Analysis\n\n\n\n\n\n\nGustavo Alckmin\n\n\n\n\n\n\n\n\n\n\n\n\nL10 - Automation in Precision Agriculture\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 8, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL11- Telematics and Data Management\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 8, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL13- Spatial Analysis: Dependency and Interpolation\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL15 - Satellite System in Agriculture\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 25, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Browse all lectures below.\n\n\n\n\n\n\n\n\n\n\n\n\nL01 - Introduction to Precision Agriculture\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJun 23, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL02 - Global Navigation Satellite Systems\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJun 23, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL05 - Soil and Water Spatial Variability\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJun 30, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL06 - Nutrient Spatial Variability\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJun 30, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL07 - Crop Spatial Variability\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 1, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL08 - Data Analysis\n\n\n\n\n\n\nGustavo Alckmin\n\n\n\n\n\n\n\n\n\n\n\n\nL10 - Automation in Precision Agriculture\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 8, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL11- Telematics and Data Management\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 8, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL12 - Technology Adoption and Investment Analysis\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 28, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL13- Spatial Analysis: Dependency and Interpolation\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nL15 - Satellite System in Agriculture\n\n\n\n\n\n\nGustavo Alckmin\n\n\nJul 25, 2025\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations/lecture_02.html#global-navigation-satellite-systems",

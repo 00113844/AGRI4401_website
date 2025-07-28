@@ -1,0 +1,110 @@
+---
+title: "L12 - Technology Adoption and Investment Analysis"
+author: "Gustavo Alckmin"
+format:
+  revealjs:
+    width: 1280
+    height: 720
+    margin: 0.05
+    minScale: 0.5
+    maxScale: 1.0
+    theme: [default, uwa-theme.scss]
+    transition: slide
+    css: AGRI4401_PrecisionAg.css
+date: 2025-07-28
+date-format: long
+---
+
+## Introduction & Objectives
+- Scope of precision agriculture  
+- Frameworks for technology adoption  
+- Capital budgeting methods: NPV & IRR  
+- Case study application & sensitivity analysis  
+
+---
+
+## Precision Agriculture Overview
+- Definition: data-driven farm management using advanced technologies  
+- Key technologies: GPS machinery; aerial drones; soil & crop sensors; VRA systems  
+- Benefits: yield optimization; input-cost reduction; environmental sustainability  
+
+---
+
+## Unique Characteristics of Agricultural Markets
+- Seasonality & biological cycles  
+- High capital intensity & long payback periods  
+- Fragmented land ownership & scale constraints  
+- Weather dependency & environmental factors  
+
+---
+
+## Comparative Adoption Dynamics
+- Lower risk tolerance due to livelihood dependence  
+- Limited financing options for smallholders  
+- Slower diffusion; peer influence is critical  
+- Strong regulatory & ecological constraints  
+
+---
+
+## Technology Adoption Strategies
+- Demonstrations & field trials to reduce perceived risk  
+- Financing models: leasing; subsidies; group purchasing  
+- Farmer education & technical support programs  
+- Collaborations: equipment manufacturers; agronomists; cooperatives  
+
+---
+
+## Technology Adoption Models
+- Rogers’ Diffusion: innovators → early adopters → early majority → late majority → laggards  
+- TOE Framework: technological, organizational & environmental contexts  
+- Key factors: relative advantage; compatibility; complexity; trialability; observability  
+
+---
+
+## Investment Analysis Concepts
+- Capital budgeting: long-term investments in equipment & systems  
+- Time value of money: discount future cash flows  
+- Cash-flow components: initial outlay (C₀); annual benefits (Cₜ); salvage value  
+- Discount rate: WACC & project-specific risk premiums  
+
+---
+
+## Net Present Value (NPV)
+- Definition: sum of discounted cash flows minus initial investment  
+- Formula: NPV = ∑ₜ₌₁ᵀ (Cₜ / (1 + r)ᵗ) – C₀  
+- Decision rule: accept if NPV > 0  
+- Pros: accounts for time value; provides absolute value measure  
+- Cons: sensitive to discount rate; requires accurate cash-flow estimates  
+
+---
+
+## Internal Rate of Return (IRR)
+- Definition: discount rate that makes NPV zero  
+- Formula: 0 = ∑ₜ₌₁ᵀ (Cₜ / (1 + IRR)ᵗ) – C₀  
+- Decision rule: accept if IRR > hurdle rate  
+- Limitations: multiple IRRs with non-conventional cash flows; scale & timing distortions  
+
+---
+
+## Case Study: NPV Calculation
+- Project: purchase of variable-rate fertilizer applicator  
+- C₀ = $150,000; Cₜ = $40,000/year for 6 years; r = 8%  
+- NPV = –150000 + ∑ₜ₌₁⁶ (40000 / 1.08ᵗ)  
+- If NPV > 0, the investment is financially viable  
+
+---
+
+## Case Study: IRR Calculation
+- Same cash flows as NPV example  
+- Solve 0 = –150000 + ∑ₜ₌₁⁶ (40000 / (1 + IRR)ᵗ) for IRR  
+- Use Excel’s IRR function or a financial calculator  
+- Accept if IRR > 8% hurdle rate  
+
+---
+
+## Sensitivity Analysis & Conclusions
+- Scenarios: discount rates of 6%, 8%, 10%; benefits of $36k (–10%) & $44k (+10%); project life of 5–7 years  
+- Evaluate NPV & IRR under each scenario; identify break-even points  
+- Recommendations: pilot trials; targeted training; flexible financing schemes  
+- Ongoing monitoring: update cash-flow estimates & revisit analysis as conditions change  
+---
