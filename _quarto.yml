@@ -3,7 +3,7 @@ project:
   output-dir: docs
 website:
   title: "AGRI4401 Lectures"
-  site-url: "https://username.github.io/AGRI4401_website" # Replace with your GitHub Pages URL
+  site-url: "https://00113844.github.io/AGRI4401_website" # Replace with your GitHub Pages URL
   navbar:
     left:
       - href: index.qmd
