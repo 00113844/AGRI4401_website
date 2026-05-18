@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Gustavo Alckmin">
-  <meta name="dcterms.date" content="2025-06-23">
-  <title>AGRI4401 Lectures - L01 - Introduction to Precision Agriculture</title>
+  <meta name="dcterms.date" content="2026-05-18">
+  <title>AGRI4401 Lectures - Introduction to Precision Agriculture</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,7 +32,6 @@
     }
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
-  <link rel="stylesheet" href="AGRI4401_PrecisionAg.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -331,17 +330,42 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">L01 - Introduction to Precision Agriculture</h1>
+  <h1 class="title">Introduction to Precision Agriculture</h1>
+  <p class="subtitle">AGRI4401 · Precision Agriculture · Lecture 01</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
 Gustavo Alckmin 
 </div>
-</div>
+        <p class="quarto-title-affiliation">
+            School of Agriculture and Environment, UWA
+          </p>
+    </div>
 </div>
 
-  <p class="date">June 23, 2025</p>
+  <p class="date">18 May 2026</p>
+</section>
+<section id="section" class="slide level2" data-background-color="#002147">
+<h2></h2>
+<div style="text-align:center; padding-top:1.5em;">
+<p><img data-src="assets/uwa-logo-white.png" width="160"></p>
+<h3 id="introduction-to-precision-agriculture">Introduction to Precision Agriculture</h3>
+<h4 id="agri4401-precision-agriculture-lecture-01">AGRI4401 · Precision Agriculture · Lecture 01</h4>
+</div>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning Objectives</h2>
+<div class="learning-objectives">
+<p>By the end of this lecture you will be able to:</p>
+<ol type="1">
+<li>Define precision agriculture and understand its core principles of site-specific management</li>
+<li>Identify key enabling technologies: GPS/GNSS, IoT sensors, remote sensing, and variable rate technology</li>
+<li>Evaluate economic and environmental benefits of precision agriculture adoption</li>
+<li>Apply the 4 Rs framework (Right Source, Rate, Time, Place) to precision nutrient management</li>
+<li>Recognize implementation challenges and adoption drivers in precision agriculture systems</li>
+</ol>
+</div>
 </section>
 <section id="welcome-to-agri4401-precision-agriculture" class="slide level2">
 <h2>Welcome to AGRI4401 Precision Agriculture</h2>
@@ -352,10 +376,10 @@ Gustavo Alckmin
 <li>Exam: Aug 01, Afternoon</li>
 <li>Change of venues for the final weeks.</li>
 <li>No class during week 29.</li>
+<li>Register for Github Copilot and Planet Labs.</li>
+<li>LinkedIn Learning - 3 QGIS courses (REQUIRED)</li>
+<li>Final recommendations.</li>
 </ul>
-</section>
-<section id="welcome-to-agri4401-precision-agriculture-1" class="slide level2">
-<h2>Welcome to AGRI4401 Precision Agriculture</h2>
 <p><strong>Key information</strong></p>
 <ul>
 <li>Register for Github Copilot and Planet Labs.</li>
@@ -363,13 +387,8 @@ Gustavo Alckmin
 <li>Final recommendations.</li>
 </ul>
 </section>
-<section class="slide level2">
-
-</section>
-<section>
-<section id="introduction-to-precision-agriculture" class="title-slide slide level1 center">
-<h1>Introduction to Precision Agriculture</h1>
-
+<section id="introduction-to-precision-agriculture-1" class="slide level2" data-background-color="#002147">
+<h2>Introduction to Precision Agriculture</h2>
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
@@ -395,7 +414,7 @@ Gustavo Alckmin
           display:block!important;
       }</style></aside>
 </section>
-<section id="introduction-to-precision-agriculture-1" class="slide level2">
+<section id="introduction-to-precision-agriculture-2" class="slide level2">
 <h2>Introduction to Precision Agriculture</h2>
 <ul>
 <li>Definition: Site-specific crop management using data and technology</li>
@@ -601,12 +620,8 @@ Figure&nbsp;1
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-</section></section>
-<section>
-<section id="historical-pespective-of-precision-agriculture" class="title-slide slide level1 center">
-<h1>Historical Pespective of Precision Agriculture</h1>
+<section id="historical-perspective-of-precision-agriculture" class="slide level2" data-background-color="#002147">
+<h2>Historical Perspective of Precision Agriculture</h2>
 <ul>
 <li>1970s: Initial Research in Spatial Variability</li>
 <li>1980s: Using of spectroscopy for soil and crop</li>
@@ -981,20 +996,7 @@ Figure&nbsp;1
 </li>
 <li>Post-harvest losses (~30 % globally) further amplify production requirements</li>
 </ul>
-<aside class="notes">
-<p>Global food demand is on an unprecedented upward trajectory driven primarily by population growth and rising incomes in developing regions. According to FAO projections, the world population will approach 9.7 billion by mid-century, necessitating roughly 60 % more food than produced today. Urbanization and changing dietary preferences are pushing per-capita calorie consumption up by an estimated 14 %, with a marked shift toward animal-based proteins. This transition will require substantial increases in feed grain and pasture land unless productivity gains are achieved.</p>
-<p>Livestock and dairy sectors are expected to face the steepest demand curves, with protein consumption patterns forecasting a 70 % rise in meat and an 80 % rise in dairy output. At the same time, climate models predict yield volatility of ±10 % across major crops, heightening the risk of localized shortages. Coupled with inefficiencies in storage and distribution—leading to global post-harvest losses around 30 %—the supply chain will struggle to keep pace without technological intervention. These trends underscore the critical need for precision agriculture solutions that enhance yield stability, optimize input use, and reduce waste throughout production and supply chain stages.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<p>Livestock and dairy sectors are expected to face the steepest demand curves, with protein consumption patterns forecasting a 70 % rise in meat and an 80 % rise in dairy output. At the same time, climate models predict yield volatility of ±10 % across major crops, heightening the risk of localized shortages. Coupled with inefficiencies in storage and distribution—leading to global post-harvest losses around 30 %—the supply chain will struggle to keep pace without technological intervention. These trends underscore the critical need for precision agriculture solutions that enhance yield stability, optimize input use, and reduce waste throughout production and supply chain stages. :::</p>
 </section>
 <section id="technology-consolidation-in-broadacre-farming" class="slide level2">
 <h2>Technology Consolidation in Broadacre Farming</h2>
@@ -1144,7 +1146,7 @@ Figure&nbsp;1
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">graph LR
+<pre class="mermaid mermaid-js">flowchart LR
     A[GPS/GNSS &lt;br&gt; Centimeter Accuracy] --&gt; B[IoT Sensor Network &lt;br&gt; Soil &amp; Crop Data]
     B --&gt; C[Cloud Data Platform]
     C --&gt; D{AI/ML Models Predictive Analytics}
@@ -1765,6 +1767,15 @@ Figure&nbsp;1
           display:block!important;
       }</style></aside>
 </section>
+<section id="section-1" class="slide level2" data-background-color="#002147">
+<h2></h2>
+<div class="r-fit-text" style="color:#FFD100; text-align:center;">
+<p>Questions?</p>
+</div>
+<div style="color:#b3c6d9; text-align:center; font-size:0.7em; margin-top:1em;">
+<p>gustavo.alckmin@uwa.edu.au · School of Agriculture and Environment</p>
+</div>
+</section>
 <section id="drone-based-imaging-for-phenotyping" class="slide level2">
 <h2>Drone-Based Imaging for Phenotyping</h2>
 <ul>
@@ -1851,11 +1862,12 @@ Figure&nbsp;1
 
 
 <div class="quarto-auto-generated-content">
+<p><img src="assets/uwa-logo-white.png" class="slide-logo"></p>
 <div class="footer footer-default">
-
+<p>UWA · School of Agriculture and Environment · AGRI4401</p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -1880,7 +1892,7 @@ Figure&nbsp;1
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -1890,14 +1902,14 @@ Figure&nbsp;1
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
         controlsTutorial: false,
 
         // Determines where controls appear, "edges" or "bottom-right"
-        controlsLayout: 'edges',
+        controlsLayout: 'bottom-right',
 
         // Visibility rule for backwards navigation arrows; "faded", "hidden"
         // or "visible"
@@ -2015,7 +2027,7 @@ Figure&nbsp;1
         transition: 'slide',
 
         // Transition speed (default/fast/slow)
-        transitionSpeed: 'default',
+        transitionSpeed: 'fast',
 
         // Transition style for full page slide backgrounds
         // (none/fade/slide/convex/concave/zoom)
@@ -2037,12 +2049,7 @@ Figure&nbsp;1
         height: 720,
 
         // Factor of the display size that should remain empty around the content
-        margin: 5.0e-2,
-
-        // Bounds for smallest/largest possible scale to apply to content
-        minScale: 0.5,
-
-        maxScale: 1,
+        margin: 8.0e-2,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
