@@ -1,21 +1,58 @@
 ---
-title: "L01 - Introduction to Precision Agriculture"
-author: "Gustavo Alckmin"
+title: "Introduction to Precision Agriculture"
+subtitle: "AGRI4401 · Precision Agriculture · Lecture 01"
+author:
+  - name: "Gustavo Alckmin"
+    affiliation: "School of Agriculture and Environment, UWA"
+date: today
+date-format: "D MMMM YYYY"
+
 format:
   revealjs:
+    theme: [default, uwa-theme.scss]
+    slide-number: c/t
+    transition: slide
+    transition-speed: fast
+    progress: true
+    controls: true
+    controls-layout: bottom-right
     width: 1280
     height: 720
-    margin: 0.05
-    minScale: 0.5
-    maxScale: 1.0
-    # chalkboard: 
-    #   buttons: false
-    theme: [default, uwa-theme.scss] 
-    transition: slide
-    css: AGRI4401_PrecisionAg.css  
-date: "2025/06/23"
-date-format: long
-slide-number: true
+    margin: 0.08
+    footer: "UWA · School of Agriculture and Environment · AGRI4401"
+    logo: "assets/uwa-logo-white.png"
+    highlight-style: github
+    code-line-numbers: true
+
+execute:
+  echo: false
+  warning: false
+  cache: true
+---
+
+## {background-color="#002147"}
+
+::: {style="text-align:center; padding-top:1.5em;"}
+![](assets/uwa-logo-white.png){width=160}
+
+### Introduction to Precision Agriculture
+#### AGRI4401 · Precision Agriculture · Lecture 01
+:::
+
+---
+
+## Learning Objectives
+
+::: learning-objectives
+By the end of this lecture you will be able to:
+
+1. Define precision agriculture and understand its core principles of site-specific management
+2. Identify key enabling technologies: GPS/GNSS, IoT sensors, remote sensing, and variable rate technology
+3. Evaluate economic and environmental benefits of precision agriculture adoption
+4. Apply the 4 Rs framework (Right Source, Rate, Time, Place) to precision nutrient management
+5. Recognize implementation challenges and adoption drivers in precision agriculture systems
+:::
+
 ---
 
 ## Welcome to AGRI4401 Precision Agriculture
@@ -27,10 +64,9 @@ slide-number: true
 - Exam: Aug 01, Afternoon
 - Change of venues for the final weeks.
 - No class during week 29.
-
----
-
-## Welcome to AGRI4401 Precision Agriculture
+- Register for Github Copilot and Planet Labs.
+- LinkedIn Learning - 3 QGIS courses (REQUIRED)
+- Final recommendations.
 
 **Key information**
 
@@ -40,10 +76,7 @@ slide-number: true
 
 ---
 
-# Introduction to Precision Agriculture
-
-
----
+## Introduction to Precision Agriculture {background-color="#002147"}
 
 ## Agenda
 
@@ -212,7 +245,7 @@ timeline
 
 ---
 
-# Historical Pespective of Precision Agriculture
+## Historical Perspective of Precision Agriculture {background-color="#002147"}
 
 - 1970s: Initial Research in Spatial Variability 
 - 1980s: Using of spectroscopy for soil and crop 
@@ -443,8 +476,6 @@ According to the UN Department of Economic and Social Affairs, roughly 3.4 billi
 - Dietary shifts toward higher-protein and micronutrient-rich foods alter crop production priorities  
 - Post-harvest losses (~30 % globally) further amplify production requirements  
 
-::: {.notes}
-Global food demand is on an unprecedented upward trajectory driven primarily by population growth and rising incomes in developing regions. According to FAO projections, the world population will approach 9.7 billion by mid-century, necessitating roughly 60 % more food than produced today. Urbanization and changing dietary preferences are pushing per-capita calorie consumption up by an estimated 14 %, with a marked shift toward animal-based proteins. This transition will require substantial increases in feed grain and pasture land unless productivity gains are achieved.
 
 Livestock and dairy sectors are expected to face the steepest demand curves, with protein consumption patterns forecasting a 70 % rise in meat and an 80 % rise in dairy output. At the same time, climate models predict yield volatility of ±10 % across major crops, heightening the risk of localized shortages. Coupled with inefficiencies in storage and distribution—leading to global post-harvest losses around 30 %—the supply chain will struggle to keep pace without technological intervention. These trends underscore the critical need for precision agriculture solutions that enhance yield stability, optimize input use, and reduce waste throughout production and supply chain stages.
 :::
@@ -541,7 +572,7 @@ This slide consolidates critical concepts differentiating precision (the consist
 ## Key Technologies Overview
 
 ```{mermaid}
-graph LR
+flowchart LR
     A[GPS/GNSS <br> Centimeter Accuracy] --> B[IoT Sensor Network <br> Soil & Crop Data]
     B --> C[Cloud Data Platform]
     C --> D{AI/ML Models Predictive Analytics}
@@ -914,6 +945,18 @@ Precision agriculture in the WA Wheatbelt harnesses spatial heterogeneity of soi
 
 ::: {.notes}
 GPS-guided tractors employ real-time kinematic (RTK) GPS corrections to achieve centimeter-level positioning accuracy, essential for precision farming. The onboard electronic control unit (ECU) processes satellite and correction data to steer the tractor automatically, reducing operator fatigue and manual errors. Integration with farm management software allows for field boundary definition, coverage mapping, and automatic record keeping of applied inputs. Optimized pass planning minimizes overlap and skips, leading to fuel, seed, and chemical savings. Over time, yield data can be correlated with positional information to refine future planting, irrigation, and fertilization strategies based on spatial variability.
+:::
+
+---
+
+## {background-color="#002147"}
+
+::: {.r-fit-text style="color:#FFD100; text-align:center;"}
+Questions?
+:::
+
+::: {style="color:#b3c6d9; text-align:center; font-size:0.7em; margin-top:1em;"}
+gustavo.alckmin@uwa.edu.au · School of Agriculture and Environment
 :::
 
 
